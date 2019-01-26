@@ -1,5 +1,5 @@
 
-$paragraph-font-size: 1.1em !default;
+$paragraph-font-size: 1rem !default;
 $paragraph-margin-top: 15px !default; // $space-2
 $paragraph-margin-bottom: 15px !default;
 
@@ -47,17 +47,11 @@ $wider-letter-space: .03em;
 
 p, .p {
   //@extend .break-word;
-  font-size: $body-font-size; //$paragraph-font-size;
+  font-size: $body-font-size;
   line-height: $line-height;
   margin-top: $paragraph-margin-top;
   margin-bottom: $paragraph-margin-bottom;
 }
-/*
-@include less-than( sm ) {
-  p, .p {
-    line-height: 1.4375rem; //$line-height;
-  }
-}*/
 
 // Markdown support: consistent
 li p {

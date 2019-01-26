@@ -1,0 +1,83 @@
+
+.site-header {
+  .header-title {
+    color: $site-header-text-color;
+    background-color: $site-header-bg-color;
+  }
+}
+
+.site-layout-with-sidebar .site-header {
+  .header-menu-content {
+
+    @extend .py-1;
+
+    color: $site-header-menu-content-text-color;
+    background-color: $site-header-menu-content-bg-color;
+
+    font-size: .9rem;
+    a { cursor: default }
+
+    a:hover {
+      background-color: $site-header-menu-item-hover-bg-color;
+    }
+    a.active {
+      background-color: $site-header-menu-item-active-bg-color;
+      text-decoration: none;
+    }
+    hr {
+      margin-top: 0;
+      margin-bottom: 0;
+      border-color: $site-header-menu-hr-color;
+    }
+  }
+}
+
+@include more-than( md ) {
+  .site-layout-with-sidebar .site-header {
+
+      border-right: 1px solid #eee;
+
+    .header-menu-content {
+      padding-top: $space-2;
+      padding-bottom: $space-2;
+    }
+  }
+}
+
+.site-layout-standard .site-header {
+  .header-menu-content {
+    @extend .bg-dark-gray-blue, .color-white;
+    a:hover {
+      background-color: rgba(255, 255, 255, .1);
+    }
+    a.active {
+      font-weight: $normal-font-weight;
+      background-color: rgba(255, 255, 255, .2);
+    }
+  }
+}
+
+@include more-than( md ) {
+  .site-layout-standard .site-header {
+
+    background-color: $gray-blue;
+    padding: $space-1 $space-2;
+
+    .header-title, .header-menu-content {
+      color: #fff;
+      background-color: transparent;
+      padding: 0 !important;
+    }
+
+    .header-menu a {
+      color: #fff;
+      background-color: transparent;
+      padding: 2px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom .3s;
+      &:hover, &.active {
+        border-bottom: 2px solid rgba(255,255,255,.3);
+      }
+    }
+  }
+}

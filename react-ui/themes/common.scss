@@ -1,0 +1,18 @@
+
+@import "@mna/ui/index";
+@import "@mna/ui/modules/hamburger";
+
+@import "@mna/react-ui/Layout/style";
+@import "@mna/react-ui/ScrollTop/style";
+@import "@mna/react-ui/SmoothTransition/style";
+@import "@mna/react-ui/Highlight/tomorrow-night";
+
+h1, h2 { text-align: center; }
+img { border-radius: 4px }
+code { font-size: .9rem; }
+
+.article-width {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}

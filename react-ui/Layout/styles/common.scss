@@ -18,7 +18,7 @@ body { overflow: hidden }
   flex-direction: column;
 }
 
-.site-header {
+.site .site-header {
 
   position: relative;
   z-index: 1;
@@ -53,6 +53,14 @@ body { overflow: hidden }
       text-decoration: none;
     }
   }
+
+  .header-menu-item .header-menu-item a {
+    padding-left: 1.25rem;
+  }
+  .header-menu-item .header-menu-item .header-menu-item a {
+    padding-left: 2rem;
+  }
+
 }
 
 @include less-than( md ) {
