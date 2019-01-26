@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { withRouter } from "react-router"
-import { animateScroll } from 'react-scroll'
+import animateScroll from '../scroll/mixins/animate-scroll'
 
 class ScrollTop extends Component {
 
@@ -57,8 +57,8 @@ class ScrollTop extends Component {
 
   render() {
 
-    return <div id="scroll-top"
-      className={this.state.isActive ? this.activeClass : ''}
+    return <div
+      className={`scroll-top${this.state.isActive ? ` ${this.activeClass}` : ''}`}
       ref={el => this.el = el}
       onClick={this.scrollToTop}
     ><span /></div>
