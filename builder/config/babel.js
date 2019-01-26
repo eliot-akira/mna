@@ -7,6 +7,7 @@ const plugins = [
   require.resolve('@babel/plugin-proposal-class-properties'),
   require.resolve('@babel/plugin-proposal-export-default-from'),
   require.resolve('@babel/plugin-syntax-dynamic-import'),
+  require.resolve('@babel/plugin-transform-runtime'),
   [
     require.resolve('babel-plugin-named-asset-import'),
     {
@@ -28,7 +29,8 @@ const clientOptions = {
   ...options,
   presets: [
     [ require.resolve('@babel/preset-env'),
-      { 'modules': false,
+      { 'modules': 'commonjs',
+        useBuiltIns: 'usage',
         'targets': { 'browsers': ['last 2 versions', 'ie >= 9'] }
       }
     ],
@@ -40,7 +42,8 @@ const serverOptions = {
   ...options,
   presets: [
     [ require.resolve('@babel/preset-env'),
-      { 'modules': false,
+      { 'modules': 'commonjs',
+        useBuiltIns: 'usage',
         'targets': { 'node': 'current' }
       }
     ],

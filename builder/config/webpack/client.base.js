@@ -8,7 +8,11 @@ module.exports = {
   name: 'client',
   target: 'web',
   entry: {
-    bundle: [require.resolve('@babel/polyfill'), paths.srcClient],
+    bundle: [
+      // See ../babel - useBuiltIns
+      //require.resolve('@babel/polyfill'),
+      paths.srcClient
+    ],
   },
   output: {
     path: path.join(paths.buildClient, paths.publicPath),
@@ -40,6 +44,11 @@ module.exports = {
         },
       },
     },
+  },
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 400000,
+    maxAssetSize: 400000,
   },
   stats: {
     cached: false,

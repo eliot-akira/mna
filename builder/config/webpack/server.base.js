@@ -12,7 +12,11 @@ module.exports = {
   name: 'server',
   target: 'node',
   entry: {
-    server: [require.resolve('@babel/polyfill'), paths.srcServer],
+    server: [
+      // See ../babel - useBuiltIns
+      //require.resolve('@babel/polyfill'),
+      paths.srcServer
+    ],
   },
   externals: [
     nodeExternals({
