@@ -3,7 +3,6 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('../friendly-errors-webpack-plugin')
-//import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const env = require('../env')()
 const isDev = process.env.NODE_ENV === 'development'
