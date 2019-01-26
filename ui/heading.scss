@@ -3,10 +3,10 @@ $heading-font-family: $font-family !default;
 $heading-font-weight: $bold-font-weight !default;
 $heading-line-height: 1.25 !default;
 
-$heading-margin-top: $space-3 !default;
+$heading-margin-top: $space-2 !default;
 $heading-margin-bottom: $space-2 !default;
 
-$h1: 1.85rem !default;
+$h1: 1.75rem !default;
 $h2: 1.5rem !default;
 $h3: 1.25rem !default;
 $h4: 1.1rem !default;
@@ -33,6 +33,6 @@ h6 { font-size: $h6 }
 
 // GitHub style
 h1, h2 {
-  padding-bottom: $space-1;
+  padding-bottom: $space-1 / 2;
   border-bottom: 1px solid $border-color;
 }
