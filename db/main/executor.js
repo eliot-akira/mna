@@ -2,7 +2,7 @@
  * Responsible for sequentially executing actions on the database
  */
 
-let asyncQueue = require('async/queue')
+let asyncQueue = require('neo-async/queue')
 
 
 function Executor () {

@@ -8,7 +8,7 @@
 let storage = require('./storage')
   , path = require('path')
   , model = require('./model')
-  , asyncWaterfall = require('async/waterfall')
+  , asyncWaterfall = require('neo-async/waterfall')
   , customUtils = require('./customUtils')
   , Index = require('./indexes')
 

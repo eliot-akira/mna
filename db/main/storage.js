@@ -9,8 +9,8 @@
 
 let fs = require('fs')
   , mkdirp = require('mkdirp')
-  , asyncWaterfall = require('async/waterfall')
-  , asyncApply = require('async/apply')
+  , asyncWaterfall = require('neo-async/waterfall')
+  , asyncApply = require('neo-async/apply')
   , path = require('path')
   , storage = {}
 
@@ -86,23 +86,23 @@ storage.crashSafeWriteFile = function (filename, data, cb) {
 
   asyncWaterfall([
     asyncApply(storage.flushToStorage, { filename: path.dirname(filename), isDir: true })
-  , function (cb) {
-    storage.exists(filename, function (exists) {
-      if (exists) {
-        storage.flushToStorage(filename, function (err) { return cb(err) })
-      } else {
-        return cb()
-      }
-    })
-  }
-  , function (cb) {
-    storage.writeFile(tempFilename, data, function (err) { return cb(err) })
-  }
-  , asyncApply(storage.flushToStorage, tempFilename)
-  , function (cb) {
-    storage.rename(tempFilename, filename, function (err) { return cb(err) })
-  }
-  , asyncApply(storage.flushToStorage, { filename: path.dirname(filename), isDir: true })
+    , function (cb) {
+      storage.exists(filename, function (exists) {
+        if (exists) {
+          storage.flushToStorage(filename, function (err) { return cb(err) })
+        } else {
+          return cb()
+        }
+      })
+    }
+    , function (cb) {
+      storage.writeFile(tempFilename, data, function (err) { return cb(err) })
+    }
+    , asyncApply(storage.flushToStorage, tempFilename)
+    , function (cb) {
+      storage.rename(tempFilename, filename, function (err) { return cb(err) })
+    }
+    , asyncApply(storage.flushToStorage, { filename: path.dirname(filename), isDir: true })
   ], function (err) { return callback(err) })
 }
 
