@@ -17,7 +17,7 @@ var encodeUrl = require('encodeurl')
 var escapeHtml = require('escape-html')
 var parseUrl = require('parseurl')
 var path = require('path')
-var send = require('send')
+var send = require('./send')
 var url = require('url')
 
 /**
