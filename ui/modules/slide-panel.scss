@@ -1,0 +1,117 @@
+
+$slide-panel-width: 100% !default; // 320px
+
+.slide-panel {
+  position: fixed;
+  z-index: 200;
+  transition: transform 0.3s;
+}
+
+.slide-panel--left,
+.slide-panel--right {
+//  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.slide-panel--left {
+  transform: translateX(-150%);
+}
+.slide-panel--right {
+  right: 0;
+  transform: translateX(+150%);
+}
+
+.slide-panel--left.is-open,
+.slide-panel--right.is-open {
+  transform: translateX(0);
+}
+
+@media all and (min-width: $slide-panel-width + 100) {
+  .slide-panel--left,
+  .slide-panel--right {
+    width: $slide-panel-width;
+  }
+  .slide-panel--left .shadow,
+  .slide-panel--right .shadow {
+    box-shadow: 2px 0 3px #bbb;
+  }
+  .slide-panel--left .shadow {
+    margin: 0 6px 0 0;
+  }
+  .slide-panel--right .shadow {
+    margin: 0 0 0 6px;
+  }
+}
+
+
+
+$slide-panel-hamburger-width: 38px !default;                  // The width of the button area
+$slide-panel-hamburger-height: 38px !default;                 // The height of the button area
+$slide-panel-hamburger-x-pad: 8px !default;                   // The left/right padding between button area and bars.
+$slide-panel-hamburger-bg-color: transparent !default;        // The background color of the button
+$slide-panel-hamburger-active-bg-color: #eee !default;        // The background color of the active button
+
+$slide-panel-hamburger-bar: 3px !default;                     // The thickness of the button bars
+$slide-panel-hamburger-bar-space: 5px !default;               // The spacing between button bars
+$slide-panel-hamburger-bar-color: #333 !default;              // The color of the button bars
+$slide-panel-hamburger-transistion-duration: 0.2s !default;   // The transition duration
+
+
+// Panel close button
+
+.slide-panel--close {
+  /*display: block;*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  font-size: 0;
+  text-indent: -9999px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  width: $slide-panel-hamburger-width;
+  height: $slide-panel-hamburger-height;
+  //background-color: $slide-panel-hamburger-active-bg-color;
+  transition: background $slide-panel-hamburger-transistion-duration;
+}
+
+.slide-panel--close-left {
+  left: 0;
+  right: auto;
+}
+
+.slide-panel--close span {
+  position: absolute;
+  display: block;
+  top: ($slide-panel-hamburger-height / 2) - ($slide-panel-hamburger-bar / 2);
+  left: $slide-panel-hamburger-x-pad;
+  right: $slide-panel-hamburger-x-pad;
+  height: $slide-panel-hamburger-bar;
+}
+
+.slide-panel--close span::before,
+.slide-panel--close span::after {
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: $slide-panel-hamburger-bar;
+  background-color: $slide-panel-hamburger-bar-color;
+  content: "";
+
+  transition-duration: $slide-panel-hamburger-transistion-duration, $slide-panel-hamburger-transistion-duration;
+  transition-delay: $slide-panel-hamburger-transistion-duration, 0s;
+}
+
+.is-open .slide-panel--close span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.is-open .slide-panel--close span::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}

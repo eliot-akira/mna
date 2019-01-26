@@ -1,0 +1,18 @@
+{
+  "name": "@mna/react-server",
+  "version": "1.0.6",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@mna/content-server": "1.x",
+    "@mna/fsp": "1.x",
+    "@mna/react": "1.x",
+    "@mna/server": "1.x",
+    "@mna/store": "1.x",
+    "dotenv": "^6.2.0",
+    "source-map-support": "^0.5.9"
+  },
+  "peerDependencies": {
+    "@mna/react-client": "1.x"
+  }
+}

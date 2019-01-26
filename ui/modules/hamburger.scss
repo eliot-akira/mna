@@ -1,0 +1,103 @@
+
+$hamburger-width: 22px !default;                  // The width of the button area
+$hamburger-height: 22px !default;                 // The height of the button area
+$hamburger-x-pad: 2px !default;                   // The left/right padding between button area and bars.
+$hamburger-bg-color: transparent !default;        // The background color of the button
+$hamburger-active-bg-color: #eee !default;        // The background color of the active button
+
+$hamburger-bar: 2px !default;                     // The thickness of the button bars
+$hamburger-bar-space: 4px !default;               // The spacing between button bars
+$hamburger-bar-color: #333 !default;              // The color of the button bars
+$hamburger-transistion-duration: 0.1s !default;   // The transition duration
+
+.hamburger {
+  // display: block; margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  font-size: 0;
+  text-indent: -9999px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+
+  width: $hamburger-width;
+  height: $hamburger-height;
+  background-color: $hamburger-bg-color;
+  transition: background $hamburger-transistion-duration;
+}
+
+.hamburger:focus {
+  outline: none;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  top: ($hamburger-height / 2) - ($hamburger-bar / 2);
+  left: $hamburger-x-pad;
+  right: $hamburger-x-pad;
+  height: $hamburger-bar;
+
+  background-color: $hamburger-bar-color;
+  transition: background-color $hamburger-transistion-duration $hamburger-transistion-duration;
+  //transition: background 0s $hamburger-transistion-duration;
+}
+
+.hamburger span::before,
+.hamburger span::after {
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: $hamburger-bar;
+  background-color: $hamburger-bar-color;
+  content: "";
+
+  transition-duration: $hamburger-transistion-duration, $hamburger-transistion-duration;
+  transition-delay: $hamburger-transistion-duration, 0s;
+}
+
+.hamburger span::before {
+  top: -$hamburger-bar - $hamburger-bar-space;
+
+  transition-property: top, transform;
+}
+
+.hamburger span::after {
+  bottom: -$hamburger-bar - $hamburger-bar-space;
+
+  transition-property: bottom, transform;
+}
+
+/* Hamburger active state: menu open */
+
+.hamburger.is-open {
+  //background-color: $hamburger-active-bg-color;
+}
+
+.hamburger.is-open span {
+  background-color: transparent;
+  //background: none;
+}
+
+.hamburger.is-open span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger.is-open span::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+.hamburger.is-open span::before,
+.hamburger.is-open span::after {
+  transition-delay: 0s, $hamburger-transistion-duration;
+}

@@ -1,0 +1,30 @@
+$arrow-color: #999 !default;
+
+.arrow-left, .arrow-right,
+.arrow-up, .arrow-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: .5em;
+  vertical-align: middle;
+}
+.arrow-up, .arrow-down {
+  border-right: .3125em solid transparent;
+  border-left: .3125em solid transparent;
+}
+.arrow-left, .arrow-right {
+  border-top: .3125em solid transparent;
+  border-bottom: .3125em solid transparent;
+}
+.arrow-up {
+  border-bottom: .4375em solid $arrow-color;
+}
+.arrow-down {
+  border-top: .4375em solid $arrow-color;
+}
+.arrow-left {
+  border-right: .4375em solid $arrow-color;
+}
+.arrow-right {
+  border-left: .4375em solid $arrow-color;
+}

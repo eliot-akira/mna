@@ -1,0 +1,15 @@
+{
+  "name": "@mna/react-ui",
+  "version": "1.0.6",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@mna/dom": "1.x",
+    "@mna/html": "1.x",
+    "@mna/htmr": "1.x",
+    "@mna/react": "1.x",
+    "@mna/ui": "1.x",
+    "react-highlight": "^0.12.0",
+    "react-scroll": "^1.7.10"
+  }
+}

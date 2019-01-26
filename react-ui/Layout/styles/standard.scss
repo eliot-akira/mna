@@ -1,0 +1,24 @@
+
+// With no sidebar
+
+@include more-than( md ) {
+
+  .site-layout-standard .site-header {
+
+    padding: $space-1 $space-2;
+    flex-direction: row;
+
+    .header-title, .header-menu {
+      width: 50%;
+    }
+    .header-menu {
+      text-align: right;
+      a {
+        margin-left: $space-2;
+      }
+    }
+    .header-menu-content li {
+      display: inline;
+    }
+  }
+}

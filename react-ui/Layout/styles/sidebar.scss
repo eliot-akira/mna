@@ -1,0 +1,49 @@
+@import "common";
+
+// With sidebar that collapses to mobile header
+
+.site-layout-with-sidebar {
+}
+
+@include more-than( md ) {
+
+  .site-layout-with-sidebar {
+
+    flex-direction: row;
+    /*article {
+      flex: 1 0 auto;
+    }*/
+
+    .site-header {
+      height: 100vh;
+      width: 100%;
+      max-width: 280px;
+
+      overflow-y: auto;
+
+      display: flex;
+      flex-direction: column;
+
+      .header-menu {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        height: auto;
+      }
+
+      .header-menu-content {
+        position: relative;
+        flex: 1 0 auto;
+        transition: none;
+        transform: translateY(0);
+        z-index: 0;
+      }
+
+      .header-menu-content a {
+        display: block;
+        padding-left: $space-1;
+        padding-right: $space-1;
+      }
+    }
+  }
+}

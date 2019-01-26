@@ -1,0 +1,93 @@
+.modal--container {
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &.is-modal-open {
+    .modal--overlay {
+      //@extend .pretty-scrollbar;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.3);
+      width: 100%;
+      height: 100%;
+      z-index: 5; // Above fixed sidebar
+      overflow-y: auto;
+    }
+  }
+  &.is-modal-closed {
+    .modal--overlay {
+      display: none;
+      z-index: -1;
+    }
+  }
+}
+
+.modal--window-container {
+  width: 95%;
+  height: 95%;
+  padding-top: 2.5%;
+  margin: 0 auto;
+}
+
+.modal--window {
+  background-color: #fafafa;
+  max-width: 960px; //$article-width;
+  margin: 0 auto 2.5%;
+  //height: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+}
+
+$modal-x-size: 20px !default;
+$modal-x-bar: 3px !default;
+
+.modal--close-button {
+
+  position: relative;
+  display: inline-block;
+  float: right;/*
+  position: absolute;
+  top: 10px;
+  right: 30px;*/
+
+  vertical-align: bottom;
+  width: $modal-x-size;
+  height: $modal-x-size;
+  cursor: pointer;
+  margin-top: 3px;
+  margin-right: 5px;
+
+  & > span {
+    display: block;
+    position: absolute;
+    top: (8px / 2) - ($modal-x-bar / 2);
+    left: 8px;
+    right: 8px;
+    //background-color: #000;
+    height: $modal-x-bar;
+    width: $modal-x-size;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 100%;
+      height: $modal-x-bar;
+      background-color: #000;
+      content: "";
+    }
+
+    &::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      bottom: 0;
+      transform: rotate(-45deg);
+    }
+  }
+}

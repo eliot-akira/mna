@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const fs = require('fs')
+const script = process.argv[2] || 'start'
+const args = process.argv.slice(3)
+process.argv.pop()
+
+switch (script) {
+case 'build':
+case 'start':
+//case 'clean':
+  require('./scripts/' + script)
+  break
+case 'babel':
+  require('./scripts/' + script)()
+  break
+/*case 'test':
+  require('./scripts/run')({ script: path.join(__dirname, 'tester', 'cli'), args })
+  break*/
+default:
+  if (fs.existsSync(`${script}.js`)) {
+    require('./scripts/run')({ script, args })
+  } else {
+    console.log('Unknown script "' + script + '".')
+  }
+  break
+}
