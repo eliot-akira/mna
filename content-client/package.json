@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@mna/api": "1.x",
-    "@mna/dom": "1.x"
+    "@mna/dom": "1.x",
+    "@mna/utils": "1.x"
   }
 }
