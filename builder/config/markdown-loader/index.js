@@ -10,6 +10,7 @@ const md = require('markdown-it')({
     // Without `disabled` attribute
     enabled: true
   })
+  .use(require('./anchor'))
 
 module.exports = function (source) {
 
