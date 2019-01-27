@@ -1,0 +1,128 @@
+$prism-bg-color: #1c1c1c;
+
+$prism-dark-gray: #777;
+$prism-gray: #999;
+$prism-light-gray: #ccc;
+$prism-red: #D27575; // #e2777a
+$prism-dark-blue: #887bb5;
+$prism-blue: #6EA4D2; // #6196cc
+$prism-light-blue: #96beff;
+$prism-orange: #CC8B5E; // #f08d49
+$prism-yellow: #E0BC72; // #f8c555
+$prism-purple: #B88EC7; // #cc99cd
+$prism-green: #8BB56E; //#7ec699
+$prism-cyan: #7FD2C7; // #67cdcc
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: $prism-light-gray;
+	background: none;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"], pre[class*="language-"] code {
+	background: $prism-bg-color;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: $prism-dark-gray;
+}
+
+.token.important,
+.token.punctuation {
+  color: $prism-gray;
+}
+
+.token.tag,
+.token.namespace,
+.token.deleted {
+	color: $prism-red;
+}
+
+.token.property,
+.token.function-name,
+.token.variable {
+	color: $prism-blue;
+}
+
+.token.boolean,
+.token.number,
+.token.function,
+.token.package {
+	color: $prism-orange;
+}
+
+.token.class-name,
+.token.constant,
+.token.symbol,
+.token.attr-name {
+	color: $prism-yellow;
+}
+
+.token.selector,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+	color: $prism-purple;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex {
+	color: $prism-green;
+}
+
+.token.operator {
+  color: $prism-dark-blue;
+}
+
+.token.entity,
+.token.url {
+	color: $prism-cyan;
+}
+
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.inserted {
+	color: $prism-green;
+}

@@ -63,6 +63,11 @@ body { overflow: hidden }
 
 }
 
+.header-menu-section-title {
+  @extend .pt-1, .pl-1, .border-bottom, .muted;
+  text-transform: uppercase;
+}
+
 @include less-than( md ) {
 
   .header-menu {

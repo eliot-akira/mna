@@ -1,19 +1,13 @@
 import React from 'react'
 import { Link } from '@mna/react'
 import convert from '@mna/html/react'
-import Highlight from '@mna/react-ui/Highlight'
-
-//import highlightLanguages from '@mna/builder/config/highlightLanguages'
-const highlightLanguages = [
-  'javascript', 'typescript', 'json',
-  'scss', 'css',
-  'xml', // Includes HTML
-  'shell'
-]
+import Prism from '../Prism'
 
 export default function htmr(post, options = {}) {
 
   const { tags, ...convertOptions } = options
+
+  let nodeIndex = 0
 
   return convert(post, {
     tags: {
@@ -36,23 +30,7 @@ export default function htmr(post, options = {}) {
       },
 
       pre(props, children, { render }) {
-        const code = children[0]
-        if (!code || !code.tagName==='code'
-          || !code.children[0]
-        ) return ''
-
-        const { className = '' } = code
-        const { content = '' } = code.children[0]
-
-        return (
-          <Highlight
-            key={new Date()} // Fix for "set unique key" warning in react dev build
-            languages={highlightLanguages}
-            className={className}>{
-              content
-            }</Highlight>
-        )
-        // return <pre {...props}>{render(children)}</pre>
+        return <Prism key={`prism-${nodeIndex++}`} {...{ ...props, children }} />
       },
 
       ...tags

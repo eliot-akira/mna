@@ -51,13 +51,7 @@ const server = [
   ),
 ]
 
-const highlightLanguages = require('../highlightLanguages')
-
 const shared = [
-  new webpack.ContextReplacementPlugin(
-    /highlight.js\/lib\/languages$/,
-    new RegExp(`^./(${highlightLanguages.join('|')})$`)
-  )
 ]
 
 if (isDev) {
