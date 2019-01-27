@@ -68,6 +68,9 @@ body { overflow: hidden }
   text-transform: uppercase;
   letter-spacing: .03rem;
 }
+.header-menu-item:first-of-type .header-menu-section-title {
+  @extend .pt-0;
+}
 
 @include less-than( md ) {
 
