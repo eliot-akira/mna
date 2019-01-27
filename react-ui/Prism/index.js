@@ -1,6 +1,9 @@
 import decodeEntities from '@mna/html/entities/decode'
 import prism from './prism'
 
+const translate = {
+  sh: 'bash'
+}
 const phpStartTag = '<?php '
 const phpStartTagReplace = '<span class="token delimiter important">&lt;?php</span> '
 
@@ -14,7 +17,9 @@ export default function Prism({ children, ...props }) {
   const { attributes: { className = '' } } = code
   const { content: rawContent = '' } = code.children[0]
 
-  const language = className.replace(/^language-/, '') || 'markup'
+  let language = className.replace(/^language-/, '') || 'markup'
+  if (translate[language]) language = translate[language]
+
   const grammar = prism.languages[language] || prism.languages.markup
 
   let content = decodeEntities(rawContent)
