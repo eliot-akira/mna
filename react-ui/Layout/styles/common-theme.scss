@@ -3,6 +3,11 @@
   .header-title {
     color: $site-header-text-color;
     background-color: $site-header-bg-color;
+
+    a, a:hover, a.active {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 }
 

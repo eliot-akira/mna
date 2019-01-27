@@ -8,7 +8,7 @@ const phpStartTag = '<?php '
 const phpStartTagReplace = '<span class="token delimiter important">&lt;?php</span> '
 
 export default function Prism({ children, ...props }) {
-  console.log('Prism', props, children)
+
   const code = children[0]
   if (!code || !code.tagName==='code'
           || !code.children[0]

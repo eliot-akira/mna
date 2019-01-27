@@ -93,6 +93,9 @@ body { overflow: hidden }
   }
 
   .site.is-header-menu-open {
+
+    overflow-y: auto;
+
     .site-header .header-menu-content {
       transform: translateY(0);
     }
