@@ -1,9 +1,10 @@
 {
   "name": "@mna/react-server",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@mna/api": "1.x",
     "@mna/content-server": "1.x",
     "@mna/fsp": "1.x",
     "@mna/react": "1.x",

@@ -1,6 +1,6 @@
-const path = require('path')
-const fs = require('fs')
-const dotenv = require('dotenv')
+import path from 'path'
+import fs from 'fs'
+import dotenv from 'dotenv'
 
 export default () => {
 
