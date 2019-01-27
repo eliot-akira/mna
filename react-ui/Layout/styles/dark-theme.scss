@@ -8,6 +8,6 @@ $site-header-menu-content-text-color: #fafafa !default;
 $site-header-menu-item-hover-bg-color: rgba(0, 0, 0, .1) !default;
 $site-header-menu-item-active-bg-color: $gray-blue !default;
 
-$site-header-menu-hr-color: $border-color !default;
+$site-header-menu-hr-color: rgba(255,255,255,.2) !default;
 
 @import "common-theme";

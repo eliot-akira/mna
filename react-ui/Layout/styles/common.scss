@@ -64,8 +64,9 @@ body { overflow: hidden }
 }
 
 .header-menu-section-title {
-  @extend .pt-1, .pl-1, .border-bottom, .muted;
+  @extend .pt-1, .pl-1, .border-bottom, .muted, .text-small;
   text-transform: uppercase;
+  letter-spacing: .03rem;
 }
 
 @include less-than( md ) {

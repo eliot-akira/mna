@@ -6,6 +6,10 @@
   }
 }
 
+.header-menu-section-title {
+  border-color: $site-header-menu-hr-color;
+}
+
 .site-layout-with-sidebar .site-header {
   .header-menu-content {
 
@@ -25,8 +29,8 @@
       text-decoration: none;
     }
     hr {
-      margin-top: 0;
-      margin-bottom: 0;
+      margin-top: $space-1;
+      margin-bottom: $space-1;
       border-color: $site-header-menu-hr-color;
     }
   }
