@@ -18,21 +18,29 @@ module.exports = async function generate(configs) {
 
 async function watchAndRegenerate(config) {
 
-  const regenEvents = ['add', 'change', 'unlink', 'unlinkDir']
+  const regenEvents = [
+    'add', 'change', 'unlink',
+    'addDir', 'unlinkDir'
+  ]
 
   const watchPattern = config.watchPattern || config.globPattern
   const onWatch = config.onWatch || ((event, item) => {
 
-    if (regenEvents.indexOf(event) < 0) return
+    if (regenEvents.indexOf(event) < 0) {
+      //console.log(`Dynamic: Ignore "${event}" for ${item}`)
+      return
+    }
 
-    console.log(`Dynamic generate: ${event} ${item}`)
+    console.log(`Dynamic: ${event} ${item}`)
 
     generateAll(config, item, event).catch(console.error)
   })
 
   console.log('Watching for dynamic code generation:', watchPattern, '\n')
 
-  const watcher = chokidar.watch(watchPattern)
+  const watcher = chokidar.watch(watchPattern, {
+    ignored: '**/_*/**'
+  })
 
   // Wait until ready, to ignore initial "add" events
   watcher.on('ready', () => watcher.on('all', onWatch))
@@ -62,7 +70,9 @@ async function generateAll(config, item, event) {
 
     // TODO: Cache for watch task, and add/remove changed file(s)
 
-    items = glob.sync(globPattern)
+    items = glob.sync(globPattern, {
+      ignore: '**/_*/**'
+    })
 
     if (mapItem) {
       for (let i = 0, len = items.length; i < len; i++) {

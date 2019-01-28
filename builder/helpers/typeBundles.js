@@ -23,7 +23,10 @@ module.exports = function createTypeBundles({ type, relativePath, routePrefix = 
     cachedItemRoutes[item]
     || (cachedItemRoutes[item] =
       `${routePrefix ? `${routePrefix}/` : ''}${
-        item.replace(/(^|\/)index$/, '').replace(/(^|\/)readme$/, '')
+        item
+          .replace(/(^|\/)index$/, '')
+          .replace(/(^|\/)readme$/, '')
+          .replace(/^home$/, '')
       }`
     )
 
