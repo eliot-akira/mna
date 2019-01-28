@@ -31,7 +31,7 @@ module.exports = function build({ args, options }) {
     '**/*.scss'
   ].join(',')}}`
 
-  const ignoreCommonFiles = ['.git', 'node_modules', '**/*.js', '**/.hardlinks', '**/*.lock', '**/*.log']
+  const ignoreCommonFiles = ['.git', 'node_modules', '**/_*/**', '**/*.js', '**/.hardlinks', '**/*.lock', '**/*.log']
 
   const getLibSrc = lib => path.join(src, lib)
   const getLibDest = lib => path.join(dest, lib)
@@ -72,7 +72,8 @@ module.exports = function build({ args, options }) {
       },
       babelOptions: {
         compact: true,
-        comments: false
+        comments: false,
+        ignore: ['_/**', '**/_/**']
       },
       root: [`publish/${lib}`],
       rename: {}

@@ -3,6 +3,7 @@ const libs = {
   // For browser or universal
   client: [
     'api',
+    'calendar',
     'content-client',
     'dom',
     'event',
