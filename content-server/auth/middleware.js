@@ -56,6 +56,8 @@ async function createAuthMiddleware({ auth, stores }) {
 
   return async (req, res) => {
 
+    req.context.user = null
+
     // Get token
 
     let token

@@ -16,3 +16,9 @@ export async function createRoutes(props) {
     require('./api/route')({ ...props, auth })
   ]
 }
+
+export async function setRouteData({ data, setState }) {
+  setState({
+    currentRouteData: data
+  })
+}

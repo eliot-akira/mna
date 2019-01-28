@@ -4,7 +4,8 @@ const createState = () => ({
   auth: null,
   config: {},
   stores: {},
-  types: {}
+  types: {},
+  currentRouteData: {}
 })
 
 const actions = {

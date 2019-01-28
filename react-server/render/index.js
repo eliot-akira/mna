@@ -20,6 +20,12 @@ export default async function render({
 
   if (user) store.setState({ user: cleanUserData(user) })
 
+  // Route data to be used when content is called from serverActions
+  // See: content-server/api
+  if (content) content.setRouteData({ data: {
+    user
+  } })
+
   const { state, actions, setState } = store
 
   await handleServerActions({

@@ -7,13 +7,16 @@ const log = (...args) => console.log('@mna/content/api', ...args)
 export async function api(props) {
 
   const {
+    // From client
     type, action, data,
+
+    // From ./route - Not available when called directly from serverAction
+    auth, content, user, req, res,
+
     state,
-    auth, content, user,
-    req, res
   } = props
 
-  const { types } = state
+  const { types, currentRouteData = {} } = state
 
   if (!type) throw { message: `Field "type" is required` }
   if (!action) throw { message: `Field "action" is required` }
@@ -23,8 +26,8 @@ export async function api(props) {
   // Default and content type actions are created in ../type
 
   return await types[type][action]({
-    type, action, data,
-    auth, content, types, user,
-    req, res
+    types, type, action, data,
+    auth, content, user, req, res,
+    ...currentRouteData
   })
 }
