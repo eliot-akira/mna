@@ -22,9 +22,7 @@ export default async function render({
 
   // Route data to be used when content is called from serverActions
   // See: content-server/api
-  if (content) content.setRouteData({ data: {
-    user
-  } })
+  if (content) content.setRouteData({ data: { user } })
 
   const { state, actions, setState } = store
 
@@ -45,13 +43,17 @@ export default async function render({
     </StaticRouter>
   )
 
+  // Important: Clear route data
+  if (content) content.setRouteData({ data: {} })
+
+
   // Status code and redirect location
   const {
     status: statusCode, // From lib/react/Status
     url: redirectLocation, // From react-router
   } = context
 
-  if (redirectLocation) return { statusCode, redirectLocation  }
+  if (redirectLocation) return { statusCode, redirectLocation }
 
   const html = await renderPage({
     markup, assets,

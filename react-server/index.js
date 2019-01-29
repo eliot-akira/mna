@@ -44,8 +44,8 @@ export default async function createServer(props = {}) {
 
     get(async (req, res) => {
 
-      const location = req.url // From lib/server/router
-      const user = req.context.user // From lib/content/user
+      const location = req.url // From server/router
+      const user = req.context.user // From content/user
 
       const { html, redirectLocation, statusCode } = await render({
         App,
