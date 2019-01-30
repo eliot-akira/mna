@@ -14,7 +14,7 @@ $prism-green: #8BB56E; //#7ec699
 $prism-cyan: #7FD2C7; // #67cdcc
 
 code[class*="language-"],
-pre[class*="language-"] {
+pre /*[class*="language-"]*/ {
 	color: $prism-light-gray;
 	background: none;
 	text-align: left;
@@ -36,14 +36,14 @@ pre[class*="language-"] {
 }
 
 /* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
+pre /*[class*="language-"]*/ {
+	padding: .75em 1em;
 	margin: .5em 0;
 	overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
-pre[class*="language-"], pre[class*="language-"] code {
+pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
 	background: $prism-bg-color;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@mna/react'
 import convert from '@mna/html/react'
+import decodeEntities from '@mna/html/entities/decode'
 import Prism from '../Prism'
 
 export default function htmr(post, options = {}) {
@@ -13,13 +14,9 @@ export default function htmr(post, options = {}) {
     tags: {
 
       input(props) {
-        if (props.checked) {
-          props.checked = 'checked'
-          props.readOnly = 'readOnly'
-        }
-        if (props.disabled) {
-          delete props.disabled
-          if (!props.checked) props.checked = false
+        if (props.type==='checkbox') {
+          props.checked = props.checked ? 'checked' : false
+          //props.disabled = 'disabled'
           props.readOnly = 'readOnly'
         }
         return <input {...props} />
@@ -30,7 +27,23 @@ export default function htmr(post, options = {}) {
       },
 
       pre(props, children, { render }) {
-        return <Prism key={`prism-${nodeIndex++}`} {...{ ...props, children }} />
+
+        const code = children[0]
+        if (!code || !code.tagName==='code'
+              || !code.children[0]
+        ) return ''
+
+        const { attributes: { className = '' } } = code
+        const { content: rawContent = '' } = code.children[0]
+
+        const language = className.replace(/^language-/, '') || 'markup'
+        const content = decodeEntities(rawContent) // Content from markdown
+
+        return <Prism
+          key={`prism-${nodeIndex++}`}
+          className={className}
+          {...{ ...props, language, children: content }}
+        />
       },
 
       ...tags
