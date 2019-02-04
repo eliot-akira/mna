@@ -43,6 +43,25 @@ class SmoothTransition extends Component {
     })
   }
 
+  createImagePromise = img => new Promise((resolve, reject) => {
+
+    if (img.complete) return resolve()
+    let handler = () => {
+      resolve()
+      //img.onload = null
+      //img.onerror = null
+      img.removeEventListener('load', handler)
+      img.removeEventListener('error', handler)
+      handler = null
+    }
+
+    //img.onload = handler
+    //img.onerror = handler
+    img.addEventListener('load', handler)
+    img.addEventListener('error', handler)
+
+  })
+
   pageAssetsLoaded() {
     return new Promise((resolve, reject) => {
 
@@ -59,24 +78,7 @@ class SmoothTransition extends Component {
           const imagePromises = Array.prototype.slice.call(
             this.el.querySelectorAll('img') || []
           )
-            .map(img => new Promise((resolve, reject) => {
-
-              if (img.complete) return resolve()
-              let handler = () => {
-                resolve()
-                //img.onload = null
-                //img.onerror = null
-                img.removeEventListener('load', handler)
-                img.removeEventListener('error', handler)
-                handler = null
-              }
-
-              //img.onload = handler
-              //img.onerror = handler
-              img.addEventListener('load', handler)
-              img.addEventListener('error', handler)
-
-            }))
+            .map(this.createImagePromise)
 
           // Other manually loaded assets
           const manualAsyncComponentsPromises = Array.prototype.slice.call(

@@ -13,5 +13,12 @@ img { border-radius: 4px }
 .article-width {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: .5rem 1.5rem 1rem;
+}
+
+@include less-than(sm) {
+  .article-width {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
 }

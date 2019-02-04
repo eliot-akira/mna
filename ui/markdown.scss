@@ -1,16 +1,21 @@
 
 // Task list
 
+$task-list-item-checkbox-width: 19px;
+
 .task-list-item {
   list-style-type: none;
-  margin-left: -19px; /* Width of checkbox.. */
+  margin-left: - $task-list-item-checkbox-width;
+  p:not(:first-child) {
+    margin-left: $task-list-item-checkbox-width;
+  }
+}
+
+.task-list-item .task-list-item {
+  margin-left: 2px;
 }
 
 .task-list-item-checkbox {
   margin-right: .1rem !important;
   margin-bottom: .1rem;
-}
-
-.task-list-item .task-list-item {
-  margin-left: 2px;
 }

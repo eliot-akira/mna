@@ -28,7 +28,6 @@ class Body extends Component {
       >
         <SmoothTransition
           location={location}
-          duration={300}
           onRouteEnter={() => this.focusScrollContainer()}
         >
           {transitLocation =>
