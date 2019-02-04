@@ -13,3 +13,6 @@ export Link from './Link'
 // See https://reacttraining.com/react-router/web/guides/server-rendering
 export Redirect from './Redirect'
 export Status from './Status'
+
+export withState from './withState'
+export withProps from './withProps'
