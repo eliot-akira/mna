@@ -11,12 +11,15 @@ module.exports = function createRoute({ server, content, auth, actions }) {
     const apiProps = { ...req.body, auth, user, content, req, res }
 
     try {
-      send(res, status.ok, await actions.api(apiProps))
+      const result = await actions.api(apiProps)
+      send(res, status.ok, result)
     } catch (e) {
 
-      log(e)
+      const { stack, ...error } = (typeof e==='string' ?
+        { message: e }
+        : e)
 
-      send(res, status.error, e.message || e)
+      send(res, status.error, error)
     }
   })
 }

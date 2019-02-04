@@ -25,9 +25,15 @@ export async function api(props) {
 
   // Default and content type actions are created in ../type
 
-  return await types[type][action]({
-    types, type, action, data,
-    auth, content, user, req, res,
-    ...currentRouteData
-  })
+  //log({ type, action, data })
+  try {
+    return await types[type][action]({
+      types, type, action, data,
+      auth, content, user, req, res,
+      ...currentRouteData
+    })
+  } catch (e) {
+    log('Error', { type, action, data }, e)
+    throw e
+  }
 }
