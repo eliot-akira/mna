@@ -151,6 +151,17 @@ const cssLoaderServer = {
   loader: require.resolve('css-loader'),
 }
 
+
+const svgLoader = require.resolve('@svgr/webpack')
+const svgLoaderClient = {
+  test: /\.svg$/,
+  loader: svgLoader,
+  issuer: {
+    test: /\.(j|t)sx?$/
+  }
+}
+const svgLoaderServer = svgLoaderClient
+
 const urlLoader = require.resolve('file-loader')
 
 const urlLoaderClient = {
@@ -173,7 +184,7 @@ const urlLoaderServer = {
 const fileLoader = require.resolve('file-loader')
 
 const fontLoaderClient = {
-  test: /\.(eot|svg|ttf|woff|woff2)$/,
+  test: /\.(eot|ttf|svg|woff|woff2)$/,
   use: [
     { loader: urlLoader, options: {
       limit: 2048,
@@ -184,7 +195,7 @@ const fontLoaderClient = {
 }
 
 const fontLoaderServer = {
-  test: /\.(eot|svg|ttf|woff|woff2)$/,
+  test: /\.(eot|ttf|svg|woff|woff2)$/,
   use: [
     { loader: urlLoader, options: {
       limit: 2048,
@@ -239,6 +250,7 @@ const client = [
       cssModuleLoaderClient,
       cssLoaderClient,
       sassLoaderClient,
+      svgLoaderClient,
       urlLoaderClient,
       fontLoaderClient,
       markdownLoaderClient,
@@ -254,6 +266,7 @@ const server = [
       cssModuleLoaderServer,
       cssLoaderServer,
       sassLoaderServer,
+      svgLoaderServer,
       urlLoaderServer,
       fontLoaderServer,
       markdownLoaderServer,

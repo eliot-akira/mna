@@ -19,8 +19,11 @@ module.exports = async function generate(configs) {
 async function watchAndRegenerate(config) {
 
   const regenEvents = [
-    'add', 'change', 'unlink',
-    'addDir', 'unlinkDir'
+    'add',
+    //'change',
+    'unlink',
+    //'addDir',
+    //'unlinkDir'
   ]
 
   const watchPattern = config.watchPattern || config.globPattern
