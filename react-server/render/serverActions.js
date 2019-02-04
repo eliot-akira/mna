@@ -33,10 +33,17 @@ export default async function handleServerActions({
       if (matchKeys.length!==routeKeyLength) continue
 
       const serverAction =
-          // In the route config, for dynamically loaded component
+          // In the route config
           childRoute.serverAction
           // Static property on the component
           || (childRoute.component && childRoute.component.serverAction)
+          // Static property on dynamically loaded route
+          || (childRoute.findRoute &&
+            (childRoute.findRoute({
+              ...serverActionProps,
+              location: { pathname: location }
+            }) || {}).serverAction
+          )
 
       if (!serverAction) continue
 

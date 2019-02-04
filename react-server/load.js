@@ -7,8 +7,7 @@ import { withRouter } from 'react-router'
 export default function load(name, Loaded) {
 
   const C = Loaded.default || Loaded
-
-  return withRouter(function SyncComponent(props) {
+  const SyncComponent = withRouter(function(props) {
 
     // Pass rendered component name to server: see ./render
     if (props.staticContext && props.staticContext.splitPoints) {
@@ -17,4 +16,10 @@ export default function load(name, Loaded) {
 
     return <C {...props} />
   })
+
+  if (C.serverAction) {
+    SyncComponent.serverAction = C.serverAction
+  }
+
+  return SyncComponent
 }
