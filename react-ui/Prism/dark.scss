@@ -15,43 +15,49 @@ $prism-cyan: #7FD2C7; // #67cdcc
 
 code[class*="language-"],
 pre /*[class*="language-"]*/ {
-	color: $prism-light-gray;
-	background: none;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
+  color: $prism-light-gray;
+  background: none;
+  text-align: left;
 
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
 
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
+  line-height: 1.5;
 
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
 /* Code blocks */
 pre /*[class*="language-"]*/ {
-	padding: .75em 1em;
-	margin: .5em 0;
-	overflow: auto;
+  padding: 0; // .75em 1em;
+  margin: .5em 0;
+  overflow: auto;
+  display: flex;
+}
+
+pre > code {
+  //padding: .6em .75em;
 }
 
 :not(pre) > code[class*="language-"],
 pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
-	background: $prism-bg-color;
+  background: $prism-bg-color;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
 }
 
 .token.comment,
@@ -59,7 +65,7 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: $prism-dark-gray;
+  color: $prism-dark-gray;
 }
 
 .token.important,
@@ -70,41 +76,41 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
 .token.tag,
 .token.namespace,
 .token.deleted {
-	color: $prism-red;
+  color: $prism-red;
 }
 
 .token.property,
 .token.function-name,
 .token.variable {
-	color: $prism-blue;
+  color: $prism-blue;
 }
 
 .token.boolean,
 .token.number,
 .token.function,
 .token.package {
-	color: $prism-orange;
+  color: $prism-orange;
 }
 
 .token.class-name,
 .token.constant,
 .token.symbol,
 .token.attr-name {
-	color: $prism-yellow;
+  color: $prism-yellow;
 }
 
 .token.selector,
 .token.atrule,
 .token.keyword,
 .token.builtin {
-	color: $prism-purple;
+  color: $prism-purple;
 }
 
 .token.string,
 .token.char,
 .token.attr-value,
 .token.regex {
-	color: $prism-green;
+  color: $prism-green;
 }
 
 .token.operator {
@@ -113,16 +119,16 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
 
 .token.entity,
 .token.url {
-	color: $prism-cyan;
+  color: $prism-cyan;
 }
 
 .token.bold {
-	font-weight: bold;
+  font-weight: bold;
 }
 .token.italic {
-	font-style: italic;
+  font-style: italic;
 }
 
 .token.inserted {
-	color: $prism-green;
+  color: $prism-green;
 }

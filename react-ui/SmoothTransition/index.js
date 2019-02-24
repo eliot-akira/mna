@@ -6,7 +6,8 @@ class SmoothTransition extends Component {
     super(props)
     this.state = {
       location: this.props.location,
-      fadeClassName: 'fade-enter',
+      fadeClassName:
+        'fade-enter' //'fade-enter fade-enter-active',
     }
     this.pathname = this.props.location.pathname
   }
@@ -31,7 +32,7 @@ class SmoothTransition extends Component {
         fadeClassName: 'fade-enter'
       }, this.smoothEnter)
 
-    }, newProps.duration || 150) // Same as CSS transition duration
+    }, newProps.duration || 300) // Same as CSS transition duration
   }
 
   smoothEnter() {
@@ -48,15 +49,11 @@ class SmoothTransition extends Component {
     if (img.complete) return resolve()
     let handler = () => {
       resolve()
-      //img.onload = null
-      //img.onerror = null
       img.removeEventListener('load', handler)
       img.removeEventListener('error', handler)
       handler = null
     }
 
-    //img.onload = handler
-    //img.onerror = handler
     img.addEventListener('load', handler)
     img.addEventListener('error', handler)
 

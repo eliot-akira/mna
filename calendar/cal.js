@@ -10,9 +10,22 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const weekdayShortNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-const getMonthName = day => monthNames[day.month - 1]
-const getWeekdayName = day => weekdayNames[day.dayOfWeek>0 ? day.dayOfWeek-1 : 6]
+const getMonthName = day =>
+  monthNames[
+    typeof day==='object' ? day.month - 1
+      : day - 1
+  ]
+const getWeekdayName = day =>
+  weekdayNames[
+    typeof day==='object' ? (day.dayOfWeek>0 ? day.dayOfWeek-1 : 6)
+      : (day>0 ? day-1 : 6)
+  ]
 const getWeekdayShortName = day => weekdayShortNames[day.dayOfWeek>0 ? day.dayOfWeek-1 : 6]
+
+const isSameDay = (first, second) =>
+  first.year===second.year
+  && first.month===second.month
+  && first.day===second.day
 
 const getDayData = day => {
 
@@ -20,17 +33,14 @@ const getDayData = day => {
     .split(' ')
     .map(i => parseInt(i, 10))
 
-  return {
-    year: p[0],
-    quarter: p[1],
-    month: p[2],
-    week: p[3],
-    day: p[4],
-    dayOfWeek: p[5],
-    hour: p[6],
-    minute: p[7],
-    second: p[8],
-  }
+  return [
+    'year', 'quarter', 'month',
+    'week', 'day', 'dayOfWeek',
+    'hour', 'minute', 'second'
+  ].reduce((obj, key, index) => {
+    obj[key] = p[index]
+    return obj
+  }, {})
 }
 
 const getMonthData = day => {
@@ -40,6 +50,7 @@ const getMonthData = day => {
   const startDay = startOfWeek(
     startOfMonth(day)
     , { weekStartsOn })
+
   const endDay = endOfWeek(
     endOfMonth(day)
     , { weekStartsOn })
@@ -64,11 +75,6 @@ const getMonthData = day => {
 
   return { weeks }
 }
-
-const isSameDay = (first, second) =>
-  first.year===second.year
-  && first.month===second.month
-  && first.day===second.day
 
 module.exports = {
   isSameDay,

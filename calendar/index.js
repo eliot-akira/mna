@@ -1,4 +1,5 @@
 // https://date-fns.org/docs/Getting-Started
+// https://date-fns.org/v1.30.1/docs/format
 
 module.exports = {
   eachDay: require('date-fns/each_day'),

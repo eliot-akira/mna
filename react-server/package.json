@@ -1,8 +1,7 @@
 {
   "name": "@mna/react-server",
-  "version": "1.1.7",
+  "version": "1.3.1",
   "main": "index.js",
-  "license": "MIT",
   "dependencies": {
     "@mna/api": "1.x",
     "@mna/content-server": "1.x",
@@ -15,5 +14,14 @@
   },
   "peerDependencies": {
     "@mna/react-client": "1.x"
+  },
+  "files": [
+    "**/*.js"
+  ],
+  "license": "MIT",
+  "author": "Eliot Akira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliot-akira/mna.git"
   }
 }

@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom'
 
-const externalUrl = new RegExp(/^(http:|https:|mailto:|ftp:)/)
+const externalUrl = new RegExp(/^(http:|https:|mailto:|ftp:|tel:)/)
 
 export default function Link({ href, to, ...props }) {
 
   const target = to || href
 
-  if (target.match(externalUrl)) {
+  if (target.indexOf(':') >= 0 /*target.match(externalUrl)*/) {
     return (
       <a {...{ ...props, href: target, target: '_blank' }} />
     )

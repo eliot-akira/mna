@@ -4,6 +4,9 @@ import convert from '@mna/html/react'
 import decodeEntities from '@mna/html/entities/decode'
 import Prism from '../Prism'
 
+export const globalTags = {}
+export const addTags = tags => Object.assign(globalTags, tags)
+
 export default function htmr(post, options = {}) {
 
   const { tags, ...convertOptions } = options
@@ -45,7 +48,7 @@ export default function htmr(post, options = {}) {
           {...{ ...props, language, children: content }}
         />
       },
-
+      ...globalTags,
       ...tags
     },
     ...convertOptions

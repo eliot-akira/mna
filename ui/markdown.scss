@@ -11,8 +11,16 @@ $task-list-item-checkbox-width: 19px;
   }
 }
 
+li .task-list-item {
+  margin-left: - $task-list-item-checkbox-width + 2px;
+}
+
 .task-list-item .task-list-item {
   margin-left: 2px;
+}
+
+.task-list-item li:not(.task-list-item) {
+  margin-left: 1.4rem;
 }
 
 .task-list-item-checkbox {

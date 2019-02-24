@@ -3,7 +3,7 @@
 $font-family-japanese: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 $serif-font-family-japanese: "HiraMinPro-W3", "Hiragino Mincho Pro W3", "Hiragino Mincho Pro", "ヒラギノ明朝 Pro W3", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", "MS Mincho", serif;
 
-.font-jp { font-family: $font-family-japanese; }
+.font-jp, :lang(ja-jp) { font-family: $font-family-japanese; }
 .font-jp-serif { font-family: $serif-font-family-japanese; }
 .font-default { font-family: $font-family; }
 .font-default-serif { font-family: $serif-font-family; }

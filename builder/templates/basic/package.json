@@ -1,0 +1,27 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "builder build",
+    "dev": "builder start",
+    "export": "yarn build && APP_EXPORT=true NODE_ENV=production node build/server/server.js",
+    "deploy": "cd build && ./deploy",
+    "analyze:client": "webpack-bundle-analyzer build/client/stats.json",
+    "analyze:server": "webpack-bundle-analyzer build/server/stats.json",
+    "-- Production --": "",
+    "prep": "NODE_ENV=production yarn",
+    "serve": "NODE_ENV=production node build/server/server.js",
+    "start": "NODE_ENV=production NODE_PATH=. pm2 start pm2.config.js",
+    "restart": "NODE_ENV=production NODE_PATH=. pm2 restart pm2.config.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mna/builder": "1.x",
+    "@mna/icons": "1.x",
+    "@mna/react-client": "1.x",
+    "@mna/react-server": "1.x",
+    "@mna/react-ui": "1.x"
+  }
+}

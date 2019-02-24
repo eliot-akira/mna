@@ -1,0 +1,16 @@
+# App-specific
+
+/data
+/build
+/src/dynamic
+
+# Alway ignore
+
+.env.production
+.env.*.local
+
+node_modules
+.cache*
+*.log
+*.lock
+*-lock.json

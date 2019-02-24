@@ -27,6 +27,7 @@ const libs = {
     'builder',
     'content-server',
     'db',
+    'icons',
     'server',
     'tester',
     'ui'

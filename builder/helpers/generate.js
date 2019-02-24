@@ -42,7 +42,7 @@ async function watchAndRegenerate(config) {
   console.log('Watching for dynamic code generation:', watchPattern, '\n')
 
   const watcher = chokidar.watch(watchPattern, {
-    ignored: '**/_*/**'
+    ignored: ['**/_*', '**/_*/**']
   })
 
   // Wait until ready, to ignore initial "add" events
@@ -74,7 +74,7 @@ async function generateAll(config, item, event) {
     // TODO: Cache for watch task, and add/remove changed file(s)
 
     items = glob.sync(globPattern, {
-      ignore: '**/_*/**'
+      ignore: ['**/_*', '**/_*/**']
     })
 
     if (mapItem) {

@@ -1,0 +1,4 @@
+templates/*/build
+templates/*/data
+templates/*/.cache*
+templates/*/src/dynamic

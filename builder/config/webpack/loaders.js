@@ -219,7 +219,7 @@ const markdownLoaderClient = {
 const markdownLoaderServer = markdownLoaderClient
 
 const fileLoaderClient = {
-  exclude: [/\.(js|css|mjs|html|json)$/],
+  exclude: [/\.(js|css|mjs|html|json|)$/],
   use: [
     {
       loader: fileLoader,

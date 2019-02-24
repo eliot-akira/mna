@@ -108,7 +108,6 @@ const parseJSON = str => {
   try {
     return JSON.parse(str)
   } catch (err) {
-    console.log('BAD JSON', str)
     throw createError(400, 'Invalid JSON', err)
   }
 }
