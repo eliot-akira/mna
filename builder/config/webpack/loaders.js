@@ -158,7 +158,8 @@ const svgLoaderClient = {
   loader: svgLoader,
   issuer: {
     test: /\.(j|t)sx?$/
-  }
+  },
+  options: { svgo: false }
 }
 const svgLoaderServer = svgLoaderClient
 

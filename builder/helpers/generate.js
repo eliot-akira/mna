@@ -42,7 +42,7 @@ async function watchAndRegenerate(config) {
   console.log('Watching for dynamic code generation:', watchPattern, '\n')
 
   const watcher = chokidar.watch(watchPattern, {
-    ignored: ['**/_*', '**/_*/**']
+    ignored: ['_*/**', '**/_*', '**/_*/**', 'node_modules/**', '**/node_modules/**', '**/.git/**']
   })
 
   // Wait until ready, to ignore initial "add" events

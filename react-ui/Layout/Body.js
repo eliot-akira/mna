@@ -20,13 +20,14 @@ class Body extends Component {
   }
 
   render() {
-    const { children, location } = this.props
+    const { children, location, footer } = this.props
     return (
       <main id="content"
         className="site-main"
         ref={el => this.scrollContainer = el }
       >
         <SmoothTransition
+          className="site-main-body"
           location={location}
           onRouteEnter={() => this.focusScrollContainer()}
         >
@@ -39,6 +40,7 @@ class Body extends Component {
             </>
           }
         </SmoothTransition>
+        {footer}
       </main>
     )
   }

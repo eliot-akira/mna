@@ -7,25 +7,22 @@ const readerMethods = {
   buffer: 'readAsArrayBuffer',
   binary: 'readAsBinaryString',
   url:    'readAsDataURL',
-  text:   'readAsText'
+  text:   'readAsText',
+  json:   'readAsText'
 }
 
 //const files = e.dataTransfer.files // From file input field
 //const files = e.target.files // From drag-and-drop
 
-function readFiles(props) {
+function readFiles({
+  type = 'buffer',
+  files = [],
+  extensions = [],
+  onStart, onLoadFile, onComplete, onError,
+  getExtensionType
+}) {
 
-  const {
-    type = 'buffer',
-    files,
-    extensions = [],
-    onStart, onLoad, onComplete, onError
-  } = props
-
-  if (!files || !files.length) return
-
-  const buffers = []
-  const filtersFiles = Array.prototype.slice.call(files)
+  const filteredFiles = Array.prototype.slice.call(files)
     .map(file => {
       const parts = file.name.split('.')
       file.extension = (parts[ parts.length - 1 ] || '').toLowerCase()
@@ -36,14 +33,15 @@ function readFiles(props) {
       return !extensions.length || extensions.indexOf(file.extension) >= 0
     })
 
-  const numFiles = filtersFiles.length
-
+  const numFiles = filteredFiles.length
   if (!numFiles) return
+
   onStart && onStart()
 
+  const results = []
   let done = 0
 
-  filtersFiles.forEach(file => {
+  return Promise.all(filteredFiles.map(file => new Promise((resolve, reject) => {
 
     const reader = new FileReader()
     const method = readerMethods[type] || readerMethods.text
@@ -51,20 +49,27 @@ function readFiles(props) {
     reader.onload = function(e) {
 
       const data = e.target.result
-      const result = { file, data }
+      const result = {
+        file,
+        data: type==='json' ? JSON.parse(data) : data
+      }
 
-      buffers.push(result)
-      onLoad && onLoad(result)
+      results.push(result)
+      onLoadFile && onLoadFile(result)
 
       done++
-      if (done===numFiles && onComplete) onComplete(buffers)
+      if (done===numFiles && onComplete) onComplete(results)
+      resolve(result)
     }
 
-    if (onError) reader.onerror = onError
+    reader.onerror = e => {
+      if (onError) onError()
+      reject(e)
+    }
 
     reader[method](file)
-
-  })
+    
+  })))
 }
 
 export default readFiles

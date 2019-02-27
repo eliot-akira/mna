@@ -1,6 +1,15 @@
 
 // With no sidebar
 
+.site-layout-standard {
+  .site-main {
+    @extend .flex;
+    .site-main-body {
+      @extend .flex-grow;
+    }
+  }
+}
+ 
 @include more-than( md ) {
 
   .site-layout-standard .site-header {
@@ -12,10 +21,17 @@
       width: 50%;
     }
     .header-menu {
-      text-align: right;
+
+      display: flex;
+      align-items: center;
+
       a {
         margin-left: $space-2;
       }
+    }
+    .header-menu-content {
+      width: 100%;
+      text-align: right;
     }
     .header-menu-content li {
       display: inline;

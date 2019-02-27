@@ -64,7 +64,17 @@
   justify-content: space-between
 }
 
+.flex-self-stretch {
+  align-self: stretch;
+}
 
+.flex-self-center {
+  align-self: center;
+}
+
+.flex-self-end {
+  align-self: end;
+}
 
 .flex-auto {
   -webkit-box-flex: 1;

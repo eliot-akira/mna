@@ -28,8 +28,6 @@ body { overflow: hidden }
   .header-title {
     display: flex;
     align-items: center;
-
-    @extend .py-1, .px-1, .h3;
   }
 
   .header-title-content {

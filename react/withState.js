@@ -10,6 +10,8 @@ const withState = ({
   state = {},
   createState,
   actions = {},
+  actionContext,
+  withProps,
   ...lifecycle
 }) => C =>
   class StatefulComponent extends Component {
@@ -31,11 +33,15 @@ const withState = ({
 
       this.setState = this.setState.bind(this)
 
+      this.actionContext = actionContext || {}
       this.actions = Object.keys(actions).reduce((obj, key) => {
-        obj[key] = (props) => actions[key]({
-          ...this.getStateProps(),
-          ...props
-        })
+        obj[key] = (props, ...args) => {
+          const isPropsObject = typeof props==='object' && !Array.isArray(props)
+          return actions[key]({
+            ...this.getStateProps(),
+            ...(isPropsObject ? props : {})
+          }, ...(isPropsObject ? args : [props, ...args]))
+        }
         return obj
       }, {})
 
@@ -43,6 +49,7 @@ const withState = ({
         if (!lifeCycleHooks[key]) return
         this[ lifeCycleHooks[key] ] = (...args) => lifecycle[key]({
           ...this.getStateProps(),
+          withProps,
           ...this.props
         }, ...args)
       })
@@ -53,14 +60,16 @@ const withState = ({
       state: this.state,
       actions: this.actions,
       setState: this.setState,
-      createState: this.createState
+      createState: this.createState,
+      ...this.actionContext
     })
 
     render() {
-      return <C {...{
+      const props = {
         ...this.getStateProps(),
         ...this.props
-      }} />
+      }
+      return <C {...(withProps ? withProps(props) : props)} />
     }
   }
 

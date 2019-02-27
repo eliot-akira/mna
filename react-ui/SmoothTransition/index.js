@@ -92,7 +92,7 @@ class SmoothTransition extends Component {
 
   render() {
     return (
-      <div className={this.state.fadeClassName} ref={el => this.el = el}>
+      <div className={`smooth-transition ${this.state.fadeClassName} ${this.props.className || ''}`} ref={el => this.el = el}>
         {this.props.children(this.state.location)}
       </div>
     )

@@ -1,6 +1,9 @@
 
 .site-header {
   .header-title {
+
+    @extend .py-1, .px-1, .h3;
+
     color: $site-header-text-color;
     background-color: $site-header-bg-color;
 
@@ -9,22 +12,10 @@
       text-decoration: none;
     }
   }
-}
 
-.header-menu-section-title {
-  border-color: $site-header-menu-hr-color;
-}
-
-.site-layout-with-sidebar .site-header {
   .header-menu-content {
 
     @extend .py-1;
-
-    color: $site-header-menu-content-text-color;
-    background-color: $site-header-menu-content-bg-color;
-
-    font-size: .9rem;
-    a { cursor: default }
 
     a:hover {
       background-color: $site-header-menu-item-hover-bg-color;
@@ -41,7 +32,36 @@
   }
 }
 
+.header-menu-section-title {
+  border-color: $site-header-menu-hr-color;
+}
+
+.site-layout-with-sidebar .site-header {
+  .header-menu-content {
+    @extend .py-1;
+    color: $site-header-menu-content-text-color;
+    background-color: $site-header-menu-content-bg-color;
+    font-size: .9rem;
+    a { cursor: default }
+  }
+}
+
+.site-layout-standard .site-header {
+  color: $site-header-text-color;
+  background-color: $site-header-bg-color;
+}
+
+@include less-than( md ) {
+  .site-layout-standard {
+    .header-menu-content {
+      color: $site-header-menu-content-text-color;
+      background-color: $site-header-menu-content-bg-color;
+    }
+  }
+}
+
 @include more-than( md ) {
+
   .site-layout-with-sidebar .site-header {
 
       border-right: 1px solid #eee;
@@ -51,41 +71,27 @@
       padding-bottom: $space-2;
     }
   }
-}
 
-.site-layout-standard .site-header {
-  .header-menu-content {
-    @extend .bg-dark-gray-blue, .color-white;
-    a:hover {
-      //background-color: rgba(255, 255, 255, .1);
-    }
-    a.active {
-      font-weight: $normal-font-weight;
-      //background-color: rgba(255, 255, 255, .2);
-    }
-  }
-}
-
-@include more-than( md ) {
   .site-layout-standard .site-header {
 
-    background-color: $gray-blue;
     padding: $space-1 $space-2;
 
     .header-title, .header-menu-content {
-      color: #fff;
-      background-color: transparent;
+      //color: #fff;
+      //background-color: transparent;
       padding: 0 !important;
     }
 
     .header-menu a {
-      color: #fff;
+
+      //color: #fff;
       background-color: transparent;
       padding: 2px 0;
       border-bottom: 2px solid transparent;
       transition: border-bottom .3s;
+
       &:hover, &.active {
-        border-bottom: 2px solid rgba(255,255,255,.3);
+        border-bottom: 2px solid $site-header-menu-hr-color;
       }
     }
   }

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// responseType: 'arraybuffer', 'blob', 'document', 'json' (default), 'text', 'stream'
+
 export class API {
 
   static methods = ['get', 'post', 'put', 'delete']

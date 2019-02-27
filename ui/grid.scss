@@ -9,7 +9,7 @@
   clear: both
 }
 
-.col { float: left; min-height: 1px; }
+.col { float: left; min-height: 1px; width: 100%; }
 
 @for $i from 1 through 12 {
   .col-#{$i} {
@@ -29,7 +29,32 @@
   }
 }
 
+.row-gutter-1 {
+  margin-left: -$space-1 / 2;
+  margin-right: -$space-1 / 2;
+  & > .col {
+    padding-left: $space-1 / 2;
+    padding-right: $space-1 / 2;
+  }
+}
 
+.row-gutter-2 {
+  margin-left: -$space-1;
+  margin-right: -$space-1;
+  & > .col {
+    padding-left: $space-1;
+    padding-right: $space-1;
+  }
+}
+
+.row-gutter-3 {
+  margin-left: -$space-1 * 1.5;
+  margin-right: -$space-1 * 1.5;
+  & > .col {
+    padding-left: $space-1 * 1.5;
+    padding-right: $space-1 * 1.5;
+  }
+}
 
 /*
 .col-1 { width: (1/12 * 100%); }

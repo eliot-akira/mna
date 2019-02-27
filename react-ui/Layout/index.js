@@ -37,8 +37,9 @@ export default class Layout extends Component {
           toggleHeaderMenu: this.toggleHeaderMenu,
           closeHeaderMenu: this.closeHeaderMenu,
         }} />
-        <Body {...{ location }}>{ children }</Body>
-        <Footer>{footer}</Footer>
+        <Body {...{ location, footer: <Footer>{footer}</Footer> }}>
+          { children }
+        </Body>
       </div>
     )
   }

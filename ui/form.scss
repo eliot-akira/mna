@@ -108,6 +108,11 @@ input[type=email]
   }
 }
 
+input[type=range]
+{
+  width: 100%;
+}
+
 select, textarea {
   margin-top: $space-1 / 2;
   margin-bottom: $space-1 / 2;

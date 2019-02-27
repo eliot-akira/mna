@@ -1,10 +1,13 @@
 
-$site-header-bg-color: $dark-gray-blue !default;
-$site-header-text-color: $white !default;
+$site-header-bg-color: #fafafa !default;
+$site-header-text-color: #343434 !default;
+
+$site-header-menu-content-bg-color: #fafafa !default;
+$site-header-menu-content-text-color: #343434 !default;
 
 $site-header-menu-item-hover-bg-color: rgba(255, 255, 255, .6) !default;
-$site-header-menu-item-active-bg-color: $gray-blue !default;
+$site-header-menu-item-active-bg-color: rgba(255, 255, 255, .6) !default;
 
-$site-header-menu-hr-color: $border-color !default;
+$site-header-menu-hr-color: rgba(0, 0, 0, .2) !default;
 
 @import "common-theme";
