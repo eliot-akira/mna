@@ -9,8 +9,8 @@ module.exports = function extendUpdate({ db, instance }) {
     if (!props) {
       const { id, name, ...restOfQuery } = query
       if (id || name) {
-        query = { id, name }
-        props = { name, ...restOfQuery }
+        query = id ? { id } : { name }
+        props = name ? { name, ...restOfQuery } : restOfQuery
       } else {
         const { query: updateQuery, ...restOfProps } = query
         query = updateQuery
@@ -46,7 +46,7 @@ module.exports = function extendUpdate({ db, instance }) {
       }
       if (!$multi) docs = [docs]
 
-      docs.forEach(doc => {
+      Promise.all(docs.map(doc => new Promise((docResolve, docReject) => {
 
         const { id, ...origData } = doc
 
@@ -69,9 +69,13 @@ module.exports = function extendUpdate({ db, instance }) {
           { id },
           newData,
           options,
-          (err, num) => err ? reject(err) : resolve(num)
+          (err, num) => err ? docReject(err) : docResolve(num)
         )
-      })
+
+      })))
+        .then(() => resolve(docs.length))
+        .catch(reject)
+
     }).catch(reject)
   })
 

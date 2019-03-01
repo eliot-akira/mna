@@ -1,6 +1,6 @@
 {
   "name": "@mna/react-ui",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -11,7 +11,8 @@
     "@mna/icons": "1.x",
     "@mna/react": "1.x",
     "@mna/ui": "1.x",
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "react-modal": "^3.8.1"
   },
   "files": [
     "**/*.js",

@@ -20,18 +20,24 @@ const withState = ({
 
       super(props)
 
-      const self = this
+      const store = this
 
       if (createState) {
         this.createState = (newProps = {}) => createState({
-          self, ...props, ...newProps
+          store, ...props, ...newProps
         })
-        this.state = this.createState()
+        state = this.createState()
+        this.state = state
       } else {
         this.state = state
       }
 
-      this.setState = this.setState.bind(this)
+      const setState = this.setState.bind(this)
+
+      this.setState = (newState, fn) => {
+        Object.assign(state, newState)
+        return setState(newState, fn)
+      }
 
       this.actionContext = actionContext || {}
       this.actions = Object.keys(actions).reduce((obj, key) => {
@@ -56,7 +62,7 @@ const withState = ({
     }
 
     getStateProps = () => ({
-      self: this,
+      store: this,
       state: this.state,
       actions: this.actions,
       setState: this.setState,
@@ -71,6 +77,6 @@ const withState = ({
       }
       return <C {...(withProps ? withProps(props) : props)} />
     }
-  }
+  }  
 
 export default withState
