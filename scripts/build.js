@@ -10,6 +10,7 @@ module.exports = function build({ args, options }) {
   const src = '.'
   const dest = 'publish'
 
+  options.watch = options.w
   options.version = options.v
   if (options.version) {
 

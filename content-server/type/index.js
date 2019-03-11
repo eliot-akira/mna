@@ -1,5 +1,5 @@
 const path = require('path')
-const createDatabase = require('@mna/db')
+const createDefaultDatabase = require('@mna/db')
 const defaultTypeActions = require('./defaultTypeActions')
 
 const log = (...args) => console.log('@mna/content/type', ...args)
@@ -8,10 +8,11 @@ export const createType = async (props) => {
 
   const {
     state, setState,
+    store: content,
 
     // Type config
     type,
-    databaseType = 'default',
+    createDatabase,
     permissions = ['admin'],
     defaultContent = [],
     typeActions: customTypeActions = props.actions || {},
@@ -23,28 +24,33 @@ export const createType = async (props) => {
   // Set from init
   const { config, stores, types, auth } = state
 
-  // Database
-
-  if (!stores[type]) {
-    if (databaseType==='default') {
-      stores[type] = await createDatabase({
-        filename: `${ path.join(config.dataPath, type) }.db`,
-        timestampData: timestamp,
-        //...options
-      })
-    }
-  }
-
-  // API actions
-
-  const typeActions = { ...defaultTypeActions, ...customTypeActions }
+  // Actions config
+  let typeActions = { ...defaultTypeActions, ...customTypeActions }
   const typeActionProps = {
-    store: stores[type],
-    config,
     type,
+    store: stores[type],
+    content,
+    config,
     auth,
     permissions
   }
+
+  // Database
+
+  if (!stores[type]) {
+    stores[type] = createDatabase
+      ? await createDatabase(typeActionProps)
+      : createDatabase!==false
+        ? await createDefaultDatabase({
+          filename: `${ path.join(config.dataPath, type) }.db`,
+          timestampData: timestamp,
+          //...options
+        })
+        : {}
+    typeActionProps.store = stores[type]
+  }
+
+  // API actions
 
   const boundTypeActions = Object.keys(typeActions).reduce((obj, key) => {
 

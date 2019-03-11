@@ -13,7 +13,8 @@ const withState = ({
   actionContext,
   withProps,
   ...lifecycle
-}) => C =>
+}) => C => {
+
   class StatefulComponent extends Component {
 
     constructor(props) {
@@ -21,6 +22,11 @@ const withState = ({
       super(props)
 
       const store = this
+
+      // Pass static properties to store actions
+      Object.keys(StatefulComponent).forEach(key => {
+        store[key] = StatefulComponent[key]
+      })
 
       if (createState) {
         this.createState = (newProps = {}) => createState({
@@ -79,4 +85,18 @@ const withState = ({
     }
   }  
 
+  // Hoist static properties
+  Object.keys(C).forEach(key => {
+    StatefulComponent[key] = C[key]
+  })
+
+  return StatefulComponent
+}
+
 export default withState
+/*(obj, cmp) => !cmp
+  ? withState(obj)
+  : obj instanceof Function
+    ? withState(cmp)(obj)
+    : withState(obj)(cmp)
+*/

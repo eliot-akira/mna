@@ -1,83 +1,53 @@
-import path from 'path'
 import http from 'http'
-import server from '@mna/server'
-import content from '@mna/content-server'
-
-import createConfig from './config'
-import render from './render'
-
-const configBase = createConfig()
+import createServerHandler from './handler'
+import createWebSocketServer from '@mna/socket/server'
 
 export default async function createServer(props = {}) {
 
-  const {
-    App, routes,
-    config: userConfig,
-    content: contentInit = true,
-    init: serverInit
-  } = props
+  let serverHandler = await createServerHandler(props)
+  const { config } = serverHandler
 
-  const config = { ...configBase, ...userConfig }
-  const routeProps = { config, server, content }
+  const appServer = http.createServer(serverHandler)
+  let webSocketServer
 
-  const serverRoutes = [
-    ...(contentInit ? await content.init(routeProps) : []),
-    ...(await serverInit(routeProps) || [])
-  ]
+  appServer.config = config
+  appServer.reload = async newProps => {
 
-  const {
-    serve, router,
-    serveStatic,
-    get, send, status, redirect
-  } = server
+    const newHandler = await createServerHandler(newProps)
 
-  const serveFromAppRoot = serveStatic(config.cwd)
+    appServer.config = newHandler.config
 
-  const serverInstance = serve(router([
+    appServer.removeListener('request', serverHandler)
+    appServer.on('request', newHandler)
+    serverHandler = newHandler
 
-    get('.well-known/*', serveFromAppRoot), // Let's Encrypt
-    get('robots.txt', serveFromAppRoot),
+    // Reload WebSocket handler
+    if (newProps.socket && webSocketServer) {
+      webSocketServer.off()
+      newProps.socket(webSocketServer)
+    }
 
-    serveStatic(config.buildClient),
-
-    ...serverRoutes,
-
-    get(async (req, res) => {
-
-      const location = req.url // From server/router
-      const user = req.context.user // From content/user
-
-      const { html, redirectLocation, statusCode } = await render({
-        App,
-        routes,
-        assets: config.assets,
-        content, location, user, status
-      })
-
-      if (html) {
-
-        send(res, statusCode || status.ok, html)
-
-      } else if (redirectLocation) {
-
-        redirect(res, statusCode || status.redirect, redirectLocation)
-      }
-    }),
-
-    (req, res) => send(res, status.notFound)
-  ]))
-
-
-  const appServer = http.createServer(serverInstance)
+    return appServer
+  }
 
   appServer.listen(config.port)
 
   console.log(`Server in ${
     config.isDev ? 'development' : 'production'
-  } running http://localhost:${config.port}`)
+  } running at ${
+    config.isDev ? `http://localhost:${config.port}` : `port ${config.port}`
+  }`)
 
-
-  // TODO: WebSocket server
+  // WebSocket server
+  if (props.socket) {
+    webSocketServer = createWebSocketServer({
+      appServer,
+      port: config.port,
+      socketPort: config.socketPort || config.port,
+      options: {}
+    })
+    props.socket(webSocketServer)
+  }
 
   // Clean exit
 
@@ -95,8 +65,6 @@ export default async function createServer(props = {}) {
   process.on('SIGINT', onExit)
   process.on('SIGTERM', onExit)
   process.on('uncaughtException', onError)
-
-  appServer.config = config
 
   return appServer
 }

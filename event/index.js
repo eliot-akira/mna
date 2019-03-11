@@ -21,6 +21,7 @@ class Emitter {
 
   off(pattern, callback) {
     this.listeners = this.listeners.filter(l =>
+      pattern &&
       !(pattern===l.pattern && callback===l.callback)
     )
   }

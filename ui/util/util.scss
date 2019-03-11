@@ -12,6 +12,8 @@
   text-transform: uppercase;
   letter-spacing: .2em;
 }
+.text-underline { text-decoration: underline; }
+
 .text-small   { font-size: $body-font-size * 0.9; }
 .text-smaller   { font-size: $body-font-size * 0.75; }
 .text-big   { font-size: $body-font-size * 1.1; }

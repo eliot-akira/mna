@@ -22,6 +22,7 @@ module.exports = function withActions(store, props) {
       state, getState, setState,
       actions: boundActions,
       store,
+      props,
       ...actionContext,
       ...props,
     }, ...args)

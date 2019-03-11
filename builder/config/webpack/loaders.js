@@ -16,7 +16,7 @@ const babelLoaderClient = {
   test: babelLoaderRegex,
   exclude: /node_modules/,
   use: [
-    require.resolve('cache-loader'),
+    //require.resolve('cache-loader'),
     {
       loader: require.resolve('babel-loader'),
       options: babelConfigClient
@@ -28,7 +28,7 @@ const babelLoaderServer = {
   test: babelLoaderRegex,
   exclude: /node_modules/,
   use: [
-    require.resolve('cache-loader'),
+    //require.resolve('cache-loader'),
     {
       loader: require.resolve('babel-loader'),
       options: babelConfigClient

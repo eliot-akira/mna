@@ -103,3 +103,25 @@ kbd {
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 #959da5;
 }
+
+img { border-radius: $border-radius; }
+
+
+.article-width {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: .5rem 1.5rem 2rem;
+  h1, h2 {
+    // GitHub style
+    padding-bottom: $space-1 / 1.5;
+    border-bottom: 1px solid $border-color;
+    text-align: center;
+  }
+}
+
+@include less-than(sm) {
+  .article-width {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+}

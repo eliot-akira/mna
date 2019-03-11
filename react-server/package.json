@@ -1,6 +1,6 @@
 {
   "name": "@mna/react-server",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "1.x",
@@ -8,6 +8,7 @@
     "@mna/fsp": "1.x",
     "@mna/react": "1.x",
     "@mna/server": "1.x",
+    "@mna/socket": "1.x",
     "@mna/store": "1.x",
     "dotenv": "^6.2.0",
     "source-map-support": "^0.5.9"

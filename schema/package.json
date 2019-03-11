@@ -1,0 +1,6 @@
+{
+  "name": "@mna/schema",
+  "version": "1.4.0",
+  "description": "Schema validation",
+  "dependencies": {}
+}

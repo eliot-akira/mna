@@ -2,7 +2,7 @@
 const libs = {
   // For browser or universal
   client: [
-    'api',
+    //'api',
     'calendar',
     'content-client',
     'dom',
@@ -13,6 +13,8 @@ const libs = {
     'react',
     'react-client',
     'react-ui',
+    'schema',
+    'socket',
     'store',
     'utils'
   ],

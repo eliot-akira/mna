@@ -19,6 +19,8 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: paths.publicPath,
     chunkFilename: '[name].[chunkhash:8].chunk.js',
+    hotUpdateChunkFilename: 'hot/hot-update.js',
+    hotUpdateMainFilename: 'hot/hot-update.json'
   },
   module: {
     rules: clientLoaders,

@@ -2,16 +2,14 @@ const { createElement } = require('react')
 const parse = require('../parse')
 const decodeEntities = require('../entities/decode')
 
-const context = {}
-
 function render(str, options = {}) {
   const nodes = typeof str==='string' ? parse(str) : str
-  return renderNodes(nodes, options)
+  return renderNodes(nodes, { context: {}, ...options })
 }
 
 function renderNodes(nodes, options = {}) {
   return nodes.map((node, nodeIndex) =>
-    node.type==='Element'
+    (!node.type || node.type==='Element')
       ? renderTag(node.tagName, { key: nodeIndex, ...node.attributes }, node.children, options)
       : node.type==='Text'
         ? decodeEntities(node.content)
@@ -22,11 +20,11 @@ function renderNodes(nodes, options = {}) {
 function renderTag(tagName, attributes, children, options = {}) {
 
   // Registered tags
-  const { tags = {} } = options
+  const { tags = {}, context = {}, rawTag = false, raw = false } = options
 
   const renderedAttributes = renderAttributes(tagName, attributes, options)
 
-  if (tags[tagName]) {
+  if (tags[tagName] && !rawTag && !raw) {
     return tags[tagName](renderedAttributes, children, {
       context,
       options,
@@ -34,7 +32,7 @@ function renderTag(tagName, attributes, children, options = {}) {
     })
   }
 
-  const childElements = renderNodes(children, options)
+  const childElements = renderNodes(children, { raw, ...options })
 
   return createElement(
     tagName,
@@ -45,7 +43,7 @@ function renderTag(tagName, attributes, children, options = {}) {
 
 function renderAttributes(tagName, attributes, options = {}) {
 
-  const { keys, ...atts } = attributes
+  const { keys = [], ...atts } = attributes
 
   keys.forEach(key => atts[key] = true)
 

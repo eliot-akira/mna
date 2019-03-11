@@ -7,20 +7,27 @@ const colors = require('./colors')
 const cwd = process.cwd()
 const options = {}
 const args = process.argv.slice(2)
-  .filter(k => k[0]!=='-' ? true
-    : ((options[k] = true) && false)
-  )
+  .filter(arg => {
+    if (arg[0]!=='-') return true
+    arg = arg.substr(1)
+    if (arg[0] && arg[0]==='-') arg = arg.substr(1)
+    const [key, value = true] = arg.split('=')
+    options[key] = value
+    return false
+  })
 
 const test = tester(reporter)
 const testDir = args[0] || '**'
 
 const testFilesGlob = `{${
   [
-    'test.js', '*.test.js', 'tests/**/*.js'
+    '**/*.test.js', 'tests/**/*.js'
   ].map(f => `${testDir}/**/${f}`).join(',')
 }}`
 
-const ignore = ['**/node_modules/**', '**/.git/**', '**/_*/**', '**/_*']
+const ignore = ['**/node_modules/**', '**/.git/**', '**/_*', '**/_*/**']
+const exclude = options.x || options.exclude
+if (exclude) ignore.push(...exclude.split(',').map(f => `${f}/**`))
 
 let files
 

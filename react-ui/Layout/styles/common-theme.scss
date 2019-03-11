@@ -2,7 +2,9 @@
 .site-header {
   .header-title {
 
-    @extend .py-1, .px-1, .h3;
+    @extend .h3;
+    padding: $space-1;
+    padding: $space-1;
 
     color: $site-header-text-color;
     background-color: $site-header-bg-color;
@@ -14,8 +16,8 @@
   }
 
   .header-menu-content {
-
-    @extend .py-1;
+    padding-top: $space-1;
+    padding-bottom: $space-1;
 
     a:hover {
       background-color: $site-header-menu-item-hover-bg-color;

@@ -43,6 +43,11 @@ const start = async () => {
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json'
   clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js'
 
+  serverConfig.entry.server.unshift('webpack/hot/poll?300')
+  //serverConfig.watch = true
+  //serverConfig.output.hotUpdateMainFilename = 'hot/hot-update.json'
+  //serverConfig.output.hotUpdateChunkFilename = 'hot/hot-update.js'
+
   const publicPath = clientConfig.output.publicPath
 
   clientConfig.output.publicPath = [`http://localhost:${WEBPACK_PORT}`, publicPath]
@@ -91,10 +96,10 @@ const start = async () => {
     // Using friendlyErrors
   })
 
+  logMessage('Building client and server..')
+
   const clientPromise = compilerPromise('client', clientCompiler)
   const serverPromise = compilerPromise('server', serverCompiler)
-
-  logMessage('Building client and server..')
 
   try {
     await serverPromise

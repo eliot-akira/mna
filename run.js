@@ -9,6 +9,6 @@ const args = process.argv.slice(3)
     options[key] = value
     return false
   })
-process.argv.pop()
+process.argv.shift()
 
 require(`./scripts/${script}`)({ args, options })

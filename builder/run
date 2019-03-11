@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const script = process.argv[2] || 'start'
 const args = process.argv.slice(3)
-process.argv.pop()
+process.argv.shift()
 
 switch (script) {
 case 'build':
@@ -12,7 +12,8 @@ case 'start':
 //case 'clean':
   require('./scripts/' + script)
   break
-case 'babel':
+  case 'babel':
+  case 'test':
   require('./scripts/' + script)()
   break
 /*case 'test':
