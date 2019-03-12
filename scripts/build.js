@@ -8,7 +8,7 @@ const libs = require('./libs')
 module.exports = function build({ args, options }) {
 
   const src = '.'
-  const dest = 'publish'
+  const dest = '_publish'
 
   options.watch = options.w
   options.version = options.v
@@ -76,7 +76,7 @@ module.exports = function build({ args, options }) {
         comments: false,
         ignore: ['_/**', '**/_/**']
       },
-      root: [`publish/${lib}`],
+      root: [`_publish/${lib}`],
       rename: {}
     })
   }

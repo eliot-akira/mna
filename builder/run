@@ -12,18 +12,20 @@ case 'start':
 //case 'clean':
   require('./scripts/' + script)
   break
-  case 'babel':
-  case 'test':
+case 'babel':
+case 'test':
   require('./scripts/' + script)()
   break
 /*case 'test':
   require('./scripts/run')({ script: path.join(__dirname, 'tester', 'cli'), args })
   break*/
-default:
-  if (fs.existsSync(`${script}.js`)) {
-    require('./scripts/run')({ script, args })
+default: {
+  const scriptPath = path.join(process.cwd(), `${script}.js`)
+  if (fs.existsSync(scriptPath)) {
+    require('./scripts/run')({ script: scriptPath, args })
   } else {
     console.log('Unknown script "' + script + '".')
   }
+} 
   break
 }
