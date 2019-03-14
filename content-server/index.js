@@ -13,6 +13,7 @@ const actions = {
   ...require('./type'),
   ...require('./auth'),
   ...require('./user'),
+  ...require('./action'),
   ...require('./routes'),
   ...require('./api'),
 }

@@ -10,6 +10,7 @@ export const init = async (props) => {
 
   await actions.initAuth(props)
   await actions.initUser(props)
+  await actions.initAction(props)
 
   return await actions.createRoutes(props)
 }

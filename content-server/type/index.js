@@ -13,7 +13,7 @@ export const createType = async (props) => {
     // Type config
     type,
     createDatabase,
-    permissions = ['admin'],
+    permissions = [],
     defaultContent = [],
     typeActions: customTypeActions = props.actions || {},
     middlewares = [],
@@ -46,34 +46,36 @@ export const createType = async (props) => {
           timestampData: timestamp,
           //...options
         })
-        : {}
+        : {} // No database
     typeActionProps.store = stores[type]
   }
-
-  // API actions
-
-  const boundTypeActions = Object.keys(typeActions).reduce((obj, key) => {
-
-    obj[key] = function(data) {
-
-      // TODO: Middlewares per action, field
-
-      return typeActions[key]({
-        ...typeActionProps,
-        action: key,
-        ...data
-      })
-    }
-
-    return obj
-  }, {})
 
   // Used by /api
   types[type] = {
     permissions,
-    ...boundTypeActions
   }
 
+  const addActions = (actionsDefinition) => {
+    for (const key in actionsDefinition) {
+      
+      types[type][key] = function(data) {
+      
+        // TODO: Middlewares per action, field
+        
+        return actionsDefinition[key]({
+          ...typeActionProps,
+          action: key,
+          ...data
+        })
+      }
+    }
+  }
+
+  // For internal use for late binding
+  // Prefixed to avoid name collision with type "action" in ../action
+  types[type]._addActions = addActions
+
+  addActions(typeActions)
   setState({ stores, types })
 
   // Default content
@@ -85,4 +87,13 @@ export const createType = async (props) => {
       })
     }
   }
+}
+
+export const addTypeActions = ({ type, typeActions, state, setState }) => {
+
+  const { types } = state
+
+  types[type]._addActions(typeActions)
+
+  setState({ types })  
 }
