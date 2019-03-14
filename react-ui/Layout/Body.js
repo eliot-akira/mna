@@ -20,7 +20,7 @@ class Body extends Component {
   }
 
   render() {
-    const { children, location, footer } = this.props
+    const { children, location, onRouteEnter, footer } = this.props
     return (
       <main id="content"
         className="site-main"
@@ -29,7 +29,10 @@ class Body extends Component {
         <SmoothTransition
           className="site-main-body"
           location={location}
-          onRouteEnter={() => this.focusScrollContainer()}
+          onRouteEnter={newLocation => {
+            this.focusScrollContainer()
+            onRouteEnter && onRouteEnter(newLocation)
+          }}
         >
           {transitLocation =>
             <>
