@@ -4,9 +4,9 @@ const layoutMap = {
   ]
 }
 
-export default ({ state, actions, location }) => {
+export default ({ state, actions, routeName }) => {
 
-  const routeBase = location.pathname.split('/')[1]
+  const routeBase = routeName.split('/')[0]
 
   let data = layoutMap[routeBase] ||
     [

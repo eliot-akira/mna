@@ -1,0 +1,17 @@
+//@import "assets/fonts/source-code/style";
+//@import "@mna/react-ui/style";
+//@import "@mna/icons/style";
+
+@import "@mna/react-ui/base";
+@import "@mna/react-ui/dark-base";
+
+//@import "variables";
+
+@import "@mna/react-ui/main";
+@import "@mna/react-ui/dark-main";
+
+//@import "site";
+//@import "pages/index.scss";
+
+h1, h2 { text-align: left; }
+html { font-size: 14px; }

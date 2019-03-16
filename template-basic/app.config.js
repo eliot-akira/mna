@@ -13,6 +13,7 @@ module.exports = async ({ cwd, fs, generate, createTypeBundles }) => {
     // Pages
     {
       globPattern: 'src/pages/**/index.js',
+      globIgnore: ['**/sections/**', '**/components/**', '**/state/**', '**/actions/**'],
       watchPattern: 'src/pages/**/index.js',
       map: f => f.replace('src/pages/', '').replace('/index.js', '').replace('.js', ''),
       generate: createTypeBundles({

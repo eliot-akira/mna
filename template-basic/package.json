@@ -4,10 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "builder build",
     "dev": "builder start",
-    "export": "yarn build && APP_EXPORT=true NODE_ENV=production node build/server/server.js",
+    "build": "builder build",
+    "test": "builder test src -x=@mna",
     "deploy": "cd build && ./deploy",
+    "export": "yarn build && APP_EXPORT=true NODE_ENV=production node build/server/server.js",
+    "lib:install": "cd src && git clone git@github.com/eliot-akira/mna.git @mna",
+    "lib:update": "rm -rf node_modules ; rm yarn.lock ; yarn",
     "analyze:client": "webpack-bundle-analyzer build/client/stats.json",
     "analyze:server": "webpack-bundle-analyzer build/server/stats.json",
     "-- Production --": "",
@@ -19,7 +22,6 @@
   "dependencies": {},
   "devDependencies": {
     "@mna/builder": "1.x",
-    "@mna/icons": "1.x",
     "@mna/react-client": "1.x",
     "@mna/react-server": "1.x",
     "@mna/react-ui": "1.x"
