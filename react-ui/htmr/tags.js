@@ -35,6 +35,7 @@ export const pre = (props, children, { render, context = { nodexIndex: 0 }}) => 
   />
 }
 
+// Remove empty text nodes in table, due to markdown render
 const renderCompact = ({ tag, childTag, childTags = [] }) =>
   (props, children, { render }) => render([
     {

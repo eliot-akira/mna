@@ -9,7 +9,9 @@ import renderPage from './page'
 
 export default async function render({
   App, routes, assets,
-  content, location, user
+  location, status,
+  content,
+  user, req, res
 }) {
 
   const store = createStore(App)
@@ -20,17 +22,25 @@ export default async function render({
 
   if (user) store.setState({ user: cleanUserData(user) })
 
-  // Route data to be used when content is called from serverActions
-  // See: content-server/api
-  if (content) content.setRouteData({ data: { user } })
-
   const { state, actions, setState } = store
+
+  const routeContent = !content ? null : {
+    ...content,
+    api: (props = {}) => content.api({
+      // Provide route data when content.api is called from serverActions
+      // See: content-server/api
+      content: routeContent,
+      user, req, res,
+      ...props,
+    })
+  }
 
   await handleServerActions({
     App, routes, location,
     serverActionProps: {
-      location, content, user,
-      state, actions, setState
+      location, user,
+      state, actions, setState,
+      content: routeContent
     }
   })
 
@@ -42,10 +52,6 @@ export default async function render({
       { renderRoutes(routes, { store }) }
     </StaticRouter>
   )
-
-  // Important: Clear route data
-  if (content) content.setRouteData({ data: {} })
-
 
   // Status code and redirect location
   const {

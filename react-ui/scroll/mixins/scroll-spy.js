@@ -1,4 +1,4 @@
-import throttle from "lodash.throttle";
+import throttle from "lodash/throttle";
 import { addPassiveEventListener } from './passive-event-listeners';
 
 // The eventHandler will execute at a rate of 15fps

@@ -4,16 +4,22 @@
 
 import createEmitter from '@mna/event'
 import createSocketInstance from './socketInstance'
+
 let io
 
 export default function createWebSocketClient(props = {}) {
 
+  // Can be called multiple times, i.e., on mount
   if (io) {
     // Remove event listeners
     io.off()
     io.clientRequestListeners = {}
-    // Trigger connect on next tick, to allow attaching new events after return
-    if (io.connected) setTimeout(() => io.emit('connect'), 0)
+    if (!io.ws || !io.connected) {
+      io.ws = createSocketInstance({ io, socketUrl })
+    } else {
+      // Trigger connect on next tick, to allow attaching new events after return
+      setTimeout(() => io.emit('connect'), 0)
+    }
     return io
   }
 

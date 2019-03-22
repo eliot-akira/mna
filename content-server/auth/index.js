@@ -1,4 +1,4 @@
-const createAuth = require('@mna/auth')
+import createAuth from '@mna/auth'
 
 export const initAuth = async({ setState, actions, config }) => {
 

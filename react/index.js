@@ -7,9 +7,10 @@ export { Switch, Route, Prompt, withRouter } from 'react-router'
 export { Helmet } from 'react-helmet'
 export classnames from 'classnames'
 
+export Link from './Link'
 export matchRoutes from './matchRoutes'
 export renderRoutes from './renderRoutes'
-export Link from './Link'
+export createRouteHandler from './createRouteHandler'
 
 // See https://reacttraining.com/react-router/web/guides/server-rendering
 export Redirect from './Redirect'

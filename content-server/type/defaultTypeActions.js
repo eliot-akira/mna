@@ -19,4 +19,4 @@ const defaultTypeActions = {
   }
 }
 
-module.exports = defaultTypeActions
+export default defaultTypeActions

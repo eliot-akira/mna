@@ -1,8 +1,9 @@
 
 const log = (...args) => console.log('@mna/content/api', ...args)
 
-// API action - called from /api with payload { type, action, data }
-// See: ./route
+// API action
+// Called from /api or server-side via content.api
+// Payload: { type, action, data }
 
 export async function api(props) {
 
@@ -10,13 +11,13 @@ export async function api(props) {
     // From client
     type, action, data,
 
-    // From ./route - Not available when called directly from serverAction
-    auth, content, user, req, res,
+    // From ./route or react-server/render
+    content, user, req, res,
 
     state,
   } = props
 
-  const { types, currentRouteData = {} } = state
+  const { auth, types } = state
 
   if (!type) throw { message: `Field "type" is required` }
   if (!action) throw { message: `Field "action" is required` }
@@ -29,8 +30,7 @@ export async function api(props) {
   try {
     return await types[type][action]({
       types, type, action, data,
-      auth, content, user, req, res,
-      ...currentRouteData
+      auth, content, user, req, res
     })
   } catch (e) {
     log('Error', { type, action, data }, e)

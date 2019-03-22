@@ -1,4 +1,3 @@
-const path = require('path')
 
 export const init = async (props) => {
 

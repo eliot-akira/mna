@@ -1,4 +1,7 @@
-const createAuthMiddleware = require('./auth/middleware')
+import createCookieMiddleware from '@mna/server/cookie'
+import createJsonMiddleware from '@mna/server/json'
+import createAuthMiddleware from './auth/middleware'
+import createApiMiddleware from './api/route'
 
 export async function createRoutes(props) {
 
@@ -8,17 +11,11 @@ export async function createRoutes(props) {
 
   return [
 
-    require('@mna/server/cookie')(),
-    require('@mna/server/json')(),
+    createCookieMiddleware(),
+    createJsonMiddleware(),
 
     await createAuthMiddleware({ auth, stores }),
 
-    require('./api/route')({ ...props, auth })
+    createApiMiddleware({ ...props, auth })
   ]
-}
-
-export async function setRouteData({ data, setState }) {
-  setState({
-    currentRouteData: data
-  })
 }

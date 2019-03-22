@@ -35,12 +35,16 @@ class SmoothTransition extends Component {
     }, newProps.duration || 300) // Same as CSS transition duration
   }
 
+  componentWillUnmount() {
+    this.unmounted = true
+  }
+
   smoothEnter() {
     this.pageAssetsLoaded().then(() => {
-      this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
-      this.setState({
+      if (!this.unmounted) this.setState({
         fadeClassName: 'fade-enter fade-enter-active'
       })
+      this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     })
   }
 

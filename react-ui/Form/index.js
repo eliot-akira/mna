@@ -4,7 +4,13 @@ import getFormData from '@mna/dom/getFormData'
 export default class Form extends Component {
 
   state = {
+    fields: {},
     invalidFields: {}
+  }
+
+  constructor(props) {
+    super(props)
+    this.state.fields = props.fields || {}
   }
 
   render() {
@@ -13,8 +19,14 @@ export default class Form extends Component {
 
     return (
       <form onSubmit={e => {
+
         e.preventDefault()
-        const data = getFormData(e.target)
+
+        const data = {
+          ...this.state.fields,
+          ...getFormData(e.target)
+        }
+
         if (onValidate) {
           const invalidFields = onValidate(data)
           if (invalidFields) {
@@ -22,9 +34,16 @@ export default class Form extends Component {
             return
           } else this.setState({ invalidFields: {} })
         }
+
         if (onSubmit) onSubmit(data)
       }}>{
-          children instanceof Function ? children(this.state) : children
+          children instanceof Function ? children({
+            ...this.state,
+            setFields: fields => this.setState({ fields: {
+              ...this.state.fields,
+              ...fields
+            } })
+          }) : children
         }</form>
     )
   }

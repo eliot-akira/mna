@@ -5,17 +5,20 @@ import { Emitter } from '@mna/event'
 class Socket extends Emitter {
 
   constructor({ io, ws, socketId }) {
+
     super()
+
     this.io = io
     this.ws = ws
     this.id = socketId
 
-    ws.on('message', this._onSocketMessage)
+    this._clientRequestListener = null
+
+    ws.on('message', this._onMessage)
   }
 
-  _onSocketMessage = (rawData, req) => {
+  _onMessage = (rawData, req) => {
 
-    const { io } = this
     const socket = this
 
     const data = JSON.parse(rawData)
@@ -24,23 +27,59 @@ class Socket extends Emitter {
       clientRequestId
     } = data
 
-    // R1. Client response for matching server request
-    if (serverRequestId) {
-
-      const resolve = io.serverRequestListeners[serverRequestId]
-
-      if (resolve) resolve(data)
-      delete io.serverRequestListeners[serverRequestId]
+    // Client request that waits for matching server response
+    if (clientRequestId) {
+      this._onClientRequest(data, req)
       return
     }
 
-    // R2. Client request that waits for matching server response
-    if (clientRequestId) {
-      socket.emit('clientRequest', data, req)
+    // Client response for matching server request
+    if (serverRequestId) {
+      this._onClientResponse(data, req)
       return
     }
 
     socket.emit('message', data, req)
+  }
+
+  _onClientRequest = (data, req) => {
+
+    const socket = this
+    const { clientRequestId } = data
+    const fn = this._clientRequestListener
+    const sendServerResponse = response =>
+      socket.send({
+        clientRequestId,
+        ...response
+      })
+
+  
+    if (!fn) {
+      sendServerResponse({
+        error: { message: 'No listener for client request' }
+      })
+      return
+    }
+
+    fn(data)
+      .then(result => {
+        sendServerResponse(result || {})
+      })
+      .catch(error => {
+        sendServerResponse({
+          error: { message: error.message }
+        })
+      })
+  }
+
+  _onClientResponse = (data, req) => {
+
+    const { io } = this
+    const { serverRequestId } = data
+    const fn = io.serverRequestListeners[serverRequestId]
+
+    if (fn) fn(data)
+    delete io.serverRequestListeners[serverRequestId]
   }
 
   send = (data) => {
@@ -50,7 +89,12 @@ class Socket extends Emitter {
     return true
   }
 
-  // R1. Server request that waits for matching client response
+  // Server response for matching client request
+  handleClientRequest = fn => {
+    this._clientRequestListener = fn
+  }
+
+  // Server request that waits for matching client response
   request = (data = {}) => new Promise((resolve, reject) => {
 
     const { io } = this
@@ -62,26 +106,6 @@ class Socket extends Emitter {
     socket.send({ ...data, serverRequestId: requestId })      
   })
 
-  // R2. Server response for matching client request
-  handleClientRequest = fn => {
-
-    const socket = this
-
-    socket.on('clientRequest', async data => {
-
-      const { clientRequestId } = data
-  
-      let result
-      try {
-        result = await fn(data)
-      } catch(e) { /**/ }
-  
-      socket.send({
-        clientRequestId,
-        ...(result || {})
-      })
-    })  
-  }
 }
 
 export default function createSocketInstance(props) {

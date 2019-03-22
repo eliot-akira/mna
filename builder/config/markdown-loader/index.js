@@ -4,6 +4,7 @@ const frontmatter = require('front-matter')
 const md = require('markdown-it')({
   preset: 'default',
   html: true,
+  linkify: true
   //highlight: renderHighLight
 })
   .use(require('./taskList'), {

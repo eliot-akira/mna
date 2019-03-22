@@ -20,17 +20,18 @@ const libs = {
   ],
   // Server only
   server: [
+    'content-server',
     'fsp',
-    'react-server'
+    'react-server',
   ],
   // Libs that don't need to be compiled
   copy: [
     'auth',
     'builder',
-    'content-server',
     'db',
     'icons',
     'server',
+    'template-basic',
     'tester',
     'ui'
   ]

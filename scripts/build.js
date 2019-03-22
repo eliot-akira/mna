@@ -27,6 +27,9 @@ module.exports = function build({ args, options }) {
     }
   }
 
+  // Empty publish folder
+  fs.emptyDirSync(dest)
+
   const commonFilesPattern = `{${[
     'package.json',
     '**/*.scss'
@@ -76,7 +79,7 @@ module.exports = function build({ args, options }) {
         comments: false,
         ignore: ['_/**', '**/_/**']
       },
-      root: [`_publish/${lib}`],
+      root: [`${dest}/${lib}`],
       rename: {}
     })
   }
@@ -89,7 +92,7 @@ module.exports = function build({ args, options }) {
     const libSrc = getLibSrc(lib)
     const libDest = getLibDest(lib)
 
-    execSync(`rsync -vrLptz --delete --exclude=".git" --exclude="node_modules" --exclude="_*" --include="_*.scss" --exclude=".hardlinks" --exclude="*.lock" --exclude="*.log" ${libSrc}/ ${libDest}`)
+    execSync(`rsync -vrLptz --delete --exclude=".git" --exclude="node_modules" --exclude="_*" --include="_*.scss" --exclude=".hardlinks" --exclude="*.lock" --exclude="*.log" --exclude="build" --exclude="data" --exclude="src/dynamic" ${libSrc}/ ${libDest}`)
   })
 
 }

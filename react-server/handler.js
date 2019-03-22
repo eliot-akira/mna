@@ -49,7 +49,8 @@ export default async function createServerHandler(props) {
         App,
         routes,
         assets: config.assets,
-        content, location, user, status
+        location, status,
+        content, user, req, res
       })
 
       if (html) {

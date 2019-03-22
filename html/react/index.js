@@ -20,7 +20,12 @@ function renderNodes(nodes, options = {}) {
 function renderTag(tagName, attributes, children, options = {}) {
 
   // Registered tags
-  const { tags = {}, context = {}, rawTag = false, raw = false } = options
+  const {
+    tags = {},
+    context = {},
+    raw = false,
+    rawTag = false
+  } = options
 
   const renderedAttributes = renderAttributes(tagName, attributes, options)
 
@@ -32,7 +37,11 @@ function renderTag(tagName, attributes, children, options = {}) {
     })
   }
 
-  const childElements = renderNodes(children, { raw, ...options })
+  const childElements = renderNodes(children, {
+    ...options,
+    raw, // Inherits from parent tag
+    rawTag: false // Applies to parent tag only
+  })
 
   return createElement(
     tagName,

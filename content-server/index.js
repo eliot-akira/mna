@@ -1,21 +1,27 @@
 import createStore from '@mna/store'
+import * as initActions from './init'
+import * as typeActions from './type'
+import * as authActions from './auth'
+import * as userActions from './user'
+import * as actionActions from './action'
+import * as routesActions from './routes'
+import * as apiActions from './api'
 
 const createState = () => ({
   auth: null,
   config: {},
   stores: {},
-  types: {},
-  currentRouteData: {}
+  types: {}
 })
 
 const actions = {
-  ...require('./init'),
-  ...require('./type'),
-  ...require('./auth'),
-  ...require('./user'),
-  ...require('./action'),
-  ...require('./routes'),
-  ...require('./api'),
+  ...initActions,
+  ...typeActions,
+  ...authActions,
+  ...userActions,
+  ...actionActions,
+  ...routesActions,
+  ...apiActions,
 }
 
 

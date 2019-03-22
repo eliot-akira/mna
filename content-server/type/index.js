@@ -1,6 +1,6 @@
-const path = require('path')
-const createDefaultDatabase = require('@mna/db')
-const defaultTypeActions = require('./defaultTypeActions')
+import path from 'path'
+import createDefaultDatabase from '@mna/db'
+import defaultTypeActions from './defaultTypeActions'
 
 const log = (...args) => console.log('@mna/content/type', ...args)
 

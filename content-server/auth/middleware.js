@@ -1,13 +1,13 @@
+import { serialize as makeCookie } from 'cookie'
 
 // Authentication for all routes
 
-const { serialize: makeCookie } = require('cookie')
 const TOKEN_KEY = 'jwt'
 const emptyCookie = makeCookie(TOKEN_KEY, '', { path: '/', maxAge: 0 })
 
 const log = (...args) => console.log('@mna/content/auth/middleware', ...args)
 
-async function createAuthMiddleware({ auth, stores }) {
+export default async function createAuthMiddleware({ auth, stores }) {
 
   const users = stores.user
 
@@ -100,5 +100,3 @@ async function createAuthMiddleware({ auth, stores }) {
     // https://github.com/pillarjs/understanding-csrf
   }
 }
-
-module.exports = createAuthMiddleware

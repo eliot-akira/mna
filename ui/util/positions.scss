@@ -45,8 +45,8 @@
 
 .mw-100 { max-width: 100% }
 .w-100, .full-width { width: 100% !important }
-.auto-width { width: auto }
-.full-height { height: 100% }
+.w-auto, .auto-width { width: auto }
+.h-100, .full-height { height: 100% }
 
 .text-left   { text-align: left }
 .text-right  { text-align: right }

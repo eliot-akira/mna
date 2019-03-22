@@ -36,7 +36,8 @@
 
 .no-border, .border-none { border: 0 }
 
-.thicker { border-width: $rule-border-width * 2; }
+.border-width-2, .thicker { border-width: $rule-border-width * 2 !important; }
+.border-width-3, .thicker { border-width: $rule-border-width * 3 !important; }
 
 .round  {
   border-radius: 50%;

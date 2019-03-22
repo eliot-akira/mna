@@ -1,7 +1,7 @@
 
 const log = (...args) => console.log('@mna/content/api/route', ...args)
 
-module.exports = function createRoute({ server, content, auth, actions }) {
+export default function createRoute({ server, content, auth, actions }) {
 
   const { post, send, status, sendError } = server
 
