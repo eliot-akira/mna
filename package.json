@@ -1,5 +1,13 @@
 {
   "name": "mna",
-  "version": "1.5.4",
-  "license": "MIT"
+  "version": "1.5.5",
+  "license": "MIT",
+  "scripts": {
+    "build": "node run build",
+    "test": "node run test",
+    "publish": "node run publish"
+  },
+  "devDependencies": {
+    "@babel/runtime-corejs3": "^7.4.3"
+  }
 }
