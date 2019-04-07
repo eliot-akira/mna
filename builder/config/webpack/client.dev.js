@@ -6,8 +6,8 @@ const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true
 const config = {
   ...baseConfig,
   plugins: [
-    new WriteFileWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new WriteFileWebpackPlugin(),
     ...baseConfig.plugins,
   ],
   mode: 'development',

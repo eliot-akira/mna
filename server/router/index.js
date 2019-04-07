@@ -23,11 +23,11 @@ const routeContext = req => {
   req.query = query
   req.context = {
     route: {
-      // .params may be set by method handler
       name, query,
       fileName, fileBase, extension,
       site, port,
       https: req.connection.encrypted ? true : false,
+      // .params may be set by method handler
     },
   }
 }

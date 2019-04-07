@@ -23,7 +23,7 @@ module.exports = {
       // we still want imported css from external files to be bundled otherwise 3rd party packages
       // which require us to include their own css would not work properly
       whitelist: [
-        /\.css$/
+        /\.css$/,
       ]
     }),
   ],

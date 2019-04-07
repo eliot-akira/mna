@@ -3,6 +3,7 @@ import { Component } from 'react'
 const lifeCycleHooks = {
   didMount: 'componentDidMount',
   willUnmount: 'componentWillUnmount',
+  didUpdate: 'componentDidUpdate',
   shouldUpdate: 'componentShouldUpdate'
 }
 
@@ -94,9 +95,3 @@ const withState = ({
 }
 
 export default withState
-/*(obj, cmp) => !cmp
-  ? withState(obj)
-  : obj instanceof Function
-    ? withState(cmp)(obj)
-    : withState(obj)(cmp)
-*/

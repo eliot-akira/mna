@@ -77,7 +77,8 @@ async function generateAll(config, item, event) {
     // TODO: Cache for watch task, and add/remove changed file(s)
 
     items = glob.sync(globPattern, {
-      ignore: ['**/_*', '**/_*/**', ...(!globIgnore ? [] : !Array.isArray(globIgnore) ? [globIgnore] : globIgnore )]
+      ignore: ['**/_*', '**/_*/**', ...(!globIgnore ? [] : !Array.isArray(globIgnore) ? [globIgnore] : globIgnore )],
+      follow: true // Follow symlinks
     })
 
     if (mapItem) {
@@ -125,12 +126,6 @@ async function run({
 
   for (let i = 0, len = fns.length; i < len; i++) {
 
-    const fn = fns[i]
-
-    const content = await (items
-      ? fn(items, item, event) // Generate all/index
-      : fn(item, event) // Generate each
-    )
     const target = targetFns[i]
     if (!target) throw new Error(`No target for generate function ${i}`)
 
@@ -140,6 +135,18 @@ async function run({
         : target(item, event)
       )
       : target
+
+    if (event && event==='unlink') {
+      // Remove
+      console.log('TODO: Remove previous generated', targetPath)
+      continue
+    }
+
+    const fn = fns[i]
+    const content = await (items
+      ? fn(items, item, event) // Generate all/index
+      : fn(item, event) // Generate each
+    )
 
     console.log('Generated', path.relative(cwd, targetPath))
     //console.log(content)

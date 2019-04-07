@@ -108,7 +108,7 @@ img { border-radius: $border-radius; }
 
 
 .article-width {
-  max-width: 800px;
+  //max-width: $article-width;
   margin: 0 auto;
   padding: .5rem 1.5rem 2rem;
   h1, h2 {

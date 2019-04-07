@@ -1,13 +1,9 @@
 // Shared variables
 
 // Colors
-$white: #fff !default;
-$silver: #eee !default;
-$gray: #aaa !default;
-$light-gray: #ddd !default;
-$dark-gray: #999 !default;
-$black: #111 !default;
 $transparent:transparent !default;
+$white: #fff !default;
+$black: #111 !default;
 
 $blue: #3F86ce !default; // #0074d9
 $green: #19a974 !default; // #1abc9c #26BF3A #2ecc40
@@ -17,18 +13,24 @@ $orange: #ff851b !default;
 $red: #e74c3c !default; // #ff4136
 $purple: #9b59b6 !default; // #b10dc9
 
-$navy: #415F69 !default; // 253c52 001f3f 56727C
+$navy: #37528A !default; // 415F69 253c52 001f3f 56727C
 $coffee: #575757 !default;
 $cream: #f3e6d5 !default;
 $sky: #77b4d5 !default;
 $light-sky: #ddecff !default;
 $olive: #3d9970 !default;
 
-$dark-blue: #253c52 !default;
+$gray: #aaa !default; // aaa
+$light-gray: #ddd !default; // ddd
+$dark-gray: #999 !default;
+$silver: #e4e8ef !default;
+
+$dark-blue: #272933 !default;
 $dark-gray-blue: #313644 !default;
 $gray-blue: #444b5d !default;
 $light-gray-blue: #545e75 !default;
 //$lighter-gray-blue: #5b6272 !default;
+
 
 // Reconsider..
 $aqua: #7fdbff !default;
@@ -36,6 +38,7 @@ $teal: #39cccc !default;
 $lime: #01ff70 !default;
 $fuchsia: #f012be !default;
 $maroon: #85144b !default;
+
 
 $darken-1: rgba(0,0,0,.0625) !default;
 $darken-2: rgba(0,0,0,.125) !default;
@@ -68,11 +71,14 @@ $colors: map-merge((
   coffee: $coffee,
   cream: $cream,
   olive: $olive,
-  sky: $sky, light-sky: $light-sky,
+  sky: $sky,
+  light-sky: $light-sky,
 
+  dark-blue: $dark-blue,
   dark-gray-blue: $dark-gray-blue,
   gray-blue: $gray-blue,
   light-gray-blue: $light-gray-blue
+
 ), $colors);
 
 $theme-colors: (
@@ -99,7 +105,7 @@ $screen-mid:      768px !default; // 900px
 $container-width: 1024px !default;
 $screen-large:   1200px !default;
 
-$article-width:  42em !default; // Comfortable reading width 38em
+$article-width:  48em !default; // Comfortable reading width 38em
 
 $screen-max-widths: (
   sm: $screen-small,

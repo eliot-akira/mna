@@ -1,29 +1,12 @@
 const loaderUtils = require('loader-utils')
-const frontmatter = require('front-matter')
+const renderMarkdown = require('../../markdown')
 
-const md = require('markdown-it')({
-  preset: 'default',
-  html: true,
-  linkify: true
-  //highlight: renderHighLight
-})
-  .use(require('./taskList'), {
-    // Without `disabled` attribute
-    enabled: true
-  })
-  .use(require('./anchor'))
-
-module.exports = function (source) {
+module.exports = function (content) {
 
   if (this.cacheable) this.cacheable()
 
   const options = loaderUtils.getOptions(this) || {}
-
-  const { body, attributes } = frontmatter(source)
-
-  const html = options.markdown
-    ? options.markdown(body)
-    : md.render(body)
+  const { html, attributes } = renderMarkdown(content, options)
 
   return `module.exports = {
   html: ${JSON.stringify(html)},

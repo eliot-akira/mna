@@ -45,8 +45,8 @@ const start = async () => {
 
   serverConfig.entry.server.unshift('webpack/hot/poll?300')
   //serverConfig.watch = true
-  //serverConfig.output.hotUpdateMainFilename = 'hot/hot-update.json'
-  //serverConfig.output.hotUpdateChunkFilename = 'hot/hot-update.js'
+  serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json'
+  serverConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js'
 
   const publicPath = clientConfig.output.publicPath
 
@@ -64,7 +64,7 @@ const start = async () => {
   const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server')
 
   const watchOptions = {
-    // poll: true,
+    //poll: true,
     ignored: /node_modules/,
     stats: clientConfig.stats,
   }
@@ -97,13 +97,14 @@ const start = async () => {
   })
 
   logMessage('Building client and server..')
-
-  const clientPromise = compilerPromise('client', clientCompiler)
-  const serverPromise = compilerPromise('server', serverCompiler)
-
   try {
-    await serverPromise
+
+    const clientPromise = compilerPromise('client', clientCompiler)
+    const serverPromise = compilerPromise('server', serverCompiler)
+  
     await clientPromise
+    await serverPromise
+
   } catch (error) {
     logMessage(error, 'error')
   }

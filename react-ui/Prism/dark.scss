@@ -1,17 +1,17 @@
 $prism-bg-color: #1c1c1c;
 
-$prism-dark-gray: #777;
+$prism-dark-gray: #5C6370; //777;
 $prism-gray: #999;
-$prism-light-gray: #ccc;
-$prism-red: #D27575; // #e2777a
+$prism-light-gray: #abb2bf; //ccc;
+$prism-red: #e06c75; //D27575; // #e2777a
 $prism-dark-blue: #887bb5;
-$prism-blue: #6EA4D2; // #6196cc
-$prism-light-blue: #96beff;
-$prism-orange: #CC8B5E; // #f08d49
+$prism-blue: #61afef; // #6196cc
+$prism-light-blue: #96beff; //96beff;
+$prism-orange: #d19a66; //CC8B5E; // #f08d49
 $prism-yellow: #E0BC72; // #f8c555
-$prism-purple: #B88EC7; // #cc99cd
-$prism-green: #8BB56E; //#7ec699
-$prism-cyan: #7FD2C7; // #67cdcc
+$prism-purple: #c678dd; //B88EC7; // #cc99cd
+$prism-green: #98c379; //8BB56E; //#7ec699
+$prism-cyan: #56b6c2; //7FD2C7; // #67cdcc
 
 code[class*="language-"],
 pre /*[class*="language-"]*/ {
@@ -58,6 +58,13 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
   padding: .1em;
   border-radius: .3em;
   white-space: normal;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
 }
 
 .token.comment,
@@ -122,13 +129,67 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
   color: $prism-cyan;
 }
 
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
 .token.inserted {
   color: $prism-green;
 }
+
+
+// Based on Atom One Dark
+/*
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #5C6370;
+}
+
+.token.punctuation {
+  color: #abb2bf;
+}
+
+.token.selector,
+.token.tag {
+  color: #e06c75;
+}
+
+.token.property,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.attr-name,
+.token.deleted {
+  color: #d19a66;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.builtin,
+.token.inserted {
+  color: #98c379;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #56b6c2;
+}
+
+.token.atrule,
+.token.keyword {
+  color: #c678dd;
+}
+
+.token.function {
+  color: #61afef;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #c678dd;
+}
+*/

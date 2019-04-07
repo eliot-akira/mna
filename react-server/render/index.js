@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
-import { renderRoutes, Helmet, matchRoutes } from '@mna/react'
+import { renderRoutes, Helmet, matchRoutes, getRouteName } from '@mna/react'
 import createStore from '@mna/store'
 import { cleanUserData } from '@mna/content-server/user'
 
@@ -38,9 +38,15 @@ export default async function render({
   await handleServerActions({
     App, routes, location,
     serverActionProps: {
-      location, user,
+      location, user, content: routeContent,
+
+      // These should be isomorphic, to allow a single function to fetch content
+      // on server-side render (serverAction) or client-side (componentDidMount)
+      // See App.render
+      // TODO: More robust way to ensure this
       state, actions, setState,
-      content: routeContent
+      api: routeContent.api,
+      routeName: getRouteName({ location })
     }
   })
 

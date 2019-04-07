@@ -53,7 +53,7 @@ body { overflow: hidden }
   }
 
   .header-menu-item .header-menu-item a {
-    padding-left: 1.25rem;
+    padding-left: 1.5rem;
   }
   .header-menu-item .header-menu-item .header-menu-item a {
     padding-left: 2rem;
@@ -62,9 +62,10 @@ body { overflow: hidden }
 }
 
 .header-menu-section-title {
-  @extend .pt-1, .pl-1, .border-bottom, .muted, .text-small;
+  @extend .pt-1, .pl-1, .border-bottom, .color-gray, .text-small;
   text-transform: uppercase;
   letter-spacing: .03rem;
+  font-size: .8rem;
 }
 .header-menu-item:first-of-type .header-menu-section-title {
   @extend .pt-0;
@@ -82,7 +83,7 @@ body { overflow: hidden }
     position: absolute;
     width: 100%;
     z-index: -1;
-    transition: transform .6s;
+    transition: transform .3s;
     transform: translateY(-150%);
   }
 

@@ -31,8 +31,57 @@ const babelLoaderServer = {
     //require.resolve('cache-loader'),
     {
       loader: require.resolve('babel-loader'),
-      options: babelConfigClient
+      options: babelConfigServer // babelConfigClient
     }
+  ]
+}
+
+const typeScriptLoaderRegex = /\.(ts|tsx)$/
+
+const typeScriptLoaderCommonOptions = {
+  // https://github.com/s-panferov/awesome-typescript-loader#loader-options
+  //useBabel: true,
+  //babelCore: require.resolve('@babel/core'),
+  errorsAsWarnings: true,
+  forceIsolatedModules: true,
+
+  //configFileName: ,
+
+  // Disables automatically with compilerOption declaration: true 
+  //useTranspileModule: true,
+  // Doesn't work well with hot reload?
+  //useCache: true, cacheDirectory: '.cache-ts'
+}
+
+const typeScriptLoaderClient = {
+  test: typeScriptLoaderRegex,
+  exclude: /node_modules/,
+  use: [
+    ////require.resolve('cache-loader'),
+    ...babelLoaderClient.use,
+    /*{
+      loader: require.resolve('awesome-typescript-loader'),
+      options: {
+        ...typeScriptLoaderCommonOptions,
+        //babelOptions: { babelrc: false, ... babelConfigClient },
+      }
+    },*/
+  ]
+}
+
+const typeScriptLoaderServer = {
+  test: typeScriptLoaderRegex,
+  exclude: /node_modules/,
+  use: [
+    ////require.resolve('cache-loader'),
+    ...babelLoaderServer.use,
+    {
+      loader: require.resolve('awesome-typescript-loader'),
+      options: {
+        ...typeScriptLoaderCommonOptions,
+        //babelOptions: { babelrc: false, ... babelConfigServer },
+      }
+    },
   ]
 }
 
@@ -248,6 +297,7 @@ const client = [
   {
     oneOf: [
       babelLoaderClient,
+      typeScriptLoaderClient,
       cssModuleLoaderClient,
       cssLoaderClient,
       sassLoaderClient,
@@ -264,6 +314,7 @@ const server = [
   {
     oneOf: [
       babelLoaderServer,
+      typeScriptLoaderServer,
       cssModuleLoaderServer,
       cssLoaderServer,
       sassLoaderServer,

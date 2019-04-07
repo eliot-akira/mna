@@ -36,6 +36,7 @@ export default function createWebSocketInstance({ io, socketUrl }) {
     // Try reconnect: Make sure to set long enough interval,
     // because there will be another `onclose` event if it's not successful
     setTimeout(() => {
+      if (io.ws) return // Ignore if already reconnected
       console.log('Try connecting to web socket server', io.reconnectAttempts)
       io.ws = createWebSocketInstance({ io, socketUrl })
     }, 5000)

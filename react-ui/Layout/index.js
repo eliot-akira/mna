@@ -39,7 +39,8 @@ export default class Layout extends Component {
           closeHeaderMenu: this.closeHeaderMenu,
         }} />
         <Body {...{
-          location, onRouteEnter,
+          location,
+          onRouteEnter,
           footer: <Footer>{footer}</Footer>
         }}>
           { children }

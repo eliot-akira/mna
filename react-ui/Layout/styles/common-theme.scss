@@ -43,7 +43,7 @@
     @extend .py-1;
     color: $site-header-menu-content-text-color;
     background-color: $site-header-menu-content-bg-color;
-    font-size: .9rem;
+    //font-size: .9rem;
     a { cursor: default }
   }
 }
@@ -58,6 +58,7 @@
     .header-menu-content {
       color: $site-header-menu-content-text-color;
       background-color: $site-header-menu-content-bg-color;
+      //box-shadow: 0 4px 4px rgba(0,0,0,.4);
     }
   }
 }
@@ -66,7 +67,7 @@
 
   .site-layout-with-sidebar .site-header {
 
-      border-right: 1px solid #eee;
+    //border-right: 1px solid #eee;
 
     .header-menu-content {
       padding-top: $space-2;

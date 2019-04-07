@@ -1,5 +1,6 @@
 const presets = [
-  require.resolve('@babel/preset-react')
+  require.resolve('@babel/preset-react'),
+  require.resolve('@babel/preset-typescript'),
 ]
 
 const plugins = [
@@ -7,9 +8,9 @@ const plugins = [
   require.resolve('@babel/plugin-proposal-class-properties'),
   require.resolve('@babel/plugin-proposal-export-default-from'),
   require.resolve('@babel/plugin-syntax-dynamic-import'),
-  /*[require.resolve('@babel/plugin-transform-runtime'), {
-    //corejs: 2, // Required by useBuiltIns option below
-  }],*/
+  [require.resolve('@babel/plugin-transform-runtime'), {
+    corejs: 3, // Match useBuiltIns option below
+  }],
   /*[
     require.resolve('babel-plugin-named-asset-import'),
     {
@@ -33,6 +34,7 @@ const clientOptions = {
     [ require.resolve('@babel/preset-env'),
       { 'modules': 'commonjs',
         useBuiltIns: 'usage',
+        corejs: 3,
         'targets': { 'browsers': ['last 2 versions', 'ie >= 9'] }
       }
     ],
@@ -46,6 +48,7 @@ const serverOptions = {
     [ require.resolve('@babel/preset-env'),
       { 'modules': 'commonjs',
         useBuiltIns: 'usage',
+        corejs: 3,
         'targets': { 'node': 'current' }
       }
     ],

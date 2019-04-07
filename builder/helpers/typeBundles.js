@@ -63,10 +63,12 @@ ${items.map(item =>
 
 // hello-world -> helloWorld
 function kebabToCamel(s) {
-  return s.replace(/(\-\w)/g, function(m){return m[1].toUpperCase()})
+  return s.replace(/(\-\w)/g, (m) => m[1].toUpperCase())
 }
 
 // hello-world -> HelloWorld
 function kebabToPascal(s) {
-  return s[0].toUpperCase()+kebabToCamel(s.substr(1))
+  if (!s || !s.length) return ''
+  const rest = s.substr(1)
+  return s[0].toUpperCase()+(rest ? kebabToCamel(rest) : '')
 }

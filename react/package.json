@@ -1,16 +1,16 @@
 {
   "name": "@mna/react",
-  "version": "1.5.0",
+  "version": "1.5.4",
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.2.6",
-    "prop-types": "^15.6.2",
-    "query-string": "^6.2.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.4.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "react-helmet": "^5.2.0",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0"
   },
   "files": [
     "**/*.js"

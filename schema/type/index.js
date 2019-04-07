@@ -1,5 +1,6 @@
 import schema from '../base'
 import email from './email'
+import withAsync from './async'
 
 const type = {
 
@@ -41,15 +42,32 @@ const type = {
       : null
   ),
 
-  arrayOf: givenType => value => {
+  instanceOf: C => value => schema.type.required(value) || (
+    !(value instanceof C) ? schema.error.invalid
+      : null
+  ), 
+
+  optional: givenType => value =>
+    schema.type.required(value)===null
+      ? givenType(value)
+      : null
+  ,
+
+  // Following types have async versions
+
+  arrayOf: (givenType, strict = false) => value => {
     let error = schema.type.array(value)
     if (error) return error
     for (const val of value) {
       error = givenType(val)
       if (error) return error
+      // Only check first element by default
+      if (!strict) break
     }
     return null
   },
+
+  strictArrayOf: givenType => schema.type.arrayOf(givenType, true),
 
   objectOf: shape => value =>
     schema.type.object(value)
@@ -62,11 +80,6 @@ const type = {
       return errors
     }, null)
   ,
-
-  instanceOf: C => value => schema.type.required(value) || (
-    !(value instanceof C) ? schema.error.invalid
-      : null
-  ), 
 
   allOf: (...givenTypes) => value => {
     let error = null
@@ -85,13 +98,7 @@ const type = {
     return schema.error.invalid
   },
 
-  optional: givenType => value =>
-    schema.type.required(value)===null
-      ? givenType(value)
-      : null
-  ,
-
   email
 }
 
-export default type
+export default withAsync(type)

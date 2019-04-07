@@ -6,7 +6,12 @@ import { deleteCookie } from '@mna/dom/cookie'
 
 export const createState = () => ({
   content: {},
-  user: null
+  user: null,
+
+  // See: react/withRouteData
+  siteContext: {},
+  routeData: {},
+  fetchingRouteData: {}
 })
 
 export const actions = {

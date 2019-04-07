@@ -15,10 +15,10 @@ export default class Form extends Component {
 
   render() {
 
-    const { children, onValidate, onSubmit } = this.props
+    const { className, onValidate, onSubmit, children } = this.props
 
     return (
-      <form onSubmit={e => {
+      <form className={className || ''} onSubmit={e => {
 
         e.preventDefault()
 

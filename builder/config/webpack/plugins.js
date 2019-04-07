@@ -3,6 +3,10 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('../friendly-errors-webpack-plugin')
+//const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+// https://github.com/webpack/webpack/issues/3460
+const { CheckerPlugin } = require('awesome-typescript-loader')
+//const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 const env = require('../env')()
 const isDev = process.env.NODE_ENV === 'development'
@@ -49,16 +53,31 @@ const server = [
       return resource
     }
   ),
+  new CheckerPlugin(),
 ]
 
 const shared = [
+  //new ForkTsCheckerWebpackPlugin()
+  //..or..
+  //new CheckerPlugin(),
+  /*new HardSourceWebpackPlugin({
+    info: { level: 'warn' }
+  }),
+  // https://github.com/mzgoddard/hard-source-webpack-plugin#excludemoduleplugin
+  new HardSourceWebpackPlugin.ExcludeModulePlugin([
+    {
+      test: /mini-css-extract-plugin[\\/]dist[\\/]loader/,
+    }
+  ]),*/
 ]
 
 if (isDev) {
+
   client.push(new FriendlyErrorsWebpackPlugin({
     title: 'Client',
     clearConsole: false
   }))
+
   server.push(new FriendlyErrorsWebpackPlugin({
     title: 'Server',
     clearConsole: false

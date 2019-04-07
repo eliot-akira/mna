@@ -1,0 +1,24 @@
+
+@import "@mna/ui/index";
+@import "@mna/ui/modules/hamburger";
+
+@import "@mna/react-ui/Layout/style";
+@import "@mna/react-ui/ScrollTop/style";
+@import "@mna/react-ui/SmoothTransition/style";
+@import "@mna/react-ui/Prism/dark";
+
+h1, h2 { text-align: center; }
+img { border-radius: 4px }
+
+.article-width {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: .5rem 1.5rem 1rem;
+}
+
+@include less-than(sm) {
+  .article-width {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+}

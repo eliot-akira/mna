@@ -1,10 +1,11 @@
 {
   "name": "@mna/content-server",
-  "version": "1.5.0",
+  "version": "1.5.4",
   "main": "index.js",
   "dependencies": {
     "@mna/auth": "1.x",
     "@mna/db": "1.x",
+    "@mna/fsp": "1.x",
     "@mna/store": "1.x",
     "@mna/utils": "1.x",
     "cookie": "^0.3.1"
