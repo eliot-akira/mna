@@ -1,8 +1,15 @@
-const babelConfig = require('../config/babel')
+const { server: babelConfig } = require('../config/babel')
 
 module.exports = function runTester(props = {}) {
 
-  require('@babel/register')(babelConfig.server)
+  const { root = [], alias = {} } = props
+
+  babelConfig.plugins = [
+    ...babelConfig.plugins,
+    [require.resolve('babel-plugin-module-resolver'), { root, alias }]
+  ]
+
+  require('@babel/register')(babelConfig)
 
   require('@mna/tester/cli')
 

@@ -1,5 +1,5 @@
 const loaderUtils = require('loader-utils')
-const renderMarkdown = require('../../markdown')
+const renderMarkdown = require('@mna/markdown')
 
 module.exports = function (content) {
 
