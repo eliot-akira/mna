@@ -30,6 +30,7 @@ const libs = {
     'builder',
     'db',
     'icons',
+    'markdown',
     'server',
     'template-basic',
     'tester',
