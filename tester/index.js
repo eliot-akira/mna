@@ -1,3 +1,23 @@
+const assert = require('assert').strict
+
+const assertHelpers = {
+  isEqual(a, b) {
+    try {
+      assert.deepStrictEqual(a, b)
+      return true
+    } catch(e) {
+      return e
+    }
+  },
+  throws(fn) {
+    try {
+      fn()
+      return false
+    } catch(e) {
+      return true
+    }
+  }
+}
 
 const tester = (title, reporter) => {
 
@@ -34,18 +54,31 @@ const tester = (title, reporter) => {
 
     tests.push(currentTest)
 
-    const assert = (title, ok, ...logOnFail) => {
+    // Main function passed to test: assert ok
+    const it = (title, ok, ...logOnFail) => {
+
       const assertion = {
         testId: currentTest.id,
         id: currentTest.assertions.length + 1,
-        title, ok,
+        title,
+        ok,
         // For reporter when assertion fails
         logOnFail
       }
+
       currentTest.assertions.push(assertion)
 
-      if (ok) currentTest.passes++
-      else currentTest.fails++
+      if (ok) {
+        if (ok instanceof Error) {
+          currentTest.fails++
+          assertion.ok = false
+          if (ok.message) assertion.logOnFail.push(ok.message)
+        } else {
+          currentTest.passes++
+        }
+      } else {
+        currentTest.fails++
+      }
 
       emitEvent({ type: 'assertion', ...assertion })
     }
@@ -72,7 +105,9 @@ const tester = (title, reporter) => {
       }
 
       try {
-        const result = testCallback(assert)
+
+        const result = testCallback(it, assertHelpers)
+
         if (result instanceof Promise) {
           result.then(done).catch(doneWithError)
         } else done()

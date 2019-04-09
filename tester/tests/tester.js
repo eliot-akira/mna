@@ -27,3 +27,16 @@ test('Assertion', async it => {
   it('Fails on false', (await t.all()).fails)
   it('Results are cleared after test.all()', !(await t.all()).fails)
 })
+
+test('Assert helpers', (it, { isEqual, throws }) => {
+
+  it('are passed to test callback', isEqual && throws)
+
+  it('.isEqual checks equality', isEqual(1, 1))
+  it('.isEqual checks deep equality of arrays', isEqual(['a'], ['a']))
+  it('.isEqual checks deep equality of objects', isEqual({ a: 'b' }, { a: 'b' }))
+  it('.throws checks if function throws', throws(() => {
+    throw new Error
+  }))
+
+})
