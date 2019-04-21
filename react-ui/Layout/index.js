@@ -20,6 +20,7 @@ export default class Layout extends Component {
   render() {
     const {
       type = 'standard',
+      withHeader = true,
       location,
       menuTitle, menuItems,
       children,
@@ -31,13 +32,15 @@ export default class Layout extends Component {
 
     return (
       <div className={`site site-layout-${type}${isHeaderMenuOpen ? ' is-header-menu-open' : ''}`}>
-        <Header {...{
-          menuTitle,
-          menuItems,
-          isHeaderMenuOpen,
-          toggleHeaderMenu: this.toggleHeaderMenu,
-          closeHeaderMenu: this.closeHeaderMenu,
-        }} />
+        { !withHeader ? null :
+          <Header {...{
+            menuTitle,
+            menuItems,
+            isHeaderMenuOpen,
+            toggleHeaderMenu: this.toggleHeaderMenu,
+            closeHeaderMenu: this.closeHeaderMenu,
+          }} />
+        }
         <Body {...{
           location,
           onRouteEnter,

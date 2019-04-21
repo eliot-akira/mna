@@ -6,11 +6,11 @@ const md = require('markdown-it')({
   linkify: true
   //highlight: renderHighLight
 })
+  .use(require('./anchor'))
   .use(require('./taskList'), {
     // Without `disabled` attribute
     enabled: true
   })
-  .use(require('./anchor'))
 
 module.exports = function renderMarkdown(content = '', options = {}) {
 

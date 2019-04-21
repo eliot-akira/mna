@@ -28,7 +28,7 @@ module.exports = function build({ args, options }) {
   }
 
   // Empty publish folder
-  fs.emptyDirSync(dest)
+  //fs.emptyDirSync(dest)
 
   const commonFilesPattern = `{${[
     'package.json',

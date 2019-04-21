@@ -1,12 +1,12 @@
 {
   "name": "@mna/template-basic",
-  "version": "1.5.5",
+  "version": "1.5.7",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev": "builder start",
     "build": "builder build",
-    "test": "builder test src -x=@mna",
+    "test": "builder test src -x=src/@mna",
     "deploy": "cd build && ./deploy",
     "export": "yarn build && APP_EXPORT=true NODE_ENV=production node build/server/server.js",
     "lib:install": "cd src && git clone git@github.com/eliot-akira/mna.git @mna",
@@ -24,6 +24,8 @@
     "@mna/builder": "1.x",
     "@mna/react-client": "1.x",
     "@mna/react-server": "1.x",
-    "@mna/react-ui": "1.x"
+    "@mna/react-ui": "1.x",
+    "@types/node": "^11.11.6",
+    "@types/react": "^16.8.8"
   }
 }

@@ -32,7 +32,7 @@ const libs = {
     'icons',
     'markdown',
     'server',
-    'template-basic',
+    //'template-basic',
     'tester',
     'ui'
   ]

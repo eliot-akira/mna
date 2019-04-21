@@ -7,17 +7,17 @@ class SmoothTransition extends Component {
     this.state = {
       location: this.props.location,
       fadeClassName:
-        'fade-enter' //'fade-enter fade-enter-active',
+        'fade-enter'
     }
     this.pathname = this.props.location.pathname
   }
 
   componentDidMount() {
-    //this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     this.smoothEnter()
   }
 
   componentWillUpdate(newProps) {
+
     if (this.pathname===newProps.location.pathname) return
 
     this.pathname = newProps.location.pathname
@@ -26,13 +26,11 @@ class SmoothTransition extends Component {
     })
 
     setTimeout(() => {
-
       this.setState({
         location: newProps.location,
         fadeClassName: 'fade-enter'
       }, this.smoothEnter)
-
-    }, newProps.duration || 300) // Same as CSS transition duration
+    }, newProps.duration || 150) // Same as CSS transition duration
   }
 
   componentWillUnmount() {
@@ -40,11 +38,11 @@ class SmoothTransition extends Component {
   }
 
   smoothEnter() {
+    this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     this.pageAssetsLoaded().then(() => {
       if (!this.unmounted) this.setState({
         fadeClassName: 'fade-enter fade-enter-active'
       })
-      this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     })
   }
 

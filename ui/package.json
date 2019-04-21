@@ -1,6 +1,6 @@
 {
   "name": "@mna/ui",
-  "version": "1.5.5",
+  "version": "1.5.7",
   "main": "index.js",
   "files": [
     "**/*.js",

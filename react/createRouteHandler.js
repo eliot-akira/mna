@@ -17,11 +17,21 @@ export default function createRouteHandler({
     if (cache[routeName]) return cache[routeName]
 
     let Route, Item, meta, notFound
+    let foundRouteName = routeName
 
     for (const type of types) {
-      if (!type.map || !type.map[routeName]) continue
-      Item = type.map[routeName]
-      meta = type.meta && type.meta[routeName]
+      if (!type.map) continue
+      if (!type.map[routeName]) {
+        // Check catch all routes
+        if (!type.catchAll || !type.catchAll.length) continue
+        for (const catchRoute of type.catchAll) {
+          if (routeName.indexOf(`${catchRoute}/`)<0) continue
+          foundRouteName = catchRoute
+        }
+        if (foundRouteName===routeName) continue
+      }
+      Item = type.map[foundRouteName]
+      meta = type.meta && type.meta[foundRouteName]
       Route = templateMap[type.name] || Item
       break
     }

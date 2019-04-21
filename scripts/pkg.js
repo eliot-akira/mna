@@ -3,12 +3,11 @@ const { fs, glob } = require('../builder/helpers')
 const { execSync } = require('child_process')
 const libs = require('./libs')
 
-module.exports = function install({ args, options }) {
+module.exports = function gatherPackages({ args, options }) {
 
   const src = '.'
   const dest = '_publish'
 
-  // Publish only specified libs
   const allLibs = [...libs.client, ...libs.server, ...libs.copy]
 
   const pkgPaths = glob.sync(`{./package.json,${
@@ -28,14 +27,23 @@ module.exports = function install({ args, options }) {
     }
   }
 
-
   const masterPackagePath = 'package.json'
   const pkg = fs.readJsonSync(masterPackagePath)
-  pkg.devDependencies = {
+  const pkgs = {
     ...pkg.devDependencies,
     ...installModules
   }
+  const keys = Object.keys(pkgs)
+  keys.sort()
+
+  pkg.devDependencies = keys.reduce((obj, key) => {
+    obj[key] = pkgs[key]
+    return obj
+  }, {})
+
   fs.writeJsonSync(masterPackagePath, pkg, { spaces: 2 })
 
-  execSync(`rm -rf node_modules`)
+  // Install node_modules in publish
+
+  execSync(`cp package.json ${dest} && cd ${dest} && yarn`) // rm -rf node_modules
 }

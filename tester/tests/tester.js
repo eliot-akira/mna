@@ -5,7 +5,7 @@ test('Tester', it => new Promise((resolve, reject) => {
   t(() => setTimeout(() => {
     it('Waits on test to finish', true)
     resolve()
-  }, 1000)
+  }, 100)
   )
   t(() => it('Runs callback', true))
   t(async () => it('Runs async callback', true))

@@ -15,7 +15,10 @@ export default function Link({ href, to, children = [], ...props }) {
 
   if (target.indexOf(':') >= 0 /*target.match(externalUrl)*/) {
     return (
-      <a {...{ ...props, href: target, target: '_blank', children }} />
+      <a {...{ ...props, href: target,
+        target: target.indexOf('http')===0 ? '_blank' : '_self',
+        children
+      }} />
     )
   }
 
