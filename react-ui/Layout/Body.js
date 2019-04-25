@@ -13,8 +13,10 @@ class Body extends Component {
     // Enable keyboard scroll upon route render
 
     // https://stackoverflow.com/questions/22109621/keyboard-down-button-does-not-work-when-overflow-is-defined-for-html-body#answer-22126539
-
-    if (!this.scrollContainer) return
+    if (!this.scrollContainer
+      // If another element is focused already
+      || window.document.activeElement
+    ) return
     this.scrollContainer.tabIndex = '0'
     this.scrollContainer.focus()
   }

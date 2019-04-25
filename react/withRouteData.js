@@ -18,10 +18,14 @@ async function ensureRouteData(props) {
   const key = !createKey ? routeName : createKey(props)
 
   let currentRouteData = state.routeData[key]
-
   if (currentRouteData) return currentRouteData
 
   if (state.fetchingRouteData && state.fetchingRouteData[key]) {
+    return
+  }
+
+  if (!api) {
+    log('No api')
     return
   }
 

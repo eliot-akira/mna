@@ -1,6 +1,6 @@
 {
   "name": "@mna/react-ui",
-  "version": "1.5.7",
+  "version": "1.5.9",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -12,7 +12,10 @@
     "@mna/react": "1.x",
     "@mna/ui": "1.x",
     "lodash": "^4.17.11",
-    "react-modal": "^3.8.1"
+    "react-draggable": "^3.3.0",
+    "react-modal": "^3.8.1",
+    "react-resizable": "^1.7.5",
+    "react-spring": "^8.0.19"
   },
   "peerDependencies": {
     "react": "16.x",

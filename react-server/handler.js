@@ -3,8 +3,6 @@ import content from '@mna/content-server'
 import createConfig from './config'
 import render from './render'
 
-const configBase = createConfig()
-
 // Separate handler creation to support reload
 
 export default async function createServerHandler(props) {
@@ -15,6 +13,8 @@ export default async function createServerHandler(props) {
     content: contentInit = true,
     init: serverInit
   } = props
+
+  const configBase = createConfig()
 
   const config = { ...configBase, ...userConfig }
   const routeProps = { config, server, content }
@@ -43,14 +43,16 @@ export default async function createServerHandler(props) {
     get(async (req, res) => {
 
       const location = req.url // From server/router
+      const siteName = req.context.route.site
       const user = req.context.user // From content/user
 
       const { html, redirectLocation, statusCode } = await render({
         App,
         routes,
         assets: config.assets,
-        location, status,
-        content, user, req, res
+        location, siteName,
+        content, status, user,
+        req, res
       })
 
       if (html) {

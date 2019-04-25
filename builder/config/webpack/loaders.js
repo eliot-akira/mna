@@ -169,7 +169,18 @@ const sassLoaderClient = {
 
 const sassLoaderServer = {
   test: sassRegex,
-  loader: require.resolve('css-loader'),
+  use: [
+    require.resolve('css-loader'),
+    {
+      loader: require.resolve('resolve-url-loader')
+    },
+    {
+      loader: require.resolve('sass-loader'),
+      options: {
+        sourceMap: generateSourceMap,
+      }
+    },
+  ],
 }
 
 const cssModuleLoaderServer = {

@@ -29,12 +29,12 @@
   border-left-color: $border-color;
 }
 
-.no-border-top { border-top: 0 }
-.no-border-right { border-right: 0 }
-.no-border-bottom { border-bottom: 0 }
-.no-border-left { border-left: 0 }
+.no-border-top { border-top: 0 !important }
+.no-border-right { border-right: 0 !important }
+.no-border-bottom { border-bottom: 0 !important }
+.no-border-left { border-left: 0 !important }
 
-.no-border, .border-none { border: 0 }
+.no-border, .border-none { border: 0 !important }
 
 .border-width-2, .thicker { border-width: $rule-border-width * 2 !important; }
 .border-width-3, .thicker { border-width: $rule-border-width * 3 !important; }

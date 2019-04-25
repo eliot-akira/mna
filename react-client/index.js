@@ -7,6 +7,8 @@ import connectReduxDevTools from '@mna/store/redux'
 const initState = window.__INIT_STATE__
 const splitPoints = window.__SPLIT_POINTS__ || []
 
+const siteName = window.location.hostname
+
 export default function renderClient({ App, routes, bundles }) {
 
   const store = createStore(App)
@@ -18,7 +20,7 @@ export default function renderClient({ App, routes, bundles }) {
   const el = document.getElementById('root')
   const renderApp = () => render(
     <BrowserRouter>
-      { renderRoutes(routes, { store }) }
+      { renderRoutes(routes, { store, siteName }) }
     </BrowserRouter>,
     el
   )

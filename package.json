@@ -1,6 +1,6 @@
 {
   "name": "mna",
-  "version": "1.5.7",
+  "version": "1.5.9",
   "license": "MIT",
   "scripts": {
     "build": "node run build",

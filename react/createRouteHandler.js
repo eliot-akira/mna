@@ -12,6 +12,7 @@ export default function createRouteHandler({
 
   const findMappedRouteData = props => {
 
+    const { siteName } = props // From react-client, react-server/render
     const routeName = getRouteName(props)
 
     if (cache[routeName]) return cache[routeName]

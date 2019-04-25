@@ -1,11 +1,6 @@
 {
-  "name": "@mna/ui",
+  "name": "@mna/fonts",
   "version": "1.5.8",
-  "main": "index.js",
-  "files": [
-    "**/*.js",
-    "**/*.scss"
-  ],
   "dependencies": {},
   "devDependencies": {},
   "license": "MIT",

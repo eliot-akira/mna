@@ -29,6 +29,7 @@ const libs = {
     'auth',
     'builder',
     'db',
+    'fonts',
     'icons',
     'markdown',
     'server',

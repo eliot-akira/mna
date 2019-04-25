@@ -38,11 +38,11 @@ class SmoothTransition extends Component {
   }
 
   smoothEnter() {
-    this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     this.pageAssetsLoaded().then(() => {
       if (!this.unmounted) this.setState({
         fadeClassName: 'fade-enter fade-enter-active'
       })
+      this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
     })
   }
 

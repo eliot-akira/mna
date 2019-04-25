@@ -3,7 +3,6 @@ import { Route } from 'react-router'
 import Switch from './Switch'
 
 const renderRoutes = (routes, routeProps = {}, switchProps = {}) =>{
-  //console.log('renderRoutes', { switchProps })
   return routes ? (
     <Switch {...switchProps}>
       { routes.map((route, i) => (

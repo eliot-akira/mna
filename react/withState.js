@@ -52,6 +52,7 @@ const withState = ({
           const isPropsObject = typeof props==='object' && !Array.isArray(props)
           return actions[key]({
             ...this.getStateProps(),
+            props,
             ...(isPropsObject ? props : {})
           }, ...(isPropsObject ? args : [props, ...args]))
         }

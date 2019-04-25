@@ -26,3 +26,14 @@ $icon-base-size: .75rem;
 .icon-size-small svg {
   width: $icon-base-size * .75;
 }
+
+@mixin icon-colors($colors) {
+  @each $name, $color in $colors {
+    .icon-color-#{$name} svg {
+      path {
+        stroke: $color;
+        fill: $color;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+
+$monospace-font-family:
+"Office Code Pro", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !default;
+
+code {
+font-weight: 400;
+}
+pre > code {
+font-weight: 400;
+}
+
+/* source-code-pro-regular - latin */
+@font-face {
+font-family: 'Office Code Pro';
+font-style: normal;
+font-weight: 400;
+src: local('Office Code Pro'), local('OfficeCodePro-Regular'),
+     url('OfficeCodePro-Regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+     url('OfficeCodePro-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* source-code-pro-300 - latin */
+@font-face {
+font-family: 'Office Code Pro';
+font-style: normal;
+font-weight: 300;
+src: local('Office Code Pro Light'), local('OfficeCodePro-Light'),
+     url('OfficeCodePro-Light.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+     url('OfficeCodePro-Light.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

@@ -9,9 +9,9 @@ import renderPage from './page'
 
 export default async function render({
   App, routes, assets,
-  location, status,
-  content,
-  user, req, res
+  location, siteName,
+  content, status, user,
+  req, res
 }) {
 
   const store = createStore(App)
@@ -46,6 +46,7 @@ export default async function render({
       // TODO: More robust way to ensure this
       state, actions, setState,
       api: routeContent.api,
+      siteName,
       routeName: getRouteName({ location })
     }
   })
@@ -55,7 +56,7 @@ export default async function render({
       location={location}
       context={context} // Passed to route as props.staticContext
     >
-      { renderRoutes(routes, { store }) }
+      { renderRoutes(routes, { store, siteName }) }
     </StaticRouter>
   )
 

@@ -13,38 +13,47 @@ export default class Form extends Component {
     this.state.fields = props.fields || {}
   }
 
+  onSubmit = e => {
+
+    e && e.preventDefault()
+
+    if (!this.el) return
+
+    const { onValidate, onSubmit } = this.props
+
+    const data = {
+      ...this.state.fields,
+      ...getFormData(this.el)
+    }
+
+    if (onValidate) {
+      const invalidFields = onValidate(data)
+      if (invalidFields) {
+        this.setState({ invalidFields })
+        return
+      } else this.setState({ invalidFields: {} })
+    }
+
+    if (onSubmit) onSubmit(data)
+
+  }
+
+  setFields = fields => this.setState({
+    fields: { ...this.state.fields, ...fields }
+  })
+
   render() {
 
-    const { className, onValidate, onSubmit, children } = this.props
+    const { className, children } = this.props
 
     return (
-      <form className={className || ''} onSubmit={e => {
-
-        e.preventDefault()
-
-        const data = {
-          ...this.state.fields,
-          ...getFormData(e.target)
-        }
-
-        if (onValidate) {
-          const invalidFields = onValidate(data)
-          if (invalidFields) {
-            this.setState({ invalidFields })
-            return
-          } else this.setState({ invalidFields: {} })
-        }
-
-        if (onSubmit) onSubmit(data)
-      }}>{
-          children instanceof Function ? children({
-            ...this.state,
-            setFields: fields => this.setState({ fields: {
-              ...this.state.fields,
-              ...fields
-            } })
-          }) : children
-        }</form>
+      <form ref={el => this.el = el} className={className || ''} onSubmit={this.onSubmit}>{
+        children instanceof Function ? children({
+          ...this.state,
+          setFields: this.setFields,
+          submit: this.onSubmit
+        }) : children
+      }</form>
     )
   }
 }

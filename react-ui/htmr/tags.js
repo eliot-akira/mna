@@ -42,7 +42,7 @@ const renderCompact = ({ tag, childTag, childTags = [] }) =>
       tagName: tag,
       attributes: props,
       children: children.filter(n =>
-        n.tagName===childTag || childTags.indexOf(n.tagName)>=0
+        n.tagName && (n.tagName===childTag || childTags.indexOf(n.tagName)>=0)
       )
     }
   ], { rawTag: true })

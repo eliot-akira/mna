@@ -17,6 +17,7 @@ export const createType = async (props) => {
     defaultContent = [],
     typeActions: customTypeActions = props.actions || {},
     middlewares = [],
+    ensureIndex = [], // [ { fieldName, expireAfterSeconds? } ]
 
     timestamp = false, // Automatic timestamp fields: created & updated
   } = props
@@ -44,6 +45,7 @@ export const createType = async (props) => {
         ? await createDefaultDatabase({
           filename: `${ path.join(config.dataPath, type) }.db`,
           timestampData: timestamp,
+          ensureIndex,
           //...options
         })
         : {} // No database
@@ -82,9 +84,7 @@ export const createType = async (props) => {
 
   if (defaultContent.length && !await stores[type].findOne()) {
     for (const item of defaultContent) {
-      await types[type].create({
-        data: item
-      })
+      await types[type].create({ data: item })
     }
   }
 }
