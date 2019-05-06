@@ -9,6 +9,8 @@ module.exports = function withActions(store, props) {
   // Wrapper to pass state and bound actions to all actions
   const action = (name, props = {}, ...args) => {
 
+    const allArgs = [props, ...args]
+
     if (typeof props!=='object' || Array.isArray(props)) {
       args.unshift(props)
       props = { args }
@@ -22,6 +24,7 @@ module.exports = function withActions(store, props) {
       state, getState, setState,
       actions: boundActions,
       store,
+      args: allArgs,
       props,
       ...actionContext,
       ...props,

@@ -4,7 +4,7 @@ $light-font-weight: 300;
 $normal-font-weight: 400;
 $bold-font-weight: 600;
 $strong-font-weight: 600;
-//$letter-spacing: -0.016rem;
+$letter-spacing: -0.016rem;
 
 @font-face {
   font-family: 'Inter';
@@ -41,10 +41,19 @@ $strong-font-weight: 600;
   src: url("inter-600.woff2") format("woff2"),
        url("inter-600.woff") format("woff");
 }
+
 @font-face {
   font-family: 'Inter';
   font-style:  italic;
   font-weight: 600;
   src: url("inter-600-italic.woff2") format("woff2"),
        url("inter-600-italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 800;
+  src: url("inter-800.woff2") format("woff2"),
+       url("inter-800.woff") format("woff");
 }

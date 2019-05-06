@@ -10,7 +10,7 @@ export default class InputRange extends Component {
     const onInput = function(e){
       initDone = true
       const { value } = e.target
-      if (value != previousValue) fn(value)
+      if (value != previousValue) fn && fn(value)
       previousValue = value
     }
 
@@ -40,4 +40,3 @@ export default class InputRange extends Component {
     )
   }
 }
-  

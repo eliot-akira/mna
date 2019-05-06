@@ -34,7 +34,9 @@
 .no-border-bottom { border-bottom: 0 !important }
 .no-border-left { border-left: 0 !important }
 
-.no-border, .border-none { border: 0 !important }
+.no-border, .border-none {
+  border: 0 !important
+}
 
 .border-width-2, .thicker { border-width: $rule-border-width * 2 !important; }
 .border-width-3, .thicker { border-width: $rule-border-width * 3 !important; }
@@ -49,7 +51,7 @@
 .rounded-bottom { border-radius: 0 0 $border-radius $border-radius }
 .rounded-left   { border-radius: $border-radius 0 0 $border-radius }
 
-.not-rounded { border-radius: 0 }
+.no-border-radius { border-radius: 0 !important; }
 
 
 .shadow {

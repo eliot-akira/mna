@@ -88,7 +88,8 @@ $button-narrow-padding-x: $space-1 !default;
 
 .btn.no-hover,
 .btn:disabled,
-.btn.is-disabled {
+.btn.is-disabled,
+button:disabled {
   box-shadow: none !important;
   cursor: default !important;
 }

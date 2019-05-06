@@ -10,17 +10,20 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const weekdayShortNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-const getMonthName = day =>
+const getMonthName = arg =>
   monthNames[
-    typeof day==='object' ? day.month - 1
-      : day - 1
+    typeof arg==='object' ? arg.month - 1
+      : arg - 1
   ]
-const getWeekdayName = day =>
+
+const getWeekdayName = arg =>
   weekdayNames[
-    typeof day==='object' ? (day.dayOfWeek>0 ? day.dayOfWeek-1 : 6)
-      : (day>0 ? day-1 : 6)
+    typeof arg==='object' ? (arg.dayOfWeek>0 ? arg.dayOfWeek-1 : 6)
+      : (arg>0 ? arg-1 : 6)
   ]
-const getWeekdayShortName = day => weekdayShortNames[day.dayOfWeek>0 ? day.dayOfWeek-1 : 6]
+
+const getWeekdayShortName = arg =>
+  weekdayShortNames[arg.dayOfWeek>0 ? arg.dayOfWeek-1 : 6]
 
 const isSameDay = (first, second) =>
   first.year===second.year

@@ -3,8 +3,7 @@
   .header-title {
 
     @extend .h3;
-    padding: $space-1;
-    padding: $space-1;
+    padding: $space-1 .75rem;
 
     color: $site-header-text-color;
     background-color: $site-header-bg-color;

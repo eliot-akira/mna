@@ -50,8 +50,10 @@ const withState = ({
       this.actions = Object.keys(actions).reduce((obj, key) => {
         obj[key] = (props, ...args) => {
           const isPropsObject = typeof props==='object' && !Array.isArray(props)
+          const allArgs = [props, ...args]
           return actions[key]({
             ...this.getStateProps(),
+            args: allArgs,
             props,
             ...(isPropsObject ? props : {})
           }, ...(isPropsObject ? args : [props, ...args]))

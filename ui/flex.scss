@@ -8,7 +8,6 @@
 }
 
 .flex-column {
-  @extend .flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -132,8 +131,8 @@
   overflow-y: auto;
 }
 
-.flex-height-body {
-  @extend .flex-auto;
+.flex-full-height {
+  height: auto;
 }
 
 @include more-than( small ) {

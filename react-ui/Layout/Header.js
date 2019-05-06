@@ -3,11 +3,14 @@ import { Link } from '@mna/react'
 const HeaderTitle = ({
   menuTitle,
   isHeaderMenuOpen,
+  closeHeaderMenu,
   toggleHeaderMenu
 }) =>
   <div className="header-title" style={{ zIndex: 1 }}>
     <div className="header-title-content">
-      <div className="header-title-content-left">
+      <div className="header-title-content-left"
+        onClick={ closeHeaderMenu }
+      >
 
         {menuTitle}
 
@@ -59,11 +62,12 @@ const HeaderMenu = ({
     </div>
   </div>
 
-const Header = ({ isHeaderMenuOpen, toggleHeaderMenu, closeHeaderMenu, menuTitle, menuItems }) =>
+const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems }) =>
   <header className={`site-header`}>
     <HeaderTitle {...{
       menuTitle,
       isHeaderMenuOpen,
+      closeHeaderMenu,
       toggleHeaderMenu
     }}/>
     <HeaderMenu {...{

@@ -138,8 +138,9 @@ async function run({
 
     if (event && event==='unlink') {
       // Remove
-      console.log('TODO: Remove previous generated', targetPath)
-      continue
+      //console.log('Remove previous generated', targetPath)
+      await fs.remove(targetPath)
+      //continue
     }
 
     const fn = fns[i]

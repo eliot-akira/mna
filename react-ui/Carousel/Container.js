@@ -42,7 +42,9 @@ class CarouselContainer extends Component {
       carouselInstance,
 
       items,
-      cardWidth, cardHeight,
+      cardCentered,
+      cardWidth,
+      cardHeight,
       cardPadCount,
 
       // From carousel core
@@ -60,8 +62,9 @@ class CarouselContainer extends Component {
   
     const carouselWidth = this.state.carouselWidth
 
-    // Put current card at center
-    const translateX = (cursor - cardPadCount) * cardWidth + (carouselWidth - cardWidth) / 2
+    const translateX = (cursor - (cardPadCount || itemCount)) * cardWidth
+      // Align current card: center or left
+      +( cardCentered ? ((carouselWidth - cardWidth) / 2) : cardWidth )
   
     return (
       <NonPassiveTouchTarget

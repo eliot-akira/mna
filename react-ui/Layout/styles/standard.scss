@@ -3,9 +3,10 @@
 
 .site-layout-standard {
   .site-main {
-    @extend .flex;
+    @extend .flex, .flex-column;
     .site-main-body {
       @extend .flex-grow;
+      max-width: 100%;
     }
   }
 }

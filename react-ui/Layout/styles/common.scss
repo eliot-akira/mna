@@ -2,20 +2,23 @@
 body { overflow: hidden }
 
 .site {
+  @extend .flex, .flex-column;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
 .site-main {
+  @extend .flex;
+
   width: 100%;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+}
 
-  display: flex;
-  flex-direction: column;
+.site-main-body {
+  @extend .flex-grow, .w-100;
+  height: auto;
 }
 
 .site .site-header {
@@ -52,9 +55,15 @@ body { overflow: hidden }
     }
   }
 
+  .header-menu-item a {
+    padding-left:  .75rem;
+    padding-right:  .75rem;
+  }
+  
   .header-menu-item .header-menu-item a {
     padding-left: 1.5rem;
   }
+
   .header-menu-item .header-menu-item .header-menu-item a {
     padding-left: 2rem;
   }
@@ -62,7 +71,8 @@ body { overflow: hidden }
 }
 
 .header-menu-section-title {
-  @extend .pt-1, .pl-1, .border-bottom, .color-gray, .text-small;
+  @extend .pt-1, .border-bottom, .color-gray, .text-small;
+  padding-left: .75rem;
   text-transform: uppercase;
   letter-spacing: .03rem;
   font-size: .8rem;

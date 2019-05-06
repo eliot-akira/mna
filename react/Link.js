@@ -23,7 +23,8 @@ export default function Link({ href, to, children = [], ...props }) {
   }
 
   return <NavLink {...{
-    ...props, children,
+    ...props,
+    children,
     to: target,
     isActive: (match, location) => {
 

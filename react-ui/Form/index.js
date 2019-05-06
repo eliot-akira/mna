@@ -13,6 +13,11 @@ export default class Form extends Component {
     this.state.fields = props.fields || {}
   }
 
+  getFormData = () => ({
+    ...this.state.fields,
+    ...(!this.el ? {} : getFormData(this.el))
+})
+
   onSubmit = e => {
 
     e && e.preventDefault()
@@ -21,10 +26,7 @@ export default class Form extends Component {
 
     const { onValidate, onSubmit } = this.props
 
-    const data = {
-      ...this.state.fields,
-      ...getFormData(this.el)
-    }
+    const data = this.getFormData()
 
     if (onValidate) {
       const invalidFields = onValidate(data)
@@ -38,22 +40,32 @@ export default class Form extends Component {
 
   }
 
-  setFields = fields => this.setState({
+  onChange = e => {
+    const { onChange } = this.props
+    if (!onChange) return
+    onChange(this.getFormData())
+  }
+
+  setFields = (fields, fn) => this.setState({
     fields: { ...this.state.fields, ...fields }
-  })
+  }, fn)
 
   render() {
 
     const { className, children } = this.props
 
     return (
-      <form ref={el => this.el = el} className={className || ''} onSubmit={this.onSubmit}>{
-        children instanceof Function ? children({
-          ...this.state,
-          setFields: this.setFields,
-          submit: this.onSubmit
-        }) : children
-      }</form>
+      <form ref={el => this.el = el}
+        className={className || ''}
+        onSubmit={this.onSubmit}
+        onChange={this.onChange}
+      >{
+          children instanceof Function ? children({
+            ...this.state,
+            setFields: this.setFields,
+            submit: this.onSubmit
+          }) : children
+        }</form>
     )
   }
 }

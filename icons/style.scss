@@ -27,8 +27,8 @@ $icon-base-size: .75rem;
   width: $icon-base-size * .75;
 }
 
-@mixin icon-colors($colors) {
-  @each $name, $color in $colors {
+@mixin icon-colors($given-colors) {
+  @each $name, $color in $given-colors {
     .icon-color-#{$name} svg {
       path {
         stroke: $color;
@@ -37,3 +37,5 @@ $icon-base-size: .75rem;
     }
   }
 }
+
+@include icon-colors($colors); // Default colors

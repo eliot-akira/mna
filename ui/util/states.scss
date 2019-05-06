@@ -1,6 +1,7 @@
 .hide, .sm-show, .md-show, .lg-show {
   display: none !important
 }
+.show { display: block !important }
 
 @include more-than( sm ) {
   .sm-show { display: block !important }

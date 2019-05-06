@@ -38,12 +38,20 @@ class SmoothTransition extends Component {
   }
 
   smoothEnter() {
-    this.pageAssetsLoaded().then(() => {
-      if (!this.unmounted) this.setState({
-        fadeClassName: 'fade-enter fade-enter-active'
+
+    this.asyncComponentsLoaded()
+      .then(() => {
+
+        this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
+
+        return this.pageAssetsLoaded()
       })
-      this.props.onRouteEnter && this.props.onRouteEnter(this.props.location)
-    })
+      .then(() => {
+
+        if (!this.unmounted) this.setState({
+          fadeClassName: 'fade-enter fade-enter-active'
+        })
+      })
   }
 
   createImagePromise = img => new Promise((resolve, reject) => {
@@ -61,7 +69,7 @@ class SmoothTransition extends Component {
 
   })
 
-  pageAssetsLoaded() {
+  asyncComponentsLoaded = () => {
     return new Promise((resolve, reject) => {
 
       if (!this.el) return resolve()
@@ -69,26 +77,42 @@ class SmoothTransition extends Component {
       // Set in react-client/load for async imported routes/chunks
       const asyncComponentsPromises = Array.prototype.slice.call(
         this.el.querySelectorAll('[data-async-component]') || []
+      )
+        .map(el => el.asyncLoadPromise)
+        .filter(p => p) // Make sure a promise exists
+
+      return Promise.all(asyncComponentsPromises).then(resolve).catch(e => {
+        // Allow route to load, even if a promise fails
+        console.log(e)
+        resolve()
+      })
+    })
+  }
+
+  pageAssetsLoaded = () => {
+    return new Promise((resolve, reject) => {
+
+      if (!this.el) return resolve()
+
+      const imagePromises = Array.prototype.slice.call(
+        this.el.querySelectorAll('img') || []
+      )
+        .map(this.createImagePromise)
+
+      // Manually loaded assets
+
+      const manualAsyncComponentsPromises = Array.prototype.slice.call(
+        this.el.querySelectorAll('[data-async-component]') || []
       ).map(el => el.asyncLoadPromise)
 
-      return Promise.all(asyncComponentsPromises)
-        .then(() => {
-
-          const imagePromises = Array.prototype.slice.call(
-            this.el.querySelectorAll('img') || []
-          )
-            .map(this.createImagePromise)
-
-          // Other manually loaded assets
-          const manualAsyncComponentsPromises = Array.prototype.slice.call(
-            this.el.querySelectorAll('[data-async-component]') || []
-          ).map(el => el.asyncLoadPromise)
-
-          Promise.all([
-            ...imagePromises,
-            ...manualAsyncComponentsPromises
-          ]).then(resolve)
-        })
+      Promise.all([
+        ...imagePromises,
+        ...manualAsyncComponentsPromises
+      ]).then(resolve).catch(e => {
+        // Allow route to load, even if a promise fails
+        console.log(e)
+        resolve()
+      })
     })
   }
 

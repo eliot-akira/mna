@@ -26,7 +26,7 @@ const type = {
       : null
   ),
 
-  object: value => schema.type.required(value) || (
+  obj: value => schema.type.required(value) || (
     typeof value!=='object' || Array.isArray(value)
       ? schema.error.invalid
       : null
@@ -100,5 +100,11 @@ const type = {
 
   email
 }
+
+// Aliases
+
+type.object = type.obj
+type.function = type.func
+type.boolean = type.bool
 
 export default withAsync(type)
