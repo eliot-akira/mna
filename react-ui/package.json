@@ -18,6 +18,8 @@
     "react-spring": "^8.0.19"
   },
   "peerDependencies": {
+    "classnames": "*",
+    "prop-types": "*",
     "react": "16.x",
     "react-dom": "16.x"
   },
