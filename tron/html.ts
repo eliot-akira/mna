@@ -33,7 +33,6 @@ const loadHtml = ({ mainWindow, indexHtmlSrc }) => {
   //     `
 
   //mainWindow.loadURL(`data:text/html;charset=utf-8,${encodeURI(html)}`)
-
 }
 
 export default loadHtml
