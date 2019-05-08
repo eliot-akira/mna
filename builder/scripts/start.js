@@ -119,7 +119,7 @@ const start = async () => {
 
     // Show deprecation warnings with stack trace
     // https://nodejs.org/en/docs/guides/buffer-constructor-deprecation/
-    execMap: { js: 'node --trace-warnings --pending-deprecation' }
+    //execMap: { js: 'node --trace-warnings --pending-deprecation' }
   })
 
   script.on('restart', () => {
