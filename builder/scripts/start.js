@@ -101,12 +101,13 @@ const start = async () => {
 
     const clientPromise = compilerPromise('client', clientCompiler)
     const serverPromise = compilerPromise('server', serverCompiler)
-  
+
     await clientPromise
     await serverPromise
 
   } catch (error) {
     logMessage(error, 'error')
+    process.exit(1)
   }
 
   // Start server with nodemon
