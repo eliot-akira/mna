@@ -1,5 +1,5 @@
 const paths = require('../paths')
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
+//const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
 
 module.exports = {
   extensions: [
@@ -9,5 +9,5 @@ module.exports = {
     '.css', '.scss'
   ],
   modules: paths.resolveModules,
-  plugins: [new TsConfigPathsPlugin()]
+  //plugins: [new TsConfigPathsPlugin()]
 }

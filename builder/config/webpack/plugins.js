@@ -53,6 +53,7 @@ const server = [
       return resource
     }
   ),
+
   // new ForkTsCheckerWebpackPlugin({
   //   //tslint: true,
   //   useTypescriptIncrementalApi: true,

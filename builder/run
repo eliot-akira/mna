@@ -26,6 +26,6 @@ default: {
   } else {
     console.log('Unknown script "' + script + '".')
   }
-} 
+}
   break
 }
