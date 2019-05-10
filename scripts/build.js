@@ -2,8 +2,42 @@ const path = require('path')
 const cwd = process.cwd()
 const { execSync } = require('child_process')
 const compileBabel = require('../builder/scripts/babel')
-const { fs, glob } = require('../builder/helpers')
+//const compileTypeScript = require('../builder/scripts/typescript')
+const { fs, glob, chokidar } = require('../builder/helpers')
 const libs = require('./libs')
+
+const allLibs = [...libs.client, ...libs.server, ...libs.copy]
+
+const ignorePaths = ['_*/**', '**/_*', '**/_*/**', 'node_modules/**', '**/node_modules/**', '**/.git/**']
+const babelOptions = {
+  compact: true,
+  comments: false,
+  ignore: ignorePaths,
+}
+
+function updateVersion({
+  src,
+  selectedLibs,
+  version
+}) {
+
+  // Update version in package.json
+
+  const includeRoot = selectedLibs.length===allLibs.length
+
+  const pkgPaths = glob.sync(`{${
+    includeRoot ? './package.json,' : ''
+  }${
+    selectedLibs.map(lib => `${src}/${lib}/package.json`).join(',')
+  }}`)
+
+  for (const pkgPath of pkgPaths) {
+    const pkg = fs.readJsonSync(pkgPath)
+    pkg.version = version
+    fs.writeJsonSync(pkgPath, pkg, { spaces: 2 })
+  }
+
+}
 
 module.exports = function build({ args, options }) {
 
@@ -12,20 +46,17 @@ module.exports = function build({ args, options }) {
 
   options.watch = options.w
   options.version = options.v
-  if (options.version) {
 
-    // For all libs and self, update version in package.json
-    const allLibs = [...libs.client, ...libs.server, ...libs.copy]
-    const pkgPaths = glob.sync(`{./package.json,${
-      allLibs.map(lib => `${src}/${lib}/package.json`).join(',')
-    }}`)
+  const selectedLibs =
+    args[0]
+      ? (args[0]==='all' ? allLibs : args[0].split(','))
+      : allLibs
 
-    for (const pkgPath of pkgPaths) {
-      const pkg = fs.readJsonSync(pkgPath)
-      pkg.version = options.version
-      fs.writeJsonSync(pkgPath, pkg, { spaces: 2 })
-    }
-  }
+  if (options.version) updateVersion({
+    src,
+    selectedLibs,
+    version: options.version
+  })
 
   // Empty publish folder
   //fs.emptyDirSync(dest)
@@ -45,6 +76,7 @@ module.exports = function build({ args, options }) {
     const libSrc = getLibSrc(lib)
     const libDest = getLibDest(lib)
 
+    // Ensure empty published module folder
     execSync(`rm -r ${libDest} 2>/dev/null; mkdir -p ${libDest}`)
 
     const copyFiles = glob.sync(
@@ -74,25 +106,42 @@ module.exports = function build({ args, options }) {
         watch: options.watch,
         verbose: true
       },
-      babelOptions: {
-        compact: true,
-        comments: false,
-        ignore: ['_/**', '**/_/**']
-      },
+      babelOptions,
       root: [`${dest}/${lib}`],
       rename: {}
     })
+
+    // TODO: Emit TypeScript declaration files
   }
 
-  libs.client.forEach(lib => buildLibType('client', lib))
-  libs.server.forEach(lib => buildLibType('server', lib))
+  const onlySelectedLib = lib => selectedLibs.includes(lib)
 
-  libs.copy.forEach(lib => {
+  libs.client.filter(onlySelectedLib).forEach(lib => buildLibType('client', lib))
+  libs.server.filter(onlySelectedLib).forEach(lib => buildLibType('server', lib))
+
+  libs.copy.filter(onlySelectedLib).forEach(lib => {
 
     const libSrc = getLibSrc(lib)
     const libDest = getLibDest(lib)
+    const copyLibSync = () => {
 
-    execSync(`rsync -vrLptz --delete --exclude=".git" --exclude="node_modules" --exclude="_*" --include="_*.scss" --exclude=".hardlinks" --exclude="*.lock" --exclude="*.log" --exclude="build" --exclude="data" --exclude="src/dynamic" ${libSrc}/ ${libDest}`)
+      execSync(`rsync -vrLptz --delete --exclude=".git" --exclude="node_modules" --exclude="_*" --include="_*.scss" --exclude=".hardlinks" --exclude="*.lock" --exclude="*.log" --exclude="build" --exclude="data" --exclude="src/dynamic" ${libSrc}/ ${libDest}`)
+
+      console.log(`Copied ${libSrc} to ${libDest}`)
+    }
+
+    copyLibSync()
+
+    if (!options.watch) return
+
+    const watcher = chokidar.watch(`${libSrc}/**`, {
+      ignored: ignorePaths
+    })
+
+    // Wait until ready, to ignore initial "add" events
+    watcher.on('ready', () => watcher.on('all', (event, item) => {
+      console.log(`${event} ${item}`)
+      copyLibSync()
+    }))
   })
-
 }

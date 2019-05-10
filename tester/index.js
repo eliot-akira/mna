@@ -110,7 +110,11 @@ const tester = (title, reporter) => {
 
         if (result instanceof Promise) {
           result.then(done).catch(doneWithError)
-        } else done()
+          return
+        }
+
+        done()
+
       } catch (error) {
         doneWithError(error)
       }
@@ -118,6 +122,15 @@ const tester = (title, reporter) => {
 
     createTestPromises.push(createPromise)
   }
+
+  test.setup = fn => createTestPromises.push(() => new Promise(async (resolve, reject) => {
+    try {
+      await fn()
+      resolve()
+    } catch(e) {
+      reject(e)
+    }
+  }))
 
   test.all = async () => {
 

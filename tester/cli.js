@@ -21,7 +21,8 @@ const testDir = args[0] || '**'
 
 const testFilesGlob = `{${
   [
-    '**/*.test.js', 'tests/**/*.js'
+    '**/*.test.js',
+    'tests/**/*.js'
   ].map(f => `${testDir}/**/${f}`).join(',')
 }}`
 
@@ -77,8 +78,11 @@ async function runTests() {
 
       const result = require(filePath)
 
+      // Don't run any exported function
+      // This would allow test files to import shared setup functions or other tests
+
       // Test can export an async function
-      if (result instanceof Function) await result(test)
+      //if (result instanceof Function) await result(test)
 
       // Test must export a function
       //await result(test)

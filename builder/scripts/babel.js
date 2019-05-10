@@ -23,9 +23,11 @@ module.exports = function babel(props = {}) {
     )
   }
 
-  additionalPlugins.push(
-    [require.resolve('babel-plugin-module-resolver'), { root, alias }]
-  )
+  if (root.length || Object.keys(alias).length) {
+    additionalPlugins.push(
+      [require.resolve('babel-plugin-module-resolver'), { root, alias }]
+    )
+  }
 
   const replacements = Object.keys(rename).map(original => {
     const replacement = rename[original]
@@ -36,7 +38,11 @@ module.exports = function babel(props = {}) {
     [require.resolve('babel-plugin-transform-rename-import'), { replacements }]
   )
 
-  Object.assign(opts.cliOptions, cliOptions)
+  Object.assign(opts.cliOptions, {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    ...cliOptions
+  })
+
   Object.assign(opts.babelOptions, {
     ...babelConfig[target],
     ...babelOptions,

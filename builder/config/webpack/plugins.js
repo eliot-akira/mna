@@ -53,7 +53,15 @@ const server = [
       return resource
     }
   ),
-  new CheckerPlugin(),
+  // new ForkTsCheckerWebpackPlugin({
+  //   //tslint: true,
+  //   useTypescriptIncrementalApi: true,
+  //   reportFiles: [
+  //     'src/**/*.{ts,tsx}'
+  //   ]
+  // }),
+
+  //new CheckerPlugin(),
 ]
 
 const shared = [

@@ -1,6 +1,6 @@
 {
   "name": "@mna/dom",
-  "version": "1.5.7",
+  "version": "1.6.3",
   "main": "index.js",
   "files": [
     "**/*.js"

@@ -46,9 +46,11 @@ const typeScriptLoaderCommonOptions = {
   forceIsolatedModules: true,
 
   //configFileName: ,
-
-  // Disables automatically with compilerOption declaration: true 
-  //useTranspileModule: true,
+  // reportFiles: [
+  //   "src/**/*.{ts,tsx}"
+  // ],
+  // Disables automatically with compilerOption declaration: true
+  useTranspileModule: true,
   // Doesn't work well with hot reload?
   //useCache: true, cacheDirectory: '.cache-ts'
 }
@@ -75,13 +77,14 @@ const typeScriptLoaderServer = {
   use: [
     ////require.resolve('cache-loader'),
     ...babelLoaderServer.use,
-    {
+    //{ loader: 'ts-loader', options: { transpileOnly: true } },
+    /*{
       loader: require.resolve('awesome-typescript-loader'),
       options: {
         ...typeScriptLoaderCommonOptions,
         //babelOptions: { babelrc: false, ... babelConfigServer },
       }
-    },
+    },*/
   ]
 }
 

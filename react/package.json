@@ -1,6 +1,6 @@
 {
   "name": "@mna/react",
-  "version": "1.5.8",
+  "version": "1.6.3",
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.2.6",
