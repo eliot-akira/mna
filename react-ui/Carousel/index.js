@@ -5,7 +5,7 @@ import Container from './Container'
 // https://github.com/xiaody/react-touch-carousel/
 // https://xiaody.github.io/react-touch-carousel/docs/
 
-const Card = ({ item, index, modIndex, cursor, cardWidth, isCurrent, carouselInstance }) => 
+const Card = ({ item, index, modIndex, cursor, cardWidth, isCurrent, carouselInstance }) =>
   <div
     className={cx(
       'carousel-card',
@@ -30,7 +30,7 @@ class Carousel extends Component {
       items,
       cardCentered = true,
       cardWidth,
-      cardHeight, 
+      cardHeight,
       cardPadCount
     } = this.props
 
@@ -65,7 +65,8 @@ class Carousel extends Component {
       items,
       cardWidth, cardHeight,
       cardPadCount = items.length,
-      onCardSelect
+      onCardSelect,
+      loop = true
     } = this.props
 
     const cardCount = items.length
@@ -78,7 +79,7 @@ class Carousel extends Component {
         cardPadCount={cardPadCount || cardCount}
         //loop={enableLoop}
         //autoplay={enableAutoplay ? 2e3 : false}
-        loop={true}
+        loop={loop}
         autoplay={false}
         renderCard={this.renderCard}
         onRest={(index, modIndex) => {
