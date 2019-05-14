@@ -1,12 +1,11 @@
 {
   "name": "mna",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "license": "MIT",
   "scripts": {
     "build": "node run build",
     "test": "node run test",
-    "publish": "node run publish",
-    "clean": "rm -rf node_modules"
+    "publish": "node run publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",

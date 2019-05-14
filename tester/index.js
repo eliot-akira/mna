@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 
 const assertHelpers = {
-  isEqual(a, b) {
+  is(a, b) {
     try {
       assert.deepStrictEqual(a, b)
       return true
@@ -83,6 +83,8 @@ const tester = (title, reporter) => {
       emitEvent({ type: 'assertion', ...assertion })
     }
 
+    Object.assign(it, assertHelpers)
+
     const createPromise = () => new Promise((resolve, reject) => {
 
       emitEvent({ type: 'test', state: 'start', ...currentTest })
@@ -106,7 +108,7 @@ const tester = (title, reporter) => {
 
       try {
 
-        const result = testCallback(it, assertHelpers)
+        const result = testCallback(it)
 
         if (result instanceof Promise) {
           result.then(done).catch(doneWithError)

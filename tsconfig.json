@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    // Can be overwritten for web projects in a local tsconfig.json
+    "module": "commonjs",
+    "moduleResolution": "node",
+
+    // Common typescript transpilation options
+    "baseUrl": "./src",
+    "target": "es2017",
+    "lib": ["es2017"],
+    "outDir": "./dist",
+
+    // Enable decorators and metadata generation.
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    // Use `tslib` for helper methods
+    "importHelpers": true,
+
+    // Never emit code with errors.
+    "noEmitOnError": true,
+
+    // Source maps are useful when tracing running code
+    "sourceMap": true,
+
+    // These values should not be modified on a per-project basis, they enforce quality.
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+  }
+}

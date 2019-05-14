@@ -1,7 +1,0 @@
-
-# Always ignore
-
-node_modules
-*.log
-*.lock
-*-lock.json

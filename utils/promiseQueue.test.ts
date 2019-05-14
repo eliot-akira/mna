@@ -1,6 +1,6 @@
 import promiseQueue from './promiseQueue'
 
-test('promiseQueue', async (it, assert) => {
+test('promiseQueue', async it => {
 
   it('exists', promiseQueue)
 
@@ -42,5 +42,5 @@ test('promiseQueue', async (it, assert) => {
 
   it('returns all promise results', results.length===numberOfPromises)
 
-  it('results are in order', assert.isEqual(results, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), { results  })
+  it('results are in order', it.is(results, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), { results  })
 })

@@ -1,6 +1,6 @@
 const renderMarkdown = require('./index')
 
-test('Markdown', (it, { isEqual }) => {
+test('Markdown', it => {
 
   it('runs', renderMarkdown())
 
@@ -29,6 +29,6 @@ tags: [abc, def]
   it('returns rendered html and attributes from Markdown front matter', result.html && result.attributes)
   it('renders html correctly', result.html===snapshot.html)
   it('parses Markdown frontmatter correctly',
-    isEqual(snapshot.attributes, result.attributes)
+    it.is(snapshot.attributes, result.attributes)
   )
 })
