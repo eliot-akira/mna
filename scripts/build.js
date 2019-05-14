@@ -109,7 +109,7 @@ module.exports = function build({ args, options }) {
       babelOptions,
       root: [`${dest}/${lib}`],
       rename: {}
-    })
+    }).then(() => console.log())
   }
 
   const onlySelectedLib = lib => selectedLibs.includes(lib)
@@ -144,7 +144,11 @@ module.exports = function build({ args, options }) {
   })
 
   // Default .npmignore
-  selectedLibs.forEach(lib => execSync(`echo "*.test.*\\n" >> ${dest}/${lib}/.npmignore`))
+
+  selectedLibs.forEach(lib => {
+    const npmIgnorePath = `${dest}/${lib}/.npmignore`
+    execSync(`if [ ! -f ${npmIgnorePath} ]; then echo "*.test.*\\n" >> ${npmIgnorePath}; fi`)
+  })
 
   // Emit TypeScript declaration files
 
@@ -156,7 +160,7 @@ module.exports = function build({ args, options }) {
 
   if (tsFiles.length) {
 
-    //execSync(`cp ${src}/global.d.ts ${dest}`)
+    execSync(`cp ${src}/global.d.ts ${dest}`)
 
     // Use dest as current working directory
     process.chdir(dest)
@@ -166,7 +170,7 @@ module.exports = function build({ args, options }) {
     execSync(`rm ${tmpSrc} 2>/dev/null && ln -s .. ${tmpSrc}`)
 
     console.log(`
-Generate TypeScript declaration files:
+Generate TypeScript declaration files from:
 
 ${tsFiles.join('\n')}
 `)

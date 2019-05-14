@@ -1,15 +1,23 @@
-function schema(fn) {
-  return schema.type.objectOf(
-    fn instanceof Function
-      ? fn(schema.type)
-      : fn
-  )
-}
+const schema = fn => {
 
-schema.async = fn => schema.type.objectOf.async(
-  fn instanceof Function
+  const v = fn instanceof Function
     ? fn(schema.type)
     : fn
-)
+
+  return v instanceof Function
+    ? v
+    : schema.type.objectOf(v)
+}
+
+schema.async = fn => {
+
+  const v = fn instanceof Function
+    ? fn(schema.type)
+    : fn
+
+  return v instanceof Function
+    ? v
+    : schema.type.objectOf.async(v)
+}
 
 export default schema

@@ -1,6 +1,6 @@
 {
   "name": "@mna/content-client",
-  "version": "1.6.3",
+  "version": "1.6.5",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "1.x",

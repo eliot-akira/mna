@@ -1,13 +1,10 @@
 {
   "name": "@mna/api",
-  "version": "1.6.3",
+  "version": "1.6.5",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "files": [
-    "**/*.js"
-  ],
   "license": "MIT",
   "author": "Eliot Akira",
   "repository": {

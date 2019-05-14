@@ -5,7 +5,7 @@ import type from './type'
 schema.error = error
 schema.type = type
 
-// Returns null if valid, or object of keys with errors
+// Returns null if valid; otherwise an error or an object of keys with errors
 schema.validate = (value, shape) =>
   shape instanceof Function
     ? shape(value)
