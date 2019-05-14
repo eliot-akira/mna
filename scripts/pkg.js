@@ -45,5 +45,7 @@ module.exports = function gatherPackages({ args, options }) {
 
   // Install node_modules in publish
 
-  execSync(`cp package.json ${dest} && cd ${dest} && yarn`) // rm -rf node_modules
+  execSync(`cp package.json ${dest} && cd ${dest} && rm -rf node_modules && yarn && mkdir node_modules/@mna && cd node_modules/@mna ${
+    allLibs.map(lib => `ln -s ../../${lib}`).join(' && ')
+  }`) // rm -rf node_modules
 }

@@ -2,13 +2,13 @@ const path = require('path')
 const cwd = process.cwd()
 const { execSync } = require('child_process')
 const compileBabel = require('../builder/scripts/babel')
-//const compileTypeScript = require('../builder/scripts/typescript')
+const ts = require('../builder/scripts/typescript')
 const { fs, glob, chokidar } = require('../builder/helpers')
 const libs = require('./libs')
 
 const allLibs = [...libs.client, ...libs.server, ...libs.copy]
 
-const ignorePaths = ['_*/**', '**/_*', '**/_*/**', 'node_modules/**', '**/node_modules/**', '**/.git/**']
+const ignorePaths = ['_*/**', '**/_*', '**/_*/**', 'node_modules/**', '**/node_modules/**', '**/.git/**', '**/*.d.ts']
 const babelOptions = {
   compact: true,
   comments: false,
@@ -110,8 +110,6 @@ module.exports = function build({ args, options }) {
       root: [`${dest}/${lib}`],
       rename: {}
     })
-
-    // TODO: Emit TypeScript declaration files
   }
 
   const onlySelectedLib = lib => selectedLibs.includes(lib)
@@ -144,4 +142,50 @@ module.exports = function build({ args, options }) {
       copyLibSync()
     }))
   })
+
+  // Default .npmignore
+  selectedLibs.forEach(lib => execSync(`echo "*.test.*\\n" >> ${dest}/${lib}/.npmignore`))
+
+  // Emit TypeScript declaration files
+
+  const tsFiles = glob.sync(`{${
+    selectedLibs.map(lib => `${lib}/**/*.ts,${lib}/**/*.tsx`).join(',')
+  }}`, { ignore: ignorePaths.concat(['**/*.test.*']) })
+
+  const origSrc = path.resolve(src)
+
+  if (tsFiles.length) {
+
+    //execSync(`cp ${src}/global.d.ts ${dest}`)
+
+    // Use dest as current working directory
+    process.chdir(dest)
+
+    const tmpSrc = '_src'
+
+    execSync(`rm ${tmpSrc} 2>/dev/null && ln -s .. ${tmpSrc}`)
+
+    console.log(`
+Generate TypeScript declaration files:
+
+${tsFiles.join('\n')}
+`)
+
+    const options = {
+      rootDir: tmpSrc,
+      lib: 'es6',
+      jsx: 'react',
+      allowSyntheticDefaultImports: true,
+      declaration: true,
+      declarationDir: '.',
+      emitDeclarationOnly: true,
+    }
+
+    const compilerHost = ts.createCompilerHost(options)
+    const program = ts.createProgram(tsFiles.map(f => path.join(tmpSrc, f)), options, compilerHost)
+    const emitResult = program.emit()
+
+    process.chdir(origSrc)
+  }
+
 }

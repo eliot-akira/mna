@@ -1,5 +1,5 @@
 
-const log = (...args) => console.log('@mna/content/api/route', ...args)
+const log = (...args) => console.log('@mna/content-server/api/route', ...args)
 
 export default function createRoute({ server, content, auth, actions }) {
 

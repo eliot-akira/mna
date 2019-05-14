@@ -1,12 +1,21 @@
 // Based on: https://github.com/visionmedia/debug
 
+const logListeners = []
+
 function logger(name, fn) {
-  const logger = fn || console.log
-  let log
-  log = function(...args) {
+
+  const l = fn || console.log
+  const log = function(...args) {
+
     if (!isEnabled(name) && !log.enabled) return
-    logger(name, ...args)
+
+    for (const { regexp, fn } of logListeners) {
+      if (regexp.test(name)) fn(name, ...args)
+    }
+
+    l(name, ...args)
   }
+
   return log
 }
 
@@ -23,6 +32,11 @@ function isEnabled(name) {
   return false
 }
 
+function regExpFromName(name) {
+  const pattern = name.replace(/\*/g, '.*?')
+  return new RegExp('^' + pattern + '$')
+}
+
 function enable(namespaces) {
 
   let name = namespaces
@@ -35,11 +49,11 @@ function enable(namespaces) {
 
   for (i = 0; i < len; i++) {
     if (!split[i]) continue // ignore empty strings
-    name = split[i].replace(/\*/g, '.*?')
+    name = split[i]
     if (name[0] === '-') {
-      disabled.push(new RegExp('^' + name.substr(1) + '$'))
+      disabled.push(regExpFromName(name.substr(1)))
     } else {
-      enabled.push(new RegExp('^' + name + '$'))
+      enabled.push(regExpFromName(name))
     }
   }
 
@@ -51,5 +65,11 @@ logger.enable = enable
 logger.enabled = []
 logger.disabled = []
 logger.isEnabled = isEnabled
+
+logger.onLog = (name, fn) => logListeners.push(
+  !fn ? { regexp: regExpFromName('*'), fn: name }
+    : { regexp: regExpFromName(name), fn }
+)
+
 
 module.exports = logger

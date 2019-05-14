@@ -44,9 +44,10 @@ class Emitter {
   }
 }
 
+/**
+ * Extend an object with event methods
+ */
 function createEmitter(obj = {}) {
-
-  // Extend an object with event methods
 
   obj.emitter = new Emitter
 

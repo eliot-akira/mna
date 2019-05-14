@@ -14,12 +14,12 @@ const reporter = (e) => {
     if (state==='start') {
       // Group title
       if (e.group && prevGroup!==e.group){
-        console.log(`\n${gray}${e.group}${reset}`)
+        console.log(`\n${blue}${e.group}${reset}`)
         prevGroup = e.group
       }
       // Test title
       console.log(`\n${
-        ' '.repeat(indentLevel - (id+'').length + 1)
+        ' '.repeat(indentLevel - (id+'').length + 1) // Max 999
       }${gray}${id}${reset}  ${title}`)
     }
     break

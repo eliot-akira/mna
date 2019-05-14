@@ -4,7 +4,7 @@ Builder and library for full-stack React apps
 
 See `template-basic` folder for example usage.
 
-For @mna v1.x, all built modules assume `@babel/runtime-corejs3` is installed in the consumer project.
+For @mna 1.x, all built modules assume `@babel/runtime-corejs3` is installed in the consumer project.
 
 ## Develop
 
@@ -22,9 +22,13 @@ For @mna v1.x, all built modules assume `@babel/runtime-corejs3` is installed in
 
 #### Bump version
 
+This updates all modules including this root repository.
+
 `node run build -v=x.x.x`
 
 ## Test
+
+Run the tests after `build` or `build -w`
 
 Install dependencies for tests
 
