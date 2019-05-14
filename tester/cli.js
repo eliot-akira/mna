@@ -21,8 +21,7 @@ const testDir = args[0] || '**'
 
 const testFilesGlob = `{${
   [
-    '**/*.test.js',
-    'tests/**/*.js'
+    '**/*.test.js', '**/*.test.ts',
   ].map(f => `${testDir}/**/${f}`).join(',')
 }}`
 

@@ -6,19 +6,17 @@ const script = process.argv[2] || 'start'
 const args = process.argv.slice(3)
 process.argv.shift()
 
+// TODO: Run help/install script if project is missing required files
+
 switch (script) {
 case 'build':
 case 'start':
-//case 'clean':
   require('./scripts/' + script)
   break
 case 'babel':
 case 'test':
   require('./scripts/' + script)()
   break
-/*case 'test':
-  require('./scripts/run')({ script: path.join(__dirname, 'tester', 'cli'), args })
-  break*/
 default: {
   const scriptPath = path.join(process.cwd(), `${script}.js`)
   if (fs.existsSync(scriptPath)) {

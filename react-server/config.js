@@ -2,21 +2,21 @@ import path from 'path'
 import fs from 'fs'
 import dotenv from 'dotenv'
 
+const dotenvFiles = [
+  `.env.${process.env.NODE_ENV}.local`,
+  `.env.${process.env.NODE_ENV}`,
+  '.env'
+].filter(Boolean)
+
+for (const dotenvFile of dotenvFiles) {
+  if (!fs.existsSync(dotenvFile)) continue
+  dotenv.config({ path: dotenvFile })
+  break
+}
+
+const isDev = process.env.NODE_ENV!=='production'
+
 export default () => {
-
-  const dotenvFiles = [
-    `.env.${process.env.NODE_ENV}.local`,
-    `.env.${process.env.NODE_ENV}`,
-    '.env'
-  ].filter(Boolean)
-
-  for (const dotenvFile of dotenvFiles) {
-    if (!fs.existsSync(dotenvFile)) continue
-    dotenv.config({ path: dotenvFile })
-    break
-  }
-
-  const isDev = process.env.NODE_ENV!=='production'
 
   const cwd = process.cwd()
 

@@ -42,15 +42,24 @@ export default async function createServerHandler(props) {
 
     get(async (req, res) => {
 
-      const location = req.url // From server/router
-      const siteName = req.context.route.site
-      const user = req.context.user // From content/user
+      //const location = req.url // From server/router
+      const {
+        route: {
+          name: location,
+          query, params,
+          site: siteName,
+          extension: fileExtension,
+        },
+        user // From content/user
+      } = req.context
+
+      if (fileExtension) return // Assume static assets, 404 by this point
 
       const { html, redirectLocation, statusCode } = await render({
         App,
         routes,
         assets: config.assets,
-        location, siteName,
+        location, query, params, siteName,
         content, status, user,
         req, res
       })

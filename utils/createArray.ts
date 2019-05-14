@@ -1,6 +1,8 @@
 
 /**
- * Creates an array of given size, filled with index
+ * Creates an array of given size, filled with index as values
+ *
+ * createArray(3): [0, 1, 2]
  */
  export default function createArray(n:(number | string) = 0): number[] {
 
@@ -10,4 +12,4 @@
   const arr: number[] = Array.apply(null, Array(num)).map((x, i) => i)
 
   return arr
-} 
+}
