@@ -44,7 +44,7 @@ const createMenuTemplate = ({ mainWindow }: MenuProps): MenuItemConstructorOptio
     ]
   } */ ]
 
-  return templateDefault  
+  return templateDefault
 }
 
 export default createMenuTemplate

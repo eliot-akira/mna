@@ -1,6 +1,5 @@
 import { BrowserWindow, ipcMain } from 'electron'
 import windowStateKeeper from 'electron-window-state'
-import loadHtml from './html'
 import createMenu from './menu'
 
 let mainWindow = null
@@ -8,7 +7,7 @@ let mainWindowState = null
 
 export const createMainWindow = ({
   appTitle,
-  indexHtmlSrc
+  indexHtmlPath
 }) => {
 
   if (mainWindow) return { mainWindow, mainWindowState }
@@ -28,12 +27,12 @@ export const createMainWindow = ({
     y: mainWindowState.y,
     minWidth: 640,
     minHeight: 640,
-    backgroundColor: '#000', // ffffff
+    backgroundColor: '#f7f7f7',
     // TODO: Replace placeholders in app.html
     webPreferences: { nodeIntegration: true }
   })
 
-  loadHtml({ mainWindow, indexHtmlSrc })
+  mainWindow.loadURL(`file://${indexHtmlPath}`)
 
   createMenu({ mainWindow, appTitle })
 
