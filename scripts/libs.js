@@ -30,6 +30,7 @@ const libs = {
     'builder',
     'db',
     'fonts',
+    'gitlib',
     'icons',
     'markdown',
     'server',

@@ -1,0 +1,12 @@
+{
+  "name": "@mna/gitlib",
+  "description": "Tool for managing projects with multiple internal Git repos",
+  "version": "1.6.6",
+  "main": "index.js",
+  "bin": {
+    "gitl": "run"
+  },
+  "repository": "git@github.com:eliot-akira/gitlib.git",
+  "author": "eliot-akira <me@eliotakira.com>",
+  "license": "MIT"
+}
