@@ -9,10 +9,6 @@
   "scripts": {
     "start": "./run"
   },
-  "files": [
-    "run",
-    "**/*.js"
-  ],
   "dependencies": {
     "glob": "^7.1.3"
   },
