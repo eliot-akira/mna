@@ -1,6 +1,6 @@
 import http, { Server, IncomingMessage, ServerResponse } from 'http'
 import url from 'url'
-import api from './index'
+import api, { API } from './index'
 
 declare var test: {
   (title: string, fn: (it: (title: string, pass: any) => void) => void): void,
@@ -83,6 +83,20 @@ for (const method of methods) {
 
   })
 }
+
+test('api.mock', async it => {
+
+  const mockApi = new API({
+    mock: (data) => {
+      it('calls mock function', true)
+      it('calls mock function with data', data)
+    }
+  })
+
+  it('exists', mockApi)
+
+  await mockApi.get('/test', { key: 'value' })
+})
 
 test.setup(() => {
   server.close()
