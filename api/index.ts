@@ -11,6 +11,9 @@ class API {
 
   props: any
   axios: any
+  mock: (req: { method: string, route: string, params: any }) => any
+
+  //[method: string]: (route: string, params: any, options?: any) => Promise<any>
 
   constructor(props: any = {}) {
 
@@ -23,6 +26,7 @@ class API {
     } = props
 
     this.props = { url, prefix, options, mock }
+    this.mock = mock
 
     methods.forEach((method: string) =>
       this[method] = (route: string, ...args) => this.request(method, route, ...args)
@@ -40,9 +44,10 @@ class API {
 
   request(method: string, route: string, params = {}, options = {}) {
 
-    const { prefix, mock } = this.props
+    const { prefix } = this.props
+    const { mock: singleMock = this.mock } = options as any
 
-    if (mock) return mock({ method, route, params })
+    if (singleMock) return this.mock({ method, route, params })
 
     // Init late, to allow setting default options
     if (!this.axios) this.init()
@@ -55,7 +60,7 @@ class API {
     return new Promise((resolve, reject) => {
 
       this.axios[method](prefix+route, ...args)
-        .then(response => {
+        .then((response: any) => {
           const { data } = response
           resolve(data)
         })

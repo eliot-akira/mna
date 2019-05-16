@@ -1,11 +1,12 @@
 {
   "name": "@mna/react-server",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "1.x",
     "@mna/content-server": "1.x",
     "@mna/fsp": "1.x",
+    "@mna/logger": "1.x",
     "@mna/react": "1.x",
     "@mna/server": "1.x",
     "@mna/socket": "1.x",

@@ -1,23 +1,4 @@
-const assert = require('assert').strict
-
-const assertHelpers = {
-  is(a, b) {
-    try {
-      assert.deepStrictEqual(a, b)
-      return true
-    } catch(e) {
-      return e
-    }
-  },
-  throws(fn) {
-    try {
-      fn()
-      return false
-    } catch(e) {
-      return true
-    }
-  }
-}
+const assertHelpers = require('./assert')
 
 const tester = (title, reporter) => {
 
@@ -101,7 +82,7 @@ const tester = (title, reporter) => {
       }
 
       const doneWithError = error => {
-        console.log(error)
+        console.error(error)
         currentTest.fails++
         done(error)
       }

@@ -18,8 +18,8 @@ export const createType = async (props) => {
     typeActions: customTypeActions = props.actions || {},
     middlewares = [],
     ensureIndex = [], // [ { fieldName, expireAfterSeconds? } ]
-
-    timestamp = false, // Automatic timestamp fields: created & updated
+    logger = false,
+    timestamp = props.logger ? true : false, // Automatic timestamp fields: created & updated
   } = props
 
   // Set from init
@@ -46,6 +46,7 @@ export const createType = async (props) => {
           filename: `${ path.join(config.dataPath, type) }.db`,
           timestampData: timestamp,
           ensureIndex,
+          logger
           //...options
         })
         : {} // No database
@@ -59,11 +60,11 @@ export const createType = async (props) => {
 
   const addActions = (actionsDefinition) => {
     for (const key in actionsDefinition) {
-      
+
       types[type][key] = function(data) {
-      
+
         // TODO: Middlewares per action, field
-        
+
         return actionsDefinition[key]({
           ...typeActionProps,
           action: key,
@@ -87,6 +88,8 @@ export const createType = async (props) => {
       await types[type].create({ data: item })
     }
   }
+
+  // Use content.api to interact with data types and actions
 }
 
 export const addTypeActions = ({ type, typeActions, state, setState }) => {
@@ -95,5 +98,5 @@ export const addTypeActions = ({ type, typeActions, state, setState }) => {
 
   types[type]._addActions(typeActions)
 
-  setState({ types })  
+  setState({ types })
 }

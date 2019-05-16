@@ -1,5 +1,7 @@
 const Datastore = require('./main/datastore')
+const Logger = require('./main/logger')
 const extendDatabaseMethods = require('./extend')
+const extendLoggerMethods = require('./extend/logger')
 //const { match } = require('./main/model')
 
 const dbs = {}
@@ -11,6 +13,7 @@ async function createDatabase(config) {
     filename,
     ensureIndex,
     defaultContent,
+    logger = false,
     ...storeOptions
   } = config
 
@@ -19,10 +22,10 @@ async function createDatabase(config) {
   // Can be called multiple times
 
   if (!db) {
-
+    const Store = logger ? Logger : Datastore
     const instance = await new Promise((resolve, reject) => {
       let i
-      i = new Datastore({
+      i = new Store({
         filename,
         autoload: true,
         onload: err => err ? reject(err) : resolve(i),
@@ -30,10 +33,15 @@ async function createDatabase(config) {
       })
     })
 
-    instance.persistence.setAutocompactionInterval(compactionInterval)
-
-    dbs[filename] = db = extendDatabaseMethods({ db, instance })
+    if (logger) {
+      dbs[filename] = db = extendLoggerMethods({ db, instance })
+    } else {
+      instance.persistence.setAutocompactionInterval(compactionInterval)
+      dbs[filename] = db = extendDatabaseMethods({ db, instance })
+    }
   }
+
+  if (logger) return db
 
   // New or existing db
 
