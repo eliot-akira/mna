@@ -17,13 +17,22 @@ case 'babel':
 case 'test':
   require('./scripts/' + script)()
   break
-default: {
-  const scriptPath = path.join(process.cwd(), `${script}.js`)
-  if (fs.existsSync(scriptPath)) {
+case 'run': {
+
+  const cwd = process.cwd()
+  // Allow relative or absolute, with optional extension
+  const scriptPath = path.join(cwd, `${path.relative(cwd, args.shift())}`)
+
+  process.argv.shift()
+
+  try {
     require('./scripts/run')({ script: scriptPath, args })
-  } else {
-    console.log('Unknown script "' + script + '".')
+  } catch(e) {
+    console.log(e)
   }
 }
+  break
+default:
+  console.log('Unknown script "' + script + '".')
   break
 }
