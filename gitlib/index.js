@@ -1,9 +1,8 @@
 /**
- * Central hub for library of shared repos
+ * Tool for managing projects with multiple internal Git repos
  *
- * Projects pull sub-repos from lib
- * Command to pull/merge changes from lib to sub-repos
- * Command to push changes from sub-repo to lib
+ * - Use gitlib.config.js in the project to configure hubs and child repos
+ * - Install/push/pull/merge changes to and from child repos to hubs
  */
 
 const path = require('path')
@@ -16,6 +15,8 @@ const cwd = process.cwd()
 const localConfigFileName = 'gitlib.config.local.js'
 const configFileName = 'gitlib.config.js'
 
+// TODO: Merge local and public configs
+
 let config = {}
 try {
   config = require(path.join(cwd, localConfigFileName))
@@ -25,7 +26,10 @@ try {
   } catch(e) { /**/ }
 }
 
+// TODO: Multiple hubs
+
 const { hub = '', modules: mods = [] } = config
+
 
 const run = (cmd, options = {}) => {
 
