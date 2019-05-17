@@ -11,7 +11,8 @@ class API {
 
   props: any
   axios: any
-  mock: (req: { method: string, route: string, params: any }) => any
+  mock: boolean
+  mockApi: (req: { method: string, route: string, params: any }) => any
 
   //[method: string]: (route: string, params: any, options?: any) => Promise<any>
 
@@ -26,7 +27,8 @@ class API {
     } = props
 
     this.props = { url, prefix, options, mock }
-    this.mock = mock
+    this.mock = mock ? true : false
+    this.mockApi = mock || (async () => ({}))
 
     methods.forEach((method: string) =>
       this[method] = (route: string, ...args) => this.request(method, route, ...args)
@@ -47,7 +49,7 @@ class API {
     const { prefix } = this.props
     const { mock: singleMock = this.mock } = options as any
 
-    if (singleMock) return this.mock({ method, route, params })
+    if (singleMock) return this.mockApi({ method, route, params })
 
     // Init late, to allow setting default options
     if (!this.axios) this.init()
