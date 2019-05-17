@@ -11,7 +11,8 @@ export default async function createServerHandler(props) {
     App, routes,
     config: userConfig,
     content: contentInit = true,
-    init: serverInit
+    init: serverInit,
+    exit: serverExit
   } = props
 
   const configBase = createConfig()
@@ -75,6 +76,12 @@ export default async function createServerHandler(props) {
   ]))
 
   handler.config = config
+  handler.exit = async () => {
+    if (!serverExit) return
+    try {
+      await serverExit(routeProps)
+    } catch(e) { /**/ }
+  }
 
   return handler
 }

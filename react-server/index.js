@@ -13,6 +13,8 @@ export default async function createServer(props = {}) {
   appServer.config = config
   appServer.reload = async newProps => {
 
+    await serverHandler.exit()
+
     const newHandler = await createServerHandler(newProps)
 
     appServer.config = newHandler.config
@@ -51,13 +53,15 @@ export default async function createServer(props = {}) {
 
   // Clean exit
 
-  const onExit = () => {
+  const onExit = async () => {
+    await serverHandler.exit()
     appServer.close()
     process.exit(0)
   }
 
-  const onError = (err) => {
+  const onError = async (err) => {
     console.error('Server error', err)
+    await serverHandler.exit()
     appServer.close()
     process.exit(1)
   }
