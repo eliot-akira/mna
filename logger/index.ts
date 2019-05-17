@@ -12,6 +12,17 @@ interface LogFunction {
   (...args: any[]): void,
 }
 
+interface LogUnsubscriber {
+  (): void
+}
+
+interface Logger {
+  (name: string, localLog?: LogFunction): LogFunction,
+  listen(nameOrFn: (string | LogEventCallback), fn?: LogEventCallback): LogUnsubscriber,
+  silence(name: string): void,
+  clear(): void,
+}
+
 const logListeners: LogListener[] = []
 const silencedLoggers: RegExp[] = []
 
@@ -28,7 +39,7 @@ const matchesOne = (str: string, matchNames: RegExp[]): boolean => {
  * @param name Unique name, such as a prefixed/namespaced module name
  * @param localLog= Listen to individual log function
  */
-const logger = (name: string, localLog?: LogFunction): LogFunction => {
+const logger: Logger = (name: string, localLog?: LogFunction): LogFunction => {
 
   const log: LogFunction = (...args: any[]): void => {
 
@@ -50,15 +61,30 @@ const regExpsFromName = (name: string): RegExp[] => name.split(',').map(regExpFr
 /**
  * Listen to all log events
  */
-logger.listen = (nameOrFn: (string | LogEventCallback), fn?: LogEventCallback): void => {
+logger.listen = (nameOrFn: (string | LogEventCallback), fn?: LogEventCallback): LogUnsubscriber => {
+
   const listener: LogListener = !fn
     ? { fn: nameOrFn as LogEventCallback }
     : { fn, matchNames: regExpsFromName(nameOrFn as string) }
+
   logListeners.push(listener)
+
+  const unsubscribe: LogUnsubscriber = () => {
+    const pos = logListeners.indexOf(listener)
+    if (pos<0) return
+    logListeners.splice(pos, 1)
+  }
+
+  return unsubscribe
 }
 
 logger.silence = (name: string): void => {
   silencedLoggers.push(...regExpsFromName(name))
+}
+
+logger.clear = (): void => {
+  logListeners.splice(0)
+  silencedLoggers.splice(0)
 }
 
 export default logger

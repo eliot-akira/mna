@@ -22,7 +22,7 @@ test('logger.listen', it => {
   let listenResult
   let listenCalled = 0
 
-  logger.listen((name, data) => {
+  const unsubscribe = logger.listen((name, data) => {
     listenSuccess = true
     listenResult = { name, data }
     listenCalled++
@@ -73,6 +73,15 @@ test('logger.listen', it => {
   it('listens to multiple names', it.is(listenMultipleResult, { name: 'test2', data }))
 
   it('listens to multiple logs', it.is(listenCalled, 2))
+
+  it('returns an unsubscribe function', unsubscribe)
+
+  listenCalled = 0
+  unsubscribe()
+  l()
+  it('unsubscribe works', listenCalled===0)
+  l()
+  it('unsubscribe is permanent', listenCalled===0)
 
 })
 
