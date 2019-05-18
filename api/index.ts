@@ -1,12 +1,11 @@
 import axios from 'axios'
 
-// responseType: 'arraybuffer', 'blob', 'document', 'json' (default), 'text', 'stream'
-
 class API {
 
   // https://github.com/axios/axios#request-config
   static defaultOptions = {
-    withCredentials: false
+    responseType: 'json', // 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream',
+    withCredentials: false,
   }
 
   props: any
