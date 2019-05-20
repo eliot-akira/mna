@@ -1,6 +1,6 @@
 {
   "name": "@mna/fsp",
-  "version": "1.6.5",
+  "version": "1.6.7",
   "main": "index.js",
   "dependencies": {
     "fs-extra": "^7.0.1"

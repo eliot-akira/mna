@@ -29,7 +29,9 @@ const paths = {
 paths.resolveModules = [
   paths.src,
   resolveApp('node_modules'),
-  'node_modules'
+  // Inside builder
+  path.join(__dirname, '..', 'node_modules'),
+  //'node_modules'
 ]
 
 module.exports = paths

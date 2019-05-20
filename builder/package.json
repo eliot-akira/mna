@@ -1,9 +1,9 @@
 {
   "name": "@mna/builder",
-  "version": "1.6.6",
+  "version": "1.6.8",
   "main": "index.js",
   "scripts": {
-    "lib:update": "rm -rf node_modules ; rm yarn.lock ; yarn"
+    "lib-update": "rm -rf node_modules ; rm yarn.lock ; yarn"
   },
   "bin": {
     "builder": "run"
