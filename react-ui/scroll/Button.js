@@ -1,7 +1,7 @@
-"use strict";
+"use strict"
 
-import React from 'react';
-import ScrollLink from '../mixins/scroll-link';
+import React from 'react'
+import ScrollLink from './mixins/scroll-link'
 
 class ButtonElement extends React.Component{
   render() {
@@ -9,8 +9,8 @@ class ButtonElement extends React.Component{
       <input {...this.props}>
         {this.props.children}
       </input>
-    );
+    )
   }
-};
+}
 
-export default ScrollLink(ButtonElement);
+export default ScrollLink(ButtonElement)

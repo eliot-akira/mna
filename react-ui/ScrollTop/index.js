@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { withRouter } from "react-router"
-import animateScroll from '../scroll/mixins/animate-scroll'
+import animateScroll from '../Scroll/animateScroll'
 
 class ScrollTop extends Component {
 
@@ -52,7 +52,8 @@ class ScrollTop extends Component {
   scrollToTop = () => animateScroll.scrollToTop({
     containerId: this.containerId,
     duration: 300,
-    delay: 0
+    delay: 0,
+    smooth: 'easeInOutQuad'
   })
 
   render() {
