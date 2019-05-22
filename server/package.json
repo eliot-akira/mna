@@ -1,6 +1,6 @@
 {
   "name": "@mna/server",
-  "version": "1.6.7",
+  "version": "1.6.9",
   "main": "index.js",
   "dependencies": {
     "content-type": "^1.0.4",

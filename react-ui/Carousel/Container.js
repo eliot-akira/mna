@@ -9,7 +9,7 @@ class CarouselContainer extends Component {
     carouselWidth: 960
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     window.addEventListener('resize', this.getCarouselWidth)
     this.getCarouselWidth(null, { immediate: true })
   }
@@ -49,23 +49,25 @@ class CarouselContainer extends Component {
 
       // From carousel core
       // onTouchStart, onTouchMove, onTouchEnd, onTouchCancel, onMouseDown, children,
-      cardSize, 
+      cardSize,
       ...rest
     } = this.props
 
     const itemCount = items.length
     let current = -Math.round(cursor) % itemCount
-  
+
     while (current < 0) {
       current += itemCount
     }
-  
+
     const carouselWidth = this.state.carouselWidth
 
-    const translateX = (cursor - (cardPadCount || itemCount)) * cardWidth
+    const translateX = (cursor - (cardPadCount || ( 0 /*itemCount*/))) * cardWidth
       // Align current card: center or left
-      +( cardCentered ? ((carouselWidth - cardWidth) / 2) : cardWidth )
-  
+      +( cardCentered ? ((carouselWidth - cardWidth) / 2) : 0 /*cardWidth*/)
+
+//console.log({ cardCentered, translateX, carouselWidth, cardWidth, cursor, itemCount })
+
     return (
       <NonPassiveTouchTarget
         getRef={el => this.el = el}
@@ -85,7 +87,7 @@ class CarouselContainer extends Component {
           style={{ transform: `translate3d(${translateX}px, 0, 0)` }}
           {...rest}
         />
-  
+
         {/* <div className='carousel-pagination-wrapper'>
           <ol className='carousel-pagination'>
             {items.map((_, index) => (

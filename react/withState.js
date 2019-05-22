@@ -85,9 +85,12 @@ const withState = ({
         ...this.getStateProps(),
         ...this.props
       }
-      return <C {...(withProps ? withProps(props) : props)} />
+      return <C {...{
+        ...props,
+        ...(withProps ? withProps(props) : {}),
+      }} />
     }
-  }  
+  }
 
   // Hoist static properties
   Object.keys(C).forEach(key => {

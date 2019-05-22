@@ -1,5 +1,8 @@
 
 const withProps = transform => C =>
-  props => <C {...transform(props)}/>
+  props => <C {...{
+    ...props,
+    ...(transform(props) || {})
+  }}/>
 
 export default withProps

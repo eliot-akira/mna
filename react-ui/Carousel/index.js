@@ -5,7 +5,14 @@ import Container from './Container'
 // https://github.com/xiaody/react-touch-carousel/
 // https://xiaody.github.io/react-touch-carousel/docs/
 
-const Card = ({ item, index, modIndex, cursor, cardWidth, isCurrent, carouselInstance }) =>
+const Card = ({
+  item,
+  index, modIndex, cursor,
+  cardWidth,
+  isCurrent,
+  carouselInstance,
+  onCardClick
+}) =>
   <div
     className={cx(
       'carousel-card',
@@ -13,8 +20,11 @@ const Card = ({ item, index, modIndex, cursor, cardWidth, isCurrent, carouselIns
     )}
     style={{ minWidth: `${cardWidth}px` }}
     onClick={() => {
-      console.log('card click', { index, modIndex, cursor })
-      //carouselInstance.setCursor(cursor+modIndex)
+      const onClickProps = { index, modIndex, cursor, carouselInstance }
+      //console.log('Carousel.Card onClick', onClickProps)
+      if (onCardClick) onCardClick({
+        index: modIndex
+      })
     }}
   >
     <div className='carousel-card-inner'>
@@ -31,8 +41,11 @@ class Carousel extends Component {
       cardCentered = true,
       cardWidth,
       cardHeight,
-      cardPadCount
+      cardPadCount,
+      getInstance
     } = this.props
+
+    if (getInstance) getInstance(carouselProps.carouselInstance)
 
     return <Container {...{
       ...carouselProps,
@@ -45,7 +58,7 @@ class Carousel extends Component {
 
   renderCard = (index, modIndex, cursor, carouselInstance) => {
 
-    const { items, cardWidth } = this.props
+    const { items, cardWidth, onCardClick } = this.props
     const item = items[modIndex]
     const cursorIndex = carouselInstance.getCursorIndex()
 
@@ -55,7 +68,8 @@ class Carousel extends Component {
       cardWidth,
       index, modIndex, cursor,
       isCurrent: modIndex===cursorIndex,
-      carouselInstance
+      carouselInstance,
+      onCardClick
     }} />
   }
 
@@ -65,7 +79,7 @@ class Carousel extends Component {
       items,
       cardWidth, cardHeight,
       cardPadCount = items.length,
-      onCardSelect,
+      onChange,
       loop = true
     } = this.props
 
@@ -83,7 +97,7 @@ class Carousel extends Component {
         autoplay={false}
         renderCard={this.renderCard}
         onRest={(index, modIndex) => {
-          if (onCardSelect) onCardSelect(modIndex)
+          if (onChange) onChange(modIndex)
         }}
         //onDragStart={() => log('dragStart')}
         //onDragEnd={() => log('dragEnd')}

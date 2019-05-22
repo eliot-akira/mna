@@ -32,8 +32,7 @@ const build = async () => {
   logMessage('Building client and server..')
 
   try {
-    await serverPromise
-    await clientPromise
+    await Promise.all([serverPromise, clientPromise])
   } catch (error) {
     logMessage(error, 'error')
     process.exit(1)
@@ -43,11 +42,12 @@ const build = async () => {
   await generateProductionServerPackage({ paths })
 
   logMessage('Done!', 'info')
-  process.exit(0)
+
 }
 
-build().catch(console.error)
-
+build()
+  .then(() => process.exit(0))
+  .catch(console.error)
 
 async function generateProductionServerPackage({ paths }) {
 

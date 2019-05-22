@@ -4,7 +4,7 @@ $light-font-weight: 300;
 $normal-font-weight: 400;
 $bold-font-weight: 600;
 $strong-font-weight: 600;
-$letter-spacing: -0.016rem;
+$letter-spacing: -0.016rem !default;
 
 @font-face {
   font-family: 'Inter';

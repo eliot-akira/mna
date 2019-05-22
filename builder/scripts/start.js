@@ -102,8 +102,7 @@ const start = async () => {
     const clientPromise = compilerPromise('client', clientCompiler)
     const serverPromise = compilerPromise('server', serverCompiler)
 
-    await clientPromise
-    await serverPromise
+    await Promise.all([serverPromise, clientPromise])
 
   } catch (error) {
     logMessage(error, 'error')

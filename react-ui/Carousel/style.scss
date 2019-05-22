@@ -32,8 +32,9 @@
   height: auto;
 
   display: flex;
+
   justify-content: center;
-  align-items: end;
+  align-items: top;
 
   -webkit-tap-highlight-color: transparent;
 
@@ -42,7 +43,7 @@
 
 .carousel-card-inner {
 
-  flex-direction: column;
+  display: flex;
 
   //width: 290px;
   //height: 290px;

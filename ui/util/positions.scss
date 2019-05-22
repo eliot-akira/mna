@@ -43,11 +43,11 @@
   clear: both
 }
 
-.mw-100 { max-width: 100% }
+.mw-100 { max-width: 100% !important }
 .w-100, .full-width { width: 100% !important }
-.w-auto, .auto-width { width: auto }
-.h-100, .full-height { height: 100% }
-.vh-100, .full-screen-height { height: 100vh } // NOTE: Use height: auto for Safari compatibility
+.w-auto, .auto-width { width: auto !important }
+.h-100, .full-height { height: 100% !important }
+.vh-100, .full-screen-height { height: 100vh !important } // NOTE: Use height: auto for Safari compatibility
 
 .text-left   { text-align: left }
 .text-right  { text-align: right }
