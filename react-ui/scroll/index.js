@@ -11,7 +11,6 @@ import  ScrollLink  from './mixins/scroll-link.js'
 import  ScrollTarget  from './mixins/scroll-target.js'
 import  Helpers  from './mixins/Helpers.js'
 
-
 export { Link, Button, Target, scroller, Events, scrollSpy, animateScroll, ScrollLink, ScrollTarget, Helpers }
 
 export default { Link, Button, Target, scroller, Events, scrollSpy, animateScroll, ScrollLink, ScrollTarget, Helpers }

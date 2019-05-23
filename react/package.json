@@ -1,8 +1,13 @@
 {
   "name": "@mna/react",
-  "version": "1.6.9",
+  "version": "1.7.0",
   "main": "index.js",
   "dependencies": {
+    "@mna/api": "1.x",
+    "@mna/event": "1.x",
+    "@mna/logger": "1.x",
+    "@mna/schema": "1.x",
+    "@mna/store": "1.x",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.0",

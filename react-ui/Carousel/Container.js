@@ -28,6 +28,7 @@ class CarouselContainer extends Component {
     })
 
     if (opts.immediate) return fn()
+
     this.scheduleResize = setTimeout(fn, 300)
   }
 
