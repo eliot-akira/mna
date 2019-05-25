@@ -4,8 +4,6 @@ Builder and library for full-stack React apps
 
 See `template-basic` folder for example usage.
 
-For @mna 1.x, all built modules assume `@babel/runtime-corejs3` is installed in the consumer project.
-
 ## Develop
 
 #### Build all modules
