@@ -9,14 +9,21 @@ export default class Form extends Component {
   }
 
   constructor(props) {
+
     super(props)
-    this.state.fields = props.fields || {}
+
+    const { fields, onValidate } = props
+    if (fields) this.state.fields = fields
+  }
+
+  componentDidMount() {
+    this.mounted = true
   }
 
   getFormData = () => ({
     ...this.state.fields,
     ...(!this.el ? {} : getFormData(this.el))
-})
+  })
 
   onSubmit = e => {
 
@@ -33,17 +40,18 @@ export default class Form extends Component {
       if (invalidFields) {
         this.setState({ invalidFields })
         return
-      } else this.setState({ invalidFields: {} })
+      }
+      this.setState({ invalidFields: {} })
     }
-
     if (onSubmit) onSubmit(data)
 
   }
 
   onChange = e => {
-    const { onChange } = this.props
+    const { onChange, onValidate } = this.props
     if (!onChange) return
-    onChange(this.getFormData())
+    const data = this.getFormData()
+    onChange(data)
   }
 
   setFields = (fields, fn) => this.setState({
@@ -52,7 +60,14 @@ export default class Form extends Component {
 
   render() {
 
-    const { className, children } = this.props
+    const { className, fields = {}, onChange, onValidate, children } = this.props
+    const validateOnRender = false //this.mounted && onChange && onValidate
+    const invalidFields = validateOnRender
+      ? onValidate({
+        ...fields,
+        ...this.state.fields
+      }) || {}
+      : this.state.invalidFields
 
     return (
       <form ref={el => this.el = el}
@@ -62,6 +77,8 @@ export default class Form extends Component {
       >{
           children instanceof Function ? children({
             ...this.state,
+            invalidFields,
+            isValid: !Object.keys(invalidFields).length,
             setFields: this.setFields,
             submit: this.onSubmit
           }) : children
