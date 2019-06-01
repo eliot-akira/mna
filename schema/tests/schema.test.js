@@ -14,13 +14,15 @@ test('Schema', it => {
     object,
     func,
     bool,
+    is,
+    stringOf,
     arrayOf,
     objectOf,
     instanceOf,
     allOf,
     oneOf,
     optional,
-    email,        
+    email,
   }) => ({
     // Test schema
     any: any,
@@ -32,6 +34,9 @@ test('Schema', it => {
     object: object,
     func: func,
     bool: bool,
+    is: is('test'),
+    stringOf: stringOf('test'),
+    stringOfArray: stringOf(['test', 'test2']),
     arrayOf: arrayOf(number),
     objectOf: objectOf({
       key: string
@@ -55,6 +60,9 @@ test('Schema', it => {
     object: {},
     func: () => {},
     bool: true,
+    is: 'test',
+    stringOf: 'test',
+    stringOfArray: 'test2',
     arrayOf: [1, 2, 3],
     objectOf: { key: 'value' },
     instanceOf: new TestClass,
@@ -70,6 +78,9 @@ test('Schema', it => {
     object: [],
     func: 'true',
     bool: 'true',
+    is: 1,
+    stringOf: 'wrong',
+    stringOfArray: 'wrong',
     arrayOf: ['1'],
     objectOf: {},
     instanceOf: {},
@@ -79,7 +90,7 @@ test('Schema', it => {
 
   let errors = testSchema(validData)
   it('returns null on valid schema', errors===null)
-  
+
   errors = testSchema(invalidData)
   it('returns errors on wrong schema', errors)
   it('returns all errors on wrong schema', Object.keys(errors).length>=Object.keys(invalidData).length)

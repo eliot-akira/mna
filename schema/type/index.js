@@ -5,7 +5,7 @@ import withAsync from './async'
 const type = {
 
   any: () => null,
-  
+
   required: value => typeof value==='undefined' || value===''
     ? schema.error.required
     : null
@@ -45,12 +45,24 @@ const type = {
   instanceOf: C => value => schema.type.required(value) || (
     !(value instanceof C) ? schema.error.invalid
       : null
-  ), 
+  ),
 
   optional: givenType => value =>
     schema.type.required(value)===null
       ? givenType(value)
       : null
+  ,
+
+  is: givenValue => value => schema.type.required(value) || (
+    givenValue===value ? null : schema.error.invalid
+  ),
+
+  stringOf: givenValue =>
+    Array.isArray(givenValue)
+      ? (value => schema.type.required(value) || (
+        givenValue.includes(value) ? null : schema.error.invalid
+      ))
+      : schema.type.is(givenValue)
   ,
 
   // Following types have async versions
