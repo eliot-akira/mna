@@ -1,6 +1,6 @@
 {
   "name": "@mna/react",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "1.x",
@@ -10,10 +10,10 @@
     "@mna/store": "1.x",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
-    "query-string": "^6.4.0",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
-    "react-helmet": "^5.2.0",
+    "query-string": "^6.5.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0"
   },

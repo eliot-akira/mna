@@ -168,7 +168,7 @@ module.exports = function build({ args, options }) {
     // Temporary symlink to containing folder
     // Used as root for TypeScript, which emits files to current publish folder
     const tmpSrc = '_src'
-    execSync(`rm ${tmpSrc} 2>/dev/null && ln -s .. ${tmpSrc}`)
+    execSync(`rm ${tmpSrc} 2>/dev/null ; ln -s .. ${tmpSrc}`)
 
     console.log(`
 Generate TypeScript declaration files from:
