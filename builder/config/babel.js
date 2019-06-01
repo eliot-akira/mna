@@ -1,5 +1,11 @@
 const presets = [
-  require.resolve('@babel/preset-react'),
+  [require.resolve('@babel/preset-react'), {
+    // React JSX doesn't support SVG with namespace; allow them anyway
+    // https://babeljs.io/docs/en/babel-preset-react/#throwifnamespace
+
+    // NOTE: @svgr/webpack still throws: https://github.com/smooth-code/svgr/issues/271
+    throwIfNamespace: false
+  }],
   require.resolve('@babel/preset-typescript'),
 ]
 
