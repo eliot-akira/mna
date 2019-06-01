@@ -45,9 +45,9 @@ label, .label {
 input[type=checkbox],
 input[type=radio] {
   vertical-align: middle;
-  margin-right: $space-1 / 2;
+  margin-right: $space-1;
 
-  margin-top: -1px;
+  margin-top: -2px;
 }
 
 fieldset {
