@@ -165,8 +165,9 @@ module.exports = function build({ args, options }) {
     // Use dest as current working directory
     process.chdir(dest)
 
+    // Temporary symlink to containing folder
+    // Used as root for TypeScript, which emits files to current publish folder
     const tmpSrc = '_src'
-
     execSync(`rm ${tmpSrc} 2>/dev/null && ln -s .. ${tmpSrc}`)
 
     console.log(`
@@ -188,6 +189,8 @@ ${tsFiles.join('\n')}
     const compilerHost = ts.createCompilerHost(options)
     const program = ts.createProgram(tsFiles.map(f => path.join(tmpSrc, f)), options, compilerHost)
     const emitResult = program.emit()
+
+    execSync(`rm ${tmpSrc} 2>/dev/null`)
 
     process.chdir(origSrc)
   }
