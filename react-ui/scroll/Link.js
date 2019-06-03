@@ -7,11 +7,12 @@ class LinkElement extends React.Component {
 
 const Link = ScrollLink(LinkElement)
 
-export default (props) => <Link {...{
+export default ({ offset, ...props }) => <Link {...{
   activeClass: 'active',
   spy: true,
   smooth: 'easeInOutQuad',
   duration: 300,
   containerId: 'content',
-  ...props
+  ...props,
+  offset: offset ? (0 - offset) : 0 // Negative is above the anchor, positive is below
 }} />

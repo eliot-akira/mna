@@ -1,6 +1,8 @@
 import { Link } from '@mna/react'
 import decodeEntities from '@mna/html/entities/decode'
 import Prism from '../Prism'
+import ScrollLink from '../Scroll/Link'
+import ScrollTarget from '../Scroll/Target'
 
 export const input = (props) => {
   if (props.type==='checkbox') {
@@ -12,6 +14,30 @@ export const input = (props) => {
 }
 
 export const a = (props, children, { render }) => {
+
+  // Smooth-scroll anchors
+  if (props.name) {
+    return <ScrollTarget {...{
+      tag: 'a',
+      ...props
+    }}>{render(children)}</ScrollTarget>
+  }
+
+  if (props.href) {
+    const href = props.href.replace(/^\//, '')
+    const to = href.replace(/^\#/, '')
+    if (href[0]==='#') {
+      return <ScrollLink {...{
+        ...props,
+        offset: props.offset!=undefined ? props.offset : 45,
+        to,
+        href
+      }}>{render(children)}</ScrollLink>
+    }
+  } else {
+    //console.log('No link target', props)
+  }
+
   return <Link {...props}>{render(children)}</Link>
 }
 
