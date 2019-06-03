@@ -1,6 +1,6 @@
-const frontmatter = require('../builder/node_modules/front-matter')
+const frontmatter = require('front-matter')
 
-const md = require('../builder/node_modules/markdown-it')({
+const md = require('markdown-it')({
   preset: 'default',
   html: true,
   linkify: true
