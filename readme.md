@@ -26,7 +26,7 @@ This updates all modules including this root repository.
 
 ## Test
 
-Run the tests after `build` or `build -w`
+Run the tests after `build` or `build -w`. The latter watch mode is useful when actively developing: keep the build process running and open another terminal window to run the tests in another process.
 
 Install dependencies for tests
 
