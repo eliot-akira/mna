@@ -1,12 +1,13 @@
-const frontmatter = require('front-matter')
+const frontmatter = require('../builder/node_modules/front-matter')
 
-const md = require('markdown-it')({
+const md = require('../builder/node_modules/markdown-it')({
   preset: 'default',
   html: true,
   linkify: true
   //highlight: renderHighLight
 })
   .use(require('./anchor'))
+  .use(require('./attr'))
   .use(require('./taskList'), {
     // Without `disabled` attribute
     enabled: true
