@@ -92,6 +92,7 @@ const appConfig = async ({ paths, clientConfig, serverConfig }) => {
   await appConfigFn({
     paths,
     clientConfig, serverConfig,
+    webpack: require('webpack'),
     ...require('../helpers')
   })
 }

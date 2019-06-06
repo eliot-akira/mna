@@ -112,6 +112,11 @@ const cssModuleLoaderClient = {
   ],
 }
 
+const autoprefixerOptions = {
+  //browsers: ['last 3 versions', 'ie >= 9', 'Edge <= 15'],
+  overrideBrowserslist: ['last 2 versions']
+}
+
 const cssLoaderClient = {
   test: cssRegex,
   exclude: cssModuleRegex,
@@ -123,9 +128,7 @@ const cssLoaderClient = {
       loader: require.resolve('postcss-loader'),
       options: {
         plugins: [
-          require('autoprefixer')({
-            browsers: ['last 3 versions', 'ie >= 9', 'Edge <= 15'],
-          }),
+          require('autoprefixer')(autoprefixerOptions),
         ],
         sourceMap: generateSourceMap,
       },
@@ -149,9 +152,7 @@ const sassLoaderClient = {
       loader: require.resolve('postcss-loader'),
       options: {
         plugins: [
-          require('autoprefixer')({
-            browsers: ['last 3 versions', 'ie >= 9', 'Edge <= 15'],
-          }),
+          require('autoprefixer')(autoprefixerOptions),
         ],
         sourceMap: generateSourceMap,
       },
