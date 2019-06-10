@@ -1,6 +1,8 @@
 
 // Based on: https://github.com/rstacruz/markdown-it-decorate
 
+/* eslint-disable no-cond-assign */
+
 var tagExpr = /^<!-- ?\{(?:([a-z0-9]+)(\^[0-9]*)?: ?)?(.*)\} ?-->\n?$/
 
 module.exports = function attributes (md) {

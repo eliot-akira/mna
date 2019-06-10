@@ -6,6 +6,7 @@ const md = require('markdown-it')({
   linkify: true
   //highlight: renderHighLight
 })
+  //.use(require('./include'))
   .use(require('./anchor'))
   .use(require('./attr'))
   .use(require('./taskList'), {
