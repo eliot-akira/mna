@@ -12,9 +12,9 @@ a {
   &:hover, &:active {
     text-decoration: $link-hover-text-decoration;
   }
-  &:not(.btn) {
+  //&:not(.btn) {
     &:hover, &:active, &:focus {
       color: $link-hover-color;
     }
-  }
+  //}
 }
