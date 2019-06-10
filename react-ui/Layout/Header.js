@@ -1,7 +1,7 @@
 import { Link } from '@mna/react'
 
 const HeaderTitle = ({
-  menuTitle,
+  menuTitle, menuCenter,
   isHeaderMenuOpen,
   closeHeaderMenu,
   toggleHeaderMenu
@@ -15,6 +15,10 @@ const HeaderTitle = ({
         {menuTitle}
 
       </div>
+      { !menuCenter ? null
+        :
+        <div className="header-center md-hide">{menuCenter}</div>
+      }
       <div className="header-title-content-right md-hide">
         <div className={`hamburger${isHeaderMenuOpen ? ' is-open' : ''}`}
           onClick={toggleHeaderMenu}
@@ -62,14 +66,18 @@ const HeaderMenu = ({
     </div>
   </div>
 
-const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems }) =>
+const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems, menuCenter }) =>
   <header className={`site-header`}>
     <HeaderTitle {...{
-      menuTitle,
+      menuTitle, menuCenter,
       isHeaderMenuOpen,
       closeHeaderMenu,
       toggleHeaderMenu
     }}/>
+    { !menuCenter ? null
+      :
+      <div className="header-center md-show">{menuCenter}</div>
+    }
     <HeaderMenu {...{
       menuItems,
       closeHeaderMenu

@@ -60,7 +60,7 @@ export default class Form extends Component {
 
   render() {
 
-    const { className, fields = {}, onChange, onValidate, children } = this.props
+    const { id, className, fields = {}, onChange, onValidate, children } = this.props
     const validateOnRender = false //this.mounted && onChange && onValidate
     const invalidFields = validateOnRender
       ? onValidate({
@@ -71,6 +71,7 @@ export default class Form extends Component {
 
     return (
       <form ref={el => this.el = el}
+        id={id || ''}
         className={className || ''}
         onSubmit={this.onSubmit}
         onChange={this.onChange}
