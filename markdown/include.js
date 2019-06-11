@@ -1,14 +1,16 @@
-// Based on: https://github.com/camelaissani/markdown-it-include
+// Originally based on: https://github.com/camelaissani/markdown-it-include
 
-var path = require('path'),
-  fs = require('fs')
+const path = require('path')
+const fs = require('fs')
+const cwd = process.cwd()
 
 //  var INCLUDE_RE = /\!{3}\s*include\s*\(\s*(.+?)\s*\)\s*\!{3}/i
-var INCLUDE_RE = /<load\s*(.+?)=(.+?)\s*>/i
+const INCLUDE_RE = /<include\s*(.+?)=[\'|\"]?(.+?)[\'|\"]?\s*>/i
 
 module.exports = function include_plugin(md, options) {
-  var root = '.',
-    includeRe = INCLUDE_RE
+
+  let root = '.'
+  let includeRe = INCLUDE_RE
 
   if (options) {
     if (typeof options === 'string') {
@@ -19,38 +21,68 @@ module.exports = function include_plugin(md, options) {
     }
   }
 
-  function _replaceIncludeByContent(src, rootdir, parentFilePath, filesProcessed) {
+  function _replaceIncludeByContent({
+    src,
+    rootDir = cwd,
+    fileDir,
+    parentFilePath,
+    filesProcessed
+  }) {
 
     filesProcessed = filesProcessed ? filesProcessed.slice() : [] // making a copy
-    var cap, filePath, mdSrc, indexOfCircularRef
+
+    let cap
 
     // store parent file path to check circular references
     if (parentFilePath) {
       filesProcessed.push(parentFilePath)
     }
+
     while ((cap = includeRe.exec(src))) {
 
-      filePath = path.resolve(rootdir, cap[1].trim())
+      const fileType = cap[1]
+      const fileBasePath = cap[2].trim()
+      const relativeFilePath = path.resolve(fileDir, fileBasePath)
+        .replace(rootDir, '') // Prevent going above "root"
+      const filePath = path.join(
+        rootDir,
+        relativeFilePath
+      )
 
       // check if circular reference
-      indexOfCircularRef = filesProcessed.indexOf(filePath)
+      const indexOfCircularRef = filesProcessed.indexOf(filePath)
       if (indexOfCircularRef !== -1) {
         throw new Error('Circular reference between ' + filePath + ' and ' + filesProcessed[indexOfCircularRef])
       }
 
-      // replace include by file content
-      // mdSrc = fs.readFileSync(filePath, 'utf8')
-      // mdSrc = _replaceIncludeByContent(mdSrc, path.dirname(filePath), filePath, filesProcessed)
-      mdSrc = filePath
+      let content = ''
 
-      src = src.slice(0, cap.index) + mdSrc + src.slice(cap.index + cap[0].length, src.length)
+      // replace include by file content
+      try {
+        content = _replaceIncludeByContent({
+          src: fs.readFileSync(filePath, 'utf8'),
+          rootDir,
+          fileDir: path.dirname(filePath),
+          parentFilePath: filePath,
+          filesProcessed
+        })
+      } catch(e) {
+        content = `Error loading: ${relativeFilePath}`
+      }
+
+      src = src.slice(0, cap.index) + content + src.slice(cap.index + cap[0].length, src.length)
     }
 
     return src
   }
 
   function _includeFileParts(state) {
-    state.src = _replaceIncludeByContent(state.src, root)
+    const currentRoot = (state.env && state.env.root) || root
+    state.src = _replaceIncludeByContent({
+      src: state.src,
+      rootDir: currentRoot,
+      fileDir: currentRoot
+    })
   }
 
   md.core.ruler.before('normalize', 'include', _includeFileParts)

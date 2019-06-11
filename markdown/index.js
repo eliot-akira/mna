@@ -6,7 +6,7 @@ const md = require('markdown-it')({
   linkify: true
   //highlight: renderHighLight
 })
-  //.use(require('./include'))
+  .use(require('./include'))
   .use(require('./anchor'))
   .use(require('./attr'))
   .use(require('./taskList'), {
@@ -19,8 +19,8 @@ module.exports = function renderMarkdown(content = '', options = {}) {
   const { body, attributes } = frontmatter(content)
 
   const html = options.markdown
-    ? options.markdown(body)
-    : md.render(body)
+    ? options.markdown(body, options)
+    : md.render(body, options)
 
   return { html, attributes }
 }
