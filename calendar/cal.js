@@ -4,11 +4,30 @@ const startOfMonth = require('date-fns/start_of_month')
 const endOfMonth = require('date-fns/end_of_month')
 const eachDay = require('date-fns/each_day')
 const formatDate = require('date-fns/format')
+const isFutureDate = require('date-fns/is_future')
+const isPastDate = require('date-fns/is_past')
+const isTodayDate = require('date-fns/is_today')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 const weekdayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const weekdayShortNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+const toPlainObject = (day, defaultKey = 'day') =>
+  day instanceof Date
+    ? getDayData(day)
+    : typeof day!=='object'
+      ? { [defaultKey]: day }
+      : day
+
+const toDate = (day) =>
+  day instanceof Date
+    ? day
+    : new Date(day.year, day.month - 1, day.day)
+
+const isFuture = d => isFutureDate(toDate(d))
+const isPast = d => isPastDate(toDate(d))
+const isToday = d => isTodayDate(toDate(d))
 
 const getMonthName = arg =>
   monthNames[
@@ -81,11 +100,15 @@ const getMonthData = day => {
 
 module.exports = {
   isSameDay,
+  isFuture,
+  isPast,
+  isToday,
+
   getDayData,
   getMonthData,
   getMonthName,
   weekdayNames,
   weekdayShortNames,
   getWeekdayName,
-  getWeekdayShortName
+  getWeekdayShortName,
 }
