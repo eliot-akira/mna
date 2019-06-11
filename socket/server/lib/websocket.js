@@ -73,6 +73,10 @@ class WebSocket extends EventEmitter {
     }
   }
 
+  isOpen() {
+    return this.readyState === WebSocket.OPEN
+  }
+
   get CONNECTING() {
     return WebSocket.CONNECTING;
   }

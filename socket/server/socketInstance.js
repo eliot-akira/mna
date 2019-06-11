@@ -53,7 +53,7 @@ class Socket extends Emitter {
         ...response
       })
 
-  
+
     if (!fn) {
       sendServerResponse({
         error: { message: 'No listener for client request' }
@@ -84,7 +84,10 @@ class Socket extends Emitter {
 
   send = (data) => {
     const { ws } = this
-    if (!ws) return false
+    if (!ws || !ws.isOpen()) {
+      // Socket not available
+      return false
+    }
     ws.send(JSON.stringify(data))
     return true
   }
@@ -103,7 +106,7 @@ class Socket extends Emitter {
     const requestId = Date.now()
 
     io.serverRequestListeners[requestId] = resolve
-    socket.send({ ...data, serverRequestId: requestId })      
+    socket.send({ ...data, serverRequestId: requestId })
   })
 
 }
