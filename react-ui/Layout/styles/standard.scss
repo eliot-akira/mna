@@ -5,12 +5,12 @@
   .site-main {
     @extend .flex, .flex-column;
     .site-main-body {
-      @extend .flex-grow;
+      @extend .flex-grow, .h-100;
       max-width: 100%;
     }
   }
 }
- 
+
 @include more-than( md ) {
 
   .site-layout-standard .site-header {

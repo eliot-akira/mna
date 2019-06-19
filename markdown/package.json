@@ -1,6 +1,6 @@
 {
   "name": "@mna/markdown",
-  "version": "1.7.6",
+  "version": "1.7.8",
   "main": "index.js",
   "dependencies": {
     "front-matter": "^3.0.1",

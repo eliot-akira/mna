@@ -11,9 +11,7 @@ const HeaderTitle = ({
       <div className="header-title-content-left"
         onClick={ closeHeaderMenu }
       >
-
         {menuTitle}
-
       </div>
       { !menuCenter ? null
         :
@@ -27,26 +25,38 @@ const HeaderTitle = ({
     </div>
   </div>
 
-const MenuItem = ({ item }) =>
-  item.to
-    ? <Link to={item.to} exact={
+const withMenuRoot = (to, menuRoot) => {
+
+  const route = to[0]==='/' ? to : (
+    menuRoot[ menuRoot.length - 1 ]==='/'
+      ? menuRoot
+      : menuRoot+'/'
+  )+to
+
+  return route
+}
+
+const MenuItem = ({ item, menuRoot }) =>
+  item.to!=undefined
+    ? <Link to={withMenuRoot(item.to, menuRoot)} exact={
       // exact=true by default
       typeof item.exact==='undefined' ? true
         : item.exact
     }>{item.content}</Link>
     : (item.content || item)
 
-const MenuItems = ({ items, keyPrefix = '' }) =>
+const MenuItems = ({ items, keyPrefix = '', menuRoot }) =>
   <>
     {items.map((item, itemIndex) =>
       <li key={
         (keyPrefix ? `${keyPrefix}-` : '')+itemIndex
       } className="header-menu-item">
-        <MenuItem item={ item } />
+        <MenuItem item={ item } menuRoot={menuRoot} />
         { !item.children ? '' :
           <ul className="list-reset">
             <MenuItems items={item.children}
               keyPrefix={(keyPrefix ? `${keyPrefix}-` : '')+itemIndex}
+              menuRoot={ item.to!=undefined ? withMenuRoot(item.to, menuRoot) : menuRoot }
             />
           </ul>
         }
@@ -56,17 +66,18 @@ const MenuItems = ({ items, keyPrefix = '' }) =>
 
 const HeaderMenu = ({
   closeHeaderMenu,
-  menuItems: items
+  menuItems: items,
+  menuRoot = '/'
 }) =>
   <div className={`header-menu`}>
     <div className="header-menu-content">
       <ul className="list-reset" onClick={ closeHeaderMenu }>
-        <MenuItems items={items} />
+        <MenuItems items={items} menuRoot={menuRoot} />
       </ul>
     </div>
   </div>
 
-const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems, menuCenter }) =>
+const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems, menuCenter, menuRoot }) =>
   <header className={`site-header`}>
     <HeaderTitle {...{
       menuTitle, menuCenter,
@@ -79,7 +90,7 @@ const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle
       <div className="header-center md-show">{menuCenter}</div>
     }
     <HeaderMenu {...{
-      menuItems,
+      menuItems, menuRoot,
       closeHeaderMenu
     }}/>
   </header>

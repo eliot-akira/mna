@@ -4,7 +4,7 @@ const lifeCycleHooks = {
   didMount: 'componentDidMount',
   willUnmount: 'componentWillUnmount',
   didUpdate: 'componentDidUpdate',
-  shouldUpdate: 'componentShouldUpdate'
+  shouldUpdate: 'shouldComponentUpdate'
 }
 
 const withState = ({

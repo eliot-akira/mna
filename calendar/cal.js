@@ -7,6 +7,7 @@ const formatDate = require('date-fns/format')
 const isFutureDate = require('date-fns/is_future')
 const isPastDate = require('date-fns/is_past')
 const isTodayDate = require('date-fns/is_today')
+const isValidDateCheck = require('date-fns/is_valid')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -28,11 +29,32 @@ const toDate = (day) =>
 const isFuture = d => isFutureDate(toDate(d))
 const isPast = d => isPastDate(toDate(d))
 const isToday = d => isTodayDate(toDate(d))
+const isValidDate = d => {
+
+  let isValid = false
+  const dateInstance = toDate(d)
+
+  try {
+    isValid = isValidDateCheck(dateInstance)
+  } catch(e) { /**/ }
+
+  // Make sure date exists, i.e., Feb 31st
+  if ( isValid && ! (d instanceof Date)) {
+    const check = getDayData(dateInstance)
+    isValid = ['year', 'month', 'day'].reduce((pass, key) => {
+      if (!pass) return false
+      return check[key]==d[key]
+    }, isValid)
+  }
+  return isValid
+}
+
 
 const getMonthName = arg =>
   monthNames[
-    typeof arg==='object' ? arg.month - 1
-      : arg - 1
+    typeof arg==='object'
+      ? arg.month - 1
+      : (arg - 1)
   ]
 
 const getWeekdayName = arg =>
@@ -103,6 +125,7 @@ module.exports = {
   isFuture,
   isPast,
   isToday,
+  isValidDate,
 
   getDayData,
   getMonthData,

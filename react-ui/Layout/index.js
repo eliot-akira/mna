@@ -22,7 +22,7 @@ export default class Layout extends Component {
       type = 'standard',
       withHeader = true,
       location,
-      menuTitle, menuItems, menuCenter,
+      menuTitle, menuItems, menuCenter, menuRoot,
       children,
       footer,
       onRouteEnter
@@ -34,7 +34,7 @@ export default class Layout extends Component {
       <div className={`site site-layout-${type}${isHeaderMenuOpen ? ' is-header-menu-open' : ''}`}>
         { !withHeader ? null :
           <Header {...{
-            menuTitle, menuCenter,
+            menuTitle, menuCenter, menuRoot,
             menuItems,
             isHeaderMenuOpen,
             toggleHeaderMenu: this.toggleHeaderMenu,
