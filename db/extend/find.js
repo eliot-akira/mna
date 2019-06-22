@@ -2,12 +2,6 @@ const { promisify } = require('util')
 
 module.exports = function extendFind({ db, instance }) {
 
-  // Find one: Wrap to accept empty query
-
-  const findOne = promisify(instance.findOne.bind(instance))
-
-  db.findOne = (query = {}, ...args) => findOne(query, ...args)
-
   // Find: Extend query with several operators
 
   db.find = (extendedQuery = {}, options = {}) => new Promise((resolve, reject) => {
@@ -27,33 +21,34 @@ module.exports = function extendFind({ db, instance }) {
       $exclude.forEach(key => $projection[key] = 0)
     }
 
-    if (!$page && !$sort && !$skip) {
-      return instance.find(query, $projection, (err, docs) => err ? reject(err) :
-        resolve(!docs ? [] :
-          (!$count ? docs : docs.slice(0, parseInt($count, 10)))
+    if (!$page) {
+
+      if (!$sort && !$skip) {
+        return instance.find(query, $projection, (err, docs) => err ? reject(err) :
+          resolve(!docs ? [] :
+            (!$count ? docs : docs.slice(0, parseInt($count, 10)))
+          )
         )
-      )
-    }
+      }
 
-    db.count(query).then(maxItems => {
-
-      const { id: queryId, slug: querySlug, ...commonQuery } = query
-
-      let cursor = instance.find(commonQuery || {}, $projection)
+      let cursor = instance.find(query, $projection)
 
       if ($sort) cursor = cursor.sort($sort)
       if ($skip) cursor = cursor.skip($skip)
 
-      if (!$page) {
-        return cursor.exec((err, docs) => err ? reject(err) :
-          resolve(!docs ? [] : docs.filter(doc =>
-            queryId ? doc.id===queryId
-              : (querySlug ? doc.slug===querySlug : true)
-          ))
-        )
-      }
+      return cursor.exec((err, docs) => err ? reject(err) : resolve(!docs ? [] :
+        (!$count ? docs : docs.slice(0, parseInt($count, 10)))
+      ))
+    }
 
-      // Paged result
+    // Paged result
+
+    db.count(query).then(maxItems => {
+
+      let cursor = instance.find(query, $projection)
+
+      if ($sort) cursor = cursor.sort($sort)
+      if ($skip) cursor = cursor.skip($skip)
 
       const maxPages = Math.ceil(maxItems / $pageMax)
       const startIndex = ($page - 1) * $pageMax

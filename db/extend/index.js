@@ -5,7 +5,13 @@ const extendRemove = require('./remove')
 
 function extendDatabaseMethods({ db, instance }) {
 
-  const methods = ['count', 'ensureIndex', 'removeIndex', 'insert']
+  const methods = [
+    'findOne',
+    'insert',
+    'count',
+    'ensureIndex',
+    'removeIndex'
+  ]
 
   db = methods.reduce((api, method) => {
     api[method] = promisify(instance[method].bind(instance))
