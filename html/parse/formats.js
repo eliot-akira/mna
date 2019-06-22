@@ -51,10 +51,13 @@ function formatAttributes (attributes, options = {}) {
         attrs.dataset[prop] = castValue(value)
 
       } else {
-        // Handle checked="", disabled=""
-        if (value==='') value = true
 
-        attrs[camelCase(key)] = castValue(value)
+        // Handle checked="", disabled=""
+        if (value==='' && (
+          key==='checked' || key==='disabled'
+        )) value = true
+
+        attrs[camelCase(key)] = value // castValue(value)
       }
 
       //attrs[key] = value
@@ -64,6 +67,7 @@ function formatAttributes (attributes, options = {}) {
       // "keys" must be ignored in render/renderAttributes
       attrs.keys.push(key)
     }
+
     return attrs
   }, obj)
 }

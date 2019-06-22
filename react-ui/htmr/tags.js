@@ -24,7 +24,9 @@ export const a = (props, children, { render }) => {
   }
 
   if (props.href) {
+
     const href = props.href.replace(/^\//, '')
+
     if (href[0]==='#') {
       return <ScrollLink {...{
         ...props,
