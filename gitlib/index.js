@@ -81,16 +81,21 @@ switch (command) {
 case 'install':
 
   run(`if [ -d "${tmpDir}" ]; then rm -rf ${tmpDir}; fi; mkdir -p ${tmpDir}`)
+
   for (const mod of mods) {
-    if (mod.dest.indexOf('/vendor/')<0) {
+
+    //const cloneCommand = `git clone ${hub}/${mod.src}.git ${mod.dest} 2>&1 | grep -v "does not exist" || git clone ${hub}/${mod.src} ${mod.dest}`
+    const cloneCommand = `git clone ${hub}/${mod.src}.git ${mod.dest}`
+
+    if (mod.dest.indexOf('vendor/')<0) {
       // For non-vendor, check if it's not already a Git repo
-      run(`if [ ! -d "${mod.dest}/.git" ]; then if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; git clone ${hub}/${mod.src}.git ${mod.dest}; fi;`)
+      run(`if [ ! -d "${mod.dest}/.git" ]; then if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand} ; fi;`)
     } else {
-      run(`if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; git clone ${hub}/${mod.src}.git ${mod.dest}`)
+      run(`if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand}`)
     }
   }
   run(`rm -rf ${tmpDir}`)
-  console.log('\n')
+  console.log()
   break
 case 'status': {
   if (!args.length) args.push('all')
