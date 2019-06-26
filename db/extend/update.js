@@ -5,7 +5,6 @@ module.exports = function extendUpdate({ db, instance }) {
   db.update = (query = {}, props, options = {}) => new Promise((resolve, reject) => {
 
     // TODO: Simplify query and props
-
     if (!props) {
       const { id, name, ...restOfQuery } = query
       if (id || name) {
@@ -23,8 +22,8 @@ module.exports = function extendUpdate({ db, instance }) {
     }
 
     const {
-      $replace = options.replace,
       $multi = options.multi,
+      $replace = options.replace,
       $upsert = options.upsert,
       id, // Remove ID from data, as it shouldn't change
       ...data

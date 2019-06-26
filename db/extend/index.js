@@ -6,7 +6,6 @@ const extendRemove = require('./remove')
 function extendDatabaseMethods({ db, instance }) {
 
   const methods = [
-    'findOne',
     'insert',
     'count',
     'ensureIndex',

@@ -2,7 +2,7 @@ const { promisify } = require('util')
 
 function extendRemove({ db, instance }) {
 
-  // Remove: Wrap to accept $multi
+  // Remove with $multi
 
   const remove = promisify(instance.remove.bind(instance))
 

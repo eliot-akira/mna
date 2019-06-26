@@ -2,6 +2,12 @@ const { promisify } = require('util')
 
 module.exports = function extendFind({ db, instance }) {
 
+  // Find one: Wrap to accept empty query
+
+  const findOne = promisify(instance.findOne.bind(instance))
+
+  db.findOne = (query = {}, ...args) => findOne(query, ...args)
+
   // Find: Extend query with several operators
 
   db.find = (extendedQuery = {}, options = {}) => new Promise((resolve, reject) => {
@@ -22,14 +28,6 @@ module.exports = function extendFind({ db, instance }) {
     }
 
     if (!$page) {
-
-      if (!$sort && !$skip) {
-        return instance.find(query, $projection, (err, docs) => err ? reject(err) :
-          resolve(!docs ? [] :
-            (!$count ? docs : docs.slice(0, parseInt($count, 10)))
-          )
-        )
-      }
 
       let cursor = instance.find(query, $projection)
 
