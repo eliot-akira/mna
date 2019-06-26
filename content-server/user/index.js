@@ -1,5 +1,7 @@
 import * as typeActions from './typeActions'
 
+
+
 export const initUser = async({ setState, actions, config }) => {
 
   await actions.createType({

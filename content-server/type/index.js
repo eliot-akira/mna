@@ -2,7 +2,7 @@ import path from 'path'
 import createDefaultDatabase from '@mna/db'
 import defaultTypeActions from './defaultTypeActions'
 
-const log = (...args) => console.log('@mna/content/type', ...args)
+const log = (...args) => false //console.log('@mna/content-server/type', ...args)
 
 export const createType = async (props) => {
 
@@ -90,6 +90,7 @@ export const createType = async (props) => {
   }
 
   // Use content.api to interact with data types and actions
+
 }
 
 export const addTypeActions = ({ type, typeActions, state, setState }) => {

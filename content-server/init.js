@@ -6,7 +6,6 @@ export const init = async (props) => {
   const { state, actions, setState, config } = props
 
   setState({ config })
-
   await actions.initAuth(props)
   await actions.initUser(props)
   await actions.initAction(props)
