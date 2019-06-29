@@ -1,22 +1,26 @@
 {
   "name": "@mna/react-ui",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@mna/calendar": "1.x",
-    "@mna/dom": "1.x",
-    "@mna/html": "1.x",
-    "@mna/htmr": "1.x",
-    "@mna/icons": "1.x",
-    "@mna/react": "1.x",
-    "@mna/ui": "1.x",
-    "@mna/utils": "1.x",
+    "@mna/calendar": "2.x",
+    "@mna/dom": "2.x",
+    "@mna/html": "2.x",
+    "@mna/htmr": "2.x",
+    "@mna/icons": "2.x",
+    "@mna/react": "2.x",
+    "@mna/ui": "2.x",
+    "@mna/utils": "2.x",
     "lodash": "^4.17.11",
     "react-draggable": "^3.3.0",
     "react-modal": "^3.8.1",
     "react-resizable": "^1.7.5",
     "react-spring": "^8.0.19"
+  },
+  "peerDependencies": {
+    "react": "16.x",
+    "react-dom": "16.x"
   },
   "files": [
     "**/*.js",

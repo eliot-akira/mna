@@ -9,7 +9,7 @@ const splitPoints = window.__SPLIT_POINTS__ || []
 
 const siteName = window.location.hostname
 
-export default function renderClient({ App, routes, bundles }) {
+export default function renderClient({ App, routes, bundles = {} }) {
 
   const store = createStore(App)
 
@@ -28,6 +28,8 @@ export default function renderClient({ App, routes, bundles }) {
   store.on('setState', renderApp)
 
   return Promise.all(
-    splitPoints.map(chunk => bundles[chunk].loadComponent())
+    splitPoints.map(chunk => bundles[chunk] ? bundles[chunk].loadComponent() : (
+      console.warn('Route chunk not found', { chunk, bundles }) && Promise.resolve()
+    ))
   ).then(renderApp)
 }

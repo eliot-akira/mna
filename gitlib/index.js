@@ -87,12 +87,15 @@ case 'install':
     //const cloneCommand = `git clone ${hub}/${mod.src}.git ${mod.dest} 2>&1 | grep -v "does not exist" || git clone ${hub}/${mod.src} ${mod.dest}`
     const cloneCommand = `git clone ${hub}/${mod.src}.git ${mod.dest}`
 
-    if (mod.dest.indexOf('vendor/')<0) {
-      // For non-vendor, check if it's not already a Git repo
-      run(`if [ ! -d "${mod.dest}/.git" ]; then if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand} ; fi;`)
-    } else {
-      run(`if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand}`)
-    }
+    // if (mod.dest.indexOf('vendor/')<0) {
+    // For non-vendor, check if it's not already a Git repo
+    run(`if [ ! -d "${mod.dest}/.git" ]; then if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand} ; fi;`)
+    // } else {
+    //   run(`if [ -d "${mod.dest}" ]; then mv ${mod.dest} ${tmpDir}; fi; ${cloneCommand}`)
+    // }
+
+    // Add remote
+    run(`cd ${mod.dest} && git remote add hub ${hub}/${mod.src}.git`)
   }
   run(`rm -rf ${tmpDir}`)
   console.log()
@@ -128,7 +131,7 @@ case 'push': {
   if (!args.length) args.push('all')
   for (const mod of filteredModules(args)) {
     logTitle(mod)
-    run(`cd ${mod.dest} && git push`)
+    run(`cd ${mod.dest} && git push hub master`)
     console.log()
   }
 }
@@ -138,7 +141,7 @@ case 'pull': {
   for (const mod of filteredModules(args)) {
     logTitle(mod)
     try {
-      run(`cd ${mod.dest} && git pull --verbose`)
+      run(`cd ${mod.dest} && git pull hub master --verbose`)
     } catch(e) {
       console.log(e)
     }
@@ -158,7 +161,7 @@ case 'tag': {
   const tag = args.pop()
   for (const mod of filteredModules(args)) {
     logTitle(mod)
-    run(`cd ${mod.dest} && git tag ${tag} && git push origin ${tag}`)
+    run(`cd ${mod.dest} && git tag ${tag} && git push hub ${tag}`)
   }
 }
   break

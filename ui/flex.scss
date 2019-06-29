@@ -15,6 +15,10 @@
   flex-direction: column
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-wrap {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;

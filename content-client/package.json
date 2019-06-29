@@ -1,11 +1,11 @@
 {
   "name": "@mna/content-client",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "dependencies": {
-    "@mna/api": "1.x",
-    "@mna/dom": "1.x",
-    "@mna/utils": "1.x"
+    "@mna/api": "2.x",
+    "@mna/dom": "2.x",
+    "@mna/utils": "2.x"
   },
   "files": [
     "**/*.js"

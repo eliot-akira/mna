@@ -1,15 +1,15 @@
 {
   "name": "@mna/react-client",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@mna/content-client": "1.x",
-    "@mna/logger": "1.x",
-    "@mna/react": "1.x",
-    "@mna/socket": "1.x",
-    "@mna/store": "1.x",
-    "@mna/utils": "1.x"
+    "@mna/content-client": "2.x",
+    "@mna/logger": "2.x",
+    "@mna/react": "2.x",
+    "@mna/socket": "2.x",
+    "@mna/store": "2.x",
+    "@mna/utils": "2.x"
   },
   "files": [
     "**/*.js"

@@ -1,13 +1,13 @@
 {
   "name": "@mna/content-server",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "dependencies": {
-    "@mna/auth": "1.x",
-    "@mna/db": "1.x",
-    "@mna/fsp": "1.x",
-    "@mna/store": "1.x",
-    "@mna/utils": "1.x",
+    "@mna/auth": "2.x",
+    "@mna/db": "2.x",
+    "@mna/fsp": "2.x",
+    "@mna/store": "2.x",
+    "@mna/utils": "2.x",
     "cookie": "^0.3.1"
   },
   "files": [

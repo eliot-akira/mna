@@ -5,12 +5,14 @@ export function getCookie(name) {
   if (parts.length == 2) return parts.pop().split(';').shift()
 }
 
-export function setCookie(name, value) {
-  document.cookie = `${name}=${value}; Path=/;`
+const withRootDomain = domain => domain ? ` Domain=${domain};` : ''
+
+export function setCookie(name, value, rootDomain) {
+  document.cookie = `${name}=${value}; Path=/;`+withRootDomain(rootDomain)
 }
 
-export function deleteCookie(name) {
+export function deleteCookie(name, rootDomain) {
   const cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
-  document.cookie = cookie
+  document.cookie = cookie //+withRootDomain(rootDomain)
   document.cookie = `${cookie} Domain=.${window.location.hostname}` // CloudFlare
 }

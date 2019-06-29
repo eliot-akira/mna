@@ -7,6 +7,7 @@ import { deleteCookie } from '@mna/dom/cookie'
 export const createState = () => ({
   content: {},
   user: null,
+  cookieRootDomain: false,
 
   // See: react/withRouteData
   siteContext: {},
@@ -16,13 +17,17 @@ export const createState = () => ({
 
 export const actions = {
 
+  setCookieRootDomain: ({ args, setState }) => setState({
+    cookieRootDomain: args[0]
+  }),
+
   api: ({ type, action, data }) => api.post('/api', {
     type,
     action,
     data
   }),
 
-  login: ({ data, setState }) => api.post('/api', {
+  login: ({ data, state, setState }) => api.post('/api', {
     type: 'user',
     action: 'login',
     data
@@ -38,18 +43,18 @@ export const actions = {
     })
   ,
 
-  logout: ({ setState }) => api.post('/api', {
+  logout: ({ state, setState }) => api.post('/api', {
     type: 'user',
     action: 'logout'
   })
     .then(res => {
       setState({ user: null })
-      deleteCookie('jwt')
+      deleteCookie('jwt', state.cookieRootDomain)
     })
     .catch(e => {
       console.log('Logout fail', e)
       setState({ user: null })
-      deleteCookie('jwt')
+      deleteCookie('jwt', state.cookieRootDomain)
     })
   ,
 

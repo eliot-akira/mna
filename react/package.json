@@ -1,21 +1,22 @@
 {
   "name": "@mna/react",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "dependencies": {
-    "@mna/api": "1.x",
-    "@mna/event": "1.x",
-    "@mna/logger": "1.x",
-    "@mna/schema": "1.x",
-    "@mna/store": "1.x",
+    "@mna/api": "2.x",
+    "@mna/event": "2.x",
+    "@mna/logger": "2.x",
+    "@mna/schema": "2.x",
+    "@mna/store": "2.x",
+    "@mna/utils": "2.x",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0"
+    "react": "16.x",
+    "react-dom": "16.x",
+    "react-helmet": "5x",
+    "react-router": "5.x",
+    "react-router-dom": "5.x"
   },
   "files": [
     "**/*.js"

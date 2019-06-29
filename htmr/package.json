@@ -1,8 +1,8 @@
 {
   "name": "@mna/htmr",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "dependencies": {
-    "@mna/react-ui": "1.x"
+    "@mna/react-ui": "2.x"
   },
   "files": [
     "**/*.js"

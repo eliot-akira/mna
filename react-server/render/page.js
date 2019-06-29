@@ -30,6 +30,7 @@ export default async function renderPage({ markup, assets, splitPoints, initStat
   // context.splitPoints contains split chunk names after render
   // Request them already in page, faster than client async load
   const bundles = splitPoints.map((name, index) => {
+
     if (assets[`${name}.js`]) {
       return `<script src="${ assets[`${name}.js`] }" defer></script>`
     }

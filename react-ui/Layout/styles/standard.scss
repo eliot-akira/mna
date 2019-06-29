@@ -2,11 +2,22 @@
 // With no sidebar
 
 .site-layout-standard {
+
   .site-main {
     @extend .flex, .flex-column;
     .site-main-body {
-      @extend .flex-grow, .h-100;
-      max-width: 100%;
+      @extend .flex-grow;
+    }
+  }
+
+
+  .site-header-inner {
+    @extend .flex, .flex-grow, .w-100, .lg-width, .mx-auto;
+  }
+
+  @include less-than(md) {
+    .site-header-inner {
+      flex-direction: column
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@mna/db",
-  "version": "1.7.8",
+  "version": "2.0.1",
   "main": "index.js",
   "dependencies": {
     "mkdirp": "^0.5.1",
