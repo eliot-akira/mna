@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import withRouteData from './withRouteData'
 
 const lifeCycleHooks = {
   didMount: 'componentDidMount',
@@ -13,6 +14,7 @@ const withState = ({
   actions = {},
   actionContext,
   withProps,
+  withRouteData: routeDataProvider,
   ...lifecycle
 }) => C => {
 
@@ -77,7 +79,8 @@ const withState = ({
       actions: this.actions,
       setState: this.setState,
       createState: this.createState,
-      ...this.actionContext
+      ...this.actionContext,
+      ...this.props
     })
 
     render() {
@@ -96,6 +99,10 @@ const withState = ({
   Object.keys(C).forEach(key => {
     StatefulComponent[key] = C[key]
   })
+
+  if (routeDataProvider) {
+    return withRouteData(routeDataProvider)(StatefulComponent)
+  }
 
   return StatefulComponent
 }

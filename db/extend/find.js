@@ -13,7 +13,8 @@ module.exports = function extendFind({ db, instance }) {
   db.find = (extendedQuery = {}, options = {}) => new Promise((resolve, reject) => {
 
     const {
-      $page, $pageMax = 10,
+      $page,
+      $pageMax = 10,
       $sort, $skip,
       $include, $exclude, // Fields
       $projection = options.projection,

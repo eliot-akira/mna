@@ -8,7 +8,8 @@ export const initUser = async({ setState, actions, config }) => {
     type: 'user',
 
     permissions: [
-      'admin'
+      'admin',
+      //'self'
       // TODO: { role: 'self', actions: ['findOne', 'update', 'register'] }
     ],
 

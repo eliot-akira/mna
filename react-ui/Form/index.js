@@ -60,7 +60,7 @@ export default class Form extends Component {
 
   render() {
 
-    const { id, className, fields = {}, onChange, onValidate, children } = this.props
+    const { id, className, fields = {}, onChange, onValidate, children, autoComplete = true } = this.props
     const validateOnRender = false //this.mounted && onChange && onValidate
     const invalidFields = validateOnRender
       ? onValidate({
@@ -75,6 +75,7 @@ export default class Form extends Component {
         className={className || ''}
         onSubmit={this.onSubmit}
         onChange={this.onChange}
+        autoComplete={autoComplete ? 'true' : 'off'}
       >{
           children instanceof Function ? children({
             ...this.state,

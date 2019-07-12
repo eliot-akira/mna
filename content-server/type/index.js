@@ -19,7 +19,7 @@ export const createType = async (props) => {
     middlewares = [],
     ensureIndex = [], // [ { fieldName, expireAfterSeconds? } ]
     logger = false,
-    timestamp = props.logger ? true : false, // Automatic timestamp fields: created & updated
+    timestamp = true //props.logger ? true : false, // Automatic timestamp fields: created & updated
   } = props
 
   // Set from init

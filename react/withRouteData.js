@@ -9,18 +9,21 @@ async function ensureRouteData(props) {
   const {
     actions, state, setState,
     api, user,
+    siteName = 'unknown',
     routeName,
     createKey,
     getRouteData,
     isServer
   } = props
 
-  const key = !createKey ? routeName : createKey(props)
+  // Must be the same as in RouteDataProvider
+  const key = !createKey ? `${siteName}/${routeName}` : createKey(props)
 
   let currentRouteData = state.routeData[key]
   if (currentRouteData) return currentRouteData
 
   if (state.fetchingRouteData && state.fetchingRouteData[key]) {
+    //log('Route data fetching', key)
     return
   }
 
@@ -30,6 +33,8 @@ async function ensureRouteData(props) {
   }
 
   setState({ fetchingRouteData: { ...state.fetchingRouteData, [key]: true } })
+
+  //log('Fetch route data', key)
 
   currentRouteData = await getRouteData({ key, ...props }) || {}
   const { context: siteContext = {} } = currentRouteData
@@ -42,17 +47,21 @@ async function ensureRouteData(props) {
     fetchingRouteData: { ...state.fetchingRouteData, [key]: false }
   })
 
+  //log('Return route data', key)
   return currentRouteData
 }
 
-const withRouteData = (ensurerProps) => C => {
+const withRouteData = (ensurerPropsOrFn) => C => {
+
+  const ensurerProps = ensurerPropsOrFn instanceof Function
+    ? { getRouteData: ensurerPropsOrFn }
+    : ensurerPropsOrFn
 
   class RouteDataProvider extends Component {
 
     static serverAction = async (props) => {
 
       //log('RouteDataProvider.serverAction')
-
       await ensureRouteData({ ...ensurerProps, ...props, isServer: true })
     }
 
@@ -75,13 +84,14 @@ const withRouteData = (ensurerProps) => C => {
 
       const {
         state,
+        siteName = 'unknown',
         routeName,
         createKey,
       } = this.props
-    
-      const key = !createKey ? routeName : createKey(this.props)
+
+      const key = !createKey ? `${siteName}/${routeName}` : createKey(this.props)
       const routeData = state.routeData[key]
-    
+
       return <C {...{ routeData, ...this.props }} />
     }
   }
