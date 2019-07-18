@@ -19,7 +19,7 @@ export default function createRoute({ server, content, auth, actions }) {
         { message: e }
         : e)
 
-      send(res, status.error, error)
+      send(res, error.code || status.error, error)
     }
   })
 }
