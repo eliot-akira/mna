@@ -1,9 +1,9 @@
 
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif !default;
-$light-font-weight: 300;
-$normal-font-weight: 400;
-$bold-font-weight: 600;
-$strong-font-weight: 600;
+$light-font-weight: 300 !default;
+$normal-font-weight: 400 !default;
+$bold-font-weight: 600 !default;
+$strong-font-weight: 600 !default;
 $letter-spacing: -0.016rem !default;
 
 @font-face {

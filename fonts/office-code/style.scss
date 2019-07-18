@@ -2,14 +2,10 @@
 $monospace-font-family:
 "Office Code Pro", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !default;
 
-code {
-font-weight: 400;
-}
-pre > code {
-font-weight: 400;
+code, pre > code {
+  font-weight: 300;
 }
 
-/* source-code-pro-regular - latin */
 @font-face {
 font-family: 'Office Code Pro';
 font-style: normal;
@@ -19,7 +15,6 @@ src: local('Office Code Pro'), local('OfficeCodePro-Regular'),
      url('OfficeCodePro-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-/* source-code-pro-300 - latin */
 @font-face {
 font-family: 'Office Code Pro';
 font-style: normal;
