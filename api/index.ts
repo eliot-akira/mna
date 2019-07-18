@@ -1,4 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+
+type ApiMethod = (route: string, params: any, options?: any) => Promise<any>
 
 class API {
 
@@ -13,7 +15,13 @@ class API {
   mock: boolean
   mockApi: (req: { method: string, route: string, params: any }) => any
 
-  //[method: string]: (route: string, params: any, options?: any) => Promise<any>
+  get: ApiMethod
+  post: ApiMethod
+  put: ApiMethod
+  delete: ApiMethod
+
+  // TypeScript can't use index signature for class instance..
+  //[method: string]: ApiMethod //(route: string, params: any, options?: any) => Promise<any>
 
   constructor(props: any = {}) {
 
@@ -22,16 +30,21 @@ class API {
       prefix = '',
       options = {},
       mock,
-      methods = ['get', 'post', 'put', 'delete']
+      //methods = ['get', 'post', 'put', 'delete']
     } = props
 
     this.props = { url, prefix, options, mock }
     this.mock = mock ? true : false
     this.mockApi = mock || (async () => ({}))
 
-    methods.forEach((method: string) =>
-      this[method] = (route: string, ...args) => this.request(method, route, ...args)
-    )
+    // methods.forEach((method: string) =>
+    //   this[method] = (route: string, ...args) => this.request(method, route, ...args)
+    // )
+
+    this.get = (route, ...args) => this.request('get', route, ...args)
+    this.post = (route, ...args) => this.request('post', route, ...args)
+    this.put = (route, ...args) => this.request('put', route, ...args)
+    this.delete = (route, ...args) => this.request('delete', route, ...args)
   }
 
   init() {
@@ -65,7 +78,7 @@ class API {
           const { data } = response
           resolve(data)
         })
-        .catch(error => {
+        .catch((error: AxiosError) => {
 
           // https://github.com/axios/axios#handling-errors
 
@@ -101,17 +114,8 @@ class API {
  * Set default options for subsequent requests
  * For example, to set absolute URL for server-side requests
  */
-function setDefaultOptions(options) {
+function setDefaultOptions(options: any) {
   Object.assign(API.defaultOptions, options)
-}
-
-interface APIInterface {
-  // Methods
-  [method: string]: (
-    route: string,
-    params?: { [key: string]: any },
-    options?: { [key: string]: any }
-  ) => Promise<any>,
 }
 
 const api = new API()
