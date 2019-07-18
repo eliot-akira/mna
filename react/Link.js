@@ -31,11 +31,13 @@ export default function Link({ href, to, children = [], ...props }) {
       const routeName = location.pathname.replace(/\/$/, '')
         || '/'
 
-      if (props.exact) return routeName===target
+      const targetRouteName = target.replace(/\/$/, '') || '/'
+
+      if (props.exact) return routeName===targetRouteName
 
       const len = target.length
 
-      return routeName.substring(0, len)===target
+      return routeName.substring(0, len)===targetRouteName
         && (!routeName[len] || routeName[len]==='/')
     }
   }} />
