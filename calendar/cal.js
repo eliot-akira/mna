@@ -8,6 +8,7 @@ const isFutureDate = require('date-fns/is_future')
 const isPastDate = require('date-fns/is_past')
 const isTodayDate = require('date-fns/is_today')
 const isValidDateCheck = require('date-fns/is_valid')
+const differenceInDays = require('date-fns/difference_in_days')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -24,7 +25,26 @@ const toPlainObject = (day, defaultKey = 'day') =>
 const toDate = (day) =>
   day instanceof Date
     ? day
-    : new Date(day.year, day.month - 1, day.day)
+    : Array.isArray(day)
+      ? new Date(day[0], day[1] - 1, day[2])
+      : typeof day==='object'
+        ? new Date(day.year, day.month - 1, day.day)
+        : (() => {
+          const len = day.length
+          let y, m, d
+          if (len===8) {
+            // YYYYMMDD
+            y = day.slice(0, 4)
+            m = day.slice(4, 6)
+            d = day.slice(6, 8)
+          } else {
+            // Assume YYYY-MM-DD
+            const dayParts = day.split(' ')
+            const dayPart = dayParts[0]
+            ;[ y, m, d ] = dayPart.split('-')
+          }
+          return new Date(y, m - 1, d)
+        })()
 
 const isFuture = d => isFutureDate(toDate(d))
 const isPast = d => isPastDate(toDate(d))
@@ -49,6 +69,7 @@ const isValidDate = d => {
   return isValid
 }
 
+const diffDays = (d1, d2) => differenceInDays(toDate(d1), toDate(d2))
 
 const getMonthName = arg =>
   monthNames[
@@ -126,6 +147,9 @@ module.exports = {
   isPast,
   isToday,
   isValidDate,
+
+  toDate,
+  diffDays,
 
   getDayData,
   getMonthData,
