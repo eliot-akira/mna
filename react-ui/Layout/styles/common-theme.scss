@@ -1,5 +1,8 @@
 
 .site-header {
+  .site-header-inner-pad {
+    width: 100%;
+  }
   .header-title {
 
     @extend .h3;
@@ -43,7 +46,7 @@
     color: $site-header-menu-content-text-color;
     background-color: $site-header-menu-content-bg-color;
     //font-size: .9rem;
-    a { cursor: default }
+    a { cursor: pointer }
   }
 }
 
@@ -75,8 +78,9 @@
   }
 
   .site-layout-standard .site-header {
-
-    padding: $space-1 $space-2;
+    .site-header-inner-pad {
+      padding: $space-1 .75rem;
+    }
 
     .header-title, .header-menu-content {
       //color: #fff;

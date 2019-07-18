@@ -64,8 +64,7 @@ body { overflow: hidden }
   }
 
   .header-menu-item a {
-    padding-left:  .75rem;
-    padding-right:  .75rem;
+    padding: 1px .75rem;
   }
 
   .header-menu-item .header-menu-item a {
@@ -79,10 +78,12 @@ body { overflow: hidden }
 }
 
 .header-menu-section-title {
-  @extend .pt-1, .border-bottom, .color-gray, .text-small;
+  @extend .pt-1, .border-bottom, .text-small;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: .25rem;
   padding-left: .75rem;
   text-transform: uppercase;
-  letter-spacing: .03rem;
+  letter-spacing: .044rem; // .03rem
   font-size: .8rem;
 }
 .header-menu-item:first-of-type .header-menu-section-title {
@@ -108,7 +109,7 @@ body { overflow: hidden }
   .header-menu {
     a {
       display: block;
-      padding: .125rem .5rem;
+      padding: 0 .5rem; // .125rem
     }
   }
 

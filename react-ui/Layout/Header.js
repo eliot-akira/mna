@@ -79,21 +79,23 @@ const HeaderMenu = ({
 
 const Header = ({ isHeaderMenuOpen, closeHeaderMenu, toggleHeaderMenu, menuTitle, menuItems, menuCenter, menuRoot }) =>
   <header className={`site-header`}>
-    <div className="site-header-inner">
-      <HeaderTitle {...{
-        menuTitle, menuCenter,
-        isHeaderMenuOpen,
-        closeHeaderMenu,
-        toggleHeaderMenu
-      }}/>
-      { !menuCenter ? null
-        :
-        <div className="header-center md-show">{menuCenter}</div>
-      }
-      <HeaderMenu {...{
-        menuItems, menuRoot,
-        closeHeaderMenu
-      }}/>
+    <div className="site-header-inner-pad">
+      <div className="site-header-inner">
+        <HeaderTitle {...{
+          menuTitle, menuCenter,
+          isHeaderMenuOpen,
+          closeHeaderMenu,
+          toggleHeaderMenu
+        }}/>
+        { !menuCenter ? null
+          :
+          <div className="header-center md-show">{menuCenter}</div>
+        }
+        <HeaderMenu {...{
+          menuItems, menuRoot,
+          closeHeaderMenu
+        }}/>
+      </div>
     </div>
   </header>
 

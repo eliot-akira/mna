@@ -30,21 +30,23 @@ export default class Layout extends Component {
 
     const { isHeaderMenuOpen } = this.state
 
+    const header = !withHeader ? null :
+      <Header {...{
+        menuTitle, menuCenter, menuRoot,
+        menuItems,
+        isHeaderMenuOpen,
+        toggleHeaderMenu: this.toggleHeaderMenu,
+        closeHeaderMenu: this.closeHeaderMenu,
+      }} />
+
     return (
       <div className={`site site-layout-${type}${isHeaderMenuOpen ? ' is-header-menu-open' : ''}`}>
-        { !withHeader ? null :
-          <Header {...{
-            menuTitle, menuCenter, menuRoot,
-            menuItems,
-            isHeaderMenuOpen,
-            toggleHeaderMenu: this.toggleHeaderMenu,
-            closeHeaderMenu: this.closeHeaderMenu,
-          }} />
-        }
+        { header /*type!=='standard' ? header : null*/ }
         <Body {...{
           location,
           onRouteEnter,
-          footer: <Footer>{footer}</Footer>
+          footer: <Footer>{footer}</Footer>,
+          //header: type==='standard' ? header : null
         }}>
           { children }
         </Body>

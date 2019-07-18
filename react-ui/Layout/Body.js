@@ -22,7 +22,7 @@ class Body extends Component {
   }
 
   render() {
-    const { children, location, onRouteEnter, footer } = this.props
+    const { children, location, onRouteEnter, header, footer } = this.props
     return (
       <main id="content"
         className="site-main"

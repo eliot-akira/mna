@@ -4,15 +4,22 @@
 .site-layout-standard {
 
   .site-main {
-    @extend .flex, .flex-column;
-    .site-main-body {
+    @extend .flex, .flex-column, .relative;
+    .site-main-body, .site-main-body-wrap {
       @extend .flex-grow;
     }
   }
 
-
+  .site-header-inner-pad {
+    @extend .w-100;
+  }
   .site-header-inner {
-    @extend .flex, .flex-grow, .w-100, .lg-width, .mx-auto;
+    @extend .flex, .flex-grow, .w-100; //, .lg-width, .mx-auto;
+  }
+
+  .site-main-body-wrap {
+    position: relative;
+    @extend .flex, .flex-column, .flex-grow, .relative;
   }
 
   @include less-than(md) {
@@ -26,7 +33,7 @@
 
   .site-layout-standard .site-header {
 
-    padding: $space-1 $space-2;
+    //padding: $space-1 $space-2;
     flex-direction: row;
 
     .header-title, .header-menu {

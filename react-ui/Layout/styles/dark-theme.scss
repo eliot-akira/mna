@@ -5,8 +5,10 @@ $site-header-text-color: $white !default;
 $site-header-menu-content-bg-color: $dark-gray-blue  !default; // $light-, gray-blue
 $site-header-menu-content-text-color: #fafafa !default;
 
-$site-header-menu-item-hover-bg-color: rgba(0,0,0,.4) !default;
-$site-header-menu-item-active-bg-color: rgba(0,0,0,.4) !default;
+// $site-header-menu-item-hover-bg-color: rgba(0,0,0,.4) !default;
+// $site-header-menu-item-active-bg-color: rgba(0,0,0,.4) !default;
+$site-header-menu-item-hover-bg-color: rgba(171, 198, 255, 0.1) !default;
+$site-header-menu-item-active-bg-color: rgba(171, 198, 255, 0.2) !default;
 
 $site-header-menu-hr-color: rgba(255, 255, 255, .2) !default;
 
