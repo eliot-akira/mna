@@ -1,6 +1,6 @@
 import Layout from './index'
 
 export default (props) => <Layout {...{
-  ...props,
-  type: 'with-sidebar'
+  type: 'with-sidebar',
+  ...props
 }} />

@@ -21,7 +21,8 @@ tr:last-child td {
 
 // Task list
 
-$task-list-item-checkbox-width: 19px;
+$task-list-item-checkbox-width: 19px !default;
+$task-list-item-checkbox-margin-right: .1rem !default;
 
 .task-list-item {
   list-style-type: none;
@@ -44,6 +45,6 @@ li .task-list-item {
 }
 
 .task-list-item-checkbox {
-  margin-right: .1rem !important;
+  margin-right: $task-list-item-checkbox-margin-right !important;
   margin-bottom: .1rem;
 }

@@ -137,10 +137,12 @@ async function run({
       : target
 
     if (event && event==='unlink') {
-      // Remove
+
       //console.log('Remove previous generated', targetPath)
       await fs.remove(targetPath)
-      //continue
+
+      // Regenerate only indexes, not the removed item
+      if (!items) continue
     }
 
     const fn = fns[i]

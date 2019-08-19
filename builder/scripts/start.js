@@ -33,7 +33,7 @@ const start = async () => {
   */
   const hmrPath = path.dirname(require.resolve('webpack-hot-middleware'))
   const hmrEntry = path.join(hmrPath, 'client')
-    +`?reload=true&path=http://localhost:${WEBPACK_PORT}/__webpack_hmr`
+    +`?path=http://localhost:${WEBPACK_PORT}/__webpack_hmr` // reload=true&
 
   clientConfig.entry.bundle = [
     hmrEntry,

@@ -1,4 +1,4 @@
-import { Component } from '@mna/react'
+import { Component, classnames as cx } from '@mna/react'
 import Header from './Header'
 import Body from './Body'
 import Footer from './Footer'
@@ -22,6 +22,7 @@ export default class Layout extends Component {
       type = 'standard',
       withHeader = true,
       location,
+      layoutClassName,
       menuTitle, menuItems, menuCenter, menuRoot,
       children,
       footer,
@@ -40,7 +41,11 @@ export default class Layout extends Component {
       }} />
 
     return (
-      <div className={`site site-layout-${type}${isHeaderMenuOpen ? ' is-header-menu-open' : ''}`}>
+      <div className={cx(
+        'site',
+        `site-layout-${type}${isHeaderMenuOpen ? ' is-header-menu-open' : ''}`,
+        layoutClassName
+      )}>
         { header /*type!=='standard' ? header : null*/ }
         <Body {...{
           location,

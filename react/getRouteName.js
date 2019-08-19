@@ -1,5 +1,5 @@
 
-const getRouteName = ({ location }) => {
+const getRouteName = ({ location = '' }) => {
 
   const pathname = typeof location==='string'
     ? location // From server router

@@ -42,11 +42,10 @@ const build = async () => {
   await generateProductionServerPackage({ paths })
 
   logMessage('Done!', 'info')
-
+  process.exit()
 }
 
 build()
-  .then(() => process.exit(0))
   .catch(console.error)
 
 async function generateProductionServerPackage({ paths }) {

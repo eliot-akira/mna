@@ -28,6 +28,8 @@ body { overflow: hidden }
   display: flex;
   flex-direction: column;
 
+  font-size: .9rem;
+
   .header-title {
     display: flex;
     align-items: center;
@@ -88,6 +90,12 @@ body { overflow: hidden }
 }
 .header-menu-item:first-of-type .header-menu-section-title {
   @extend .pt-0;
+}
+
+.article-width {
+  & > h1:first-child {
+    @extend .mt-0;
+  }
 }
 
 @include less-than( md ) {

@@ -1,6 +1,6 @@
 {
   "name": "@mna/react-server",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "2.x",
@@ -12,8 +12,8 @@
     "@mna/socket": "2.x",
     "@mna/store": "2.x",
     "@mna/utils": "2.x",
-    "dotenv": "^6.2.0",
-    "source-map-support": "^0.5.9"
+    "dotenv": "^8.1.0",
+    "source-map-support": "^0.5.13"
   },
   "peerDependencies": {
     "@mna/react-client": "2.x"

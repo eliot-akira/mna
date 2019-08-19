@@ -4,8 +4,9 @@ import withRouteData from './withRouteData'
 const lifeCycleHooks = {
   didMount: 'componentDidMount',
   willUnmount: 'componentWillUnmount',
+  shouldUpdate: 'shouldComponentUpdate',
   didUpdate: 'componentDidUpdate',
-  shouldUpdate: 'shouldComponentUpdate'
+  willUpdate: 'componentWillUpdate'
 }
 
 const withState = ({
@@ -64,8 +65,8 @@ const withState = ({
       }, {})
 
       Object.keys(lifecycle).forEach(key => {
-        if (!lifeCycleHooks[key]) return
-        this[ lifeCycleHooks[key] ] = (...args) => lifecycle[key]({
+        //if (!lifeCycleHooks[key]) return
+        this[ lifeCycleHooks[key] || key ] = (...args) => lifecycle[key]({
           ...this.getStateProps(),
           withProps,
           ...this.props
