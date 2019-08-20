@@ -67,7 +67,7 @@ const filteredModules = (args) =>
         //return name.indexOf(arg)===0 // Match beginning of name
 
         // TODO: Support wildcard
-        return name===arg || aliases.includes(arg)
+        return name===arg || aliases.includes(arg) || name.indexOf(arg)===0
 
       }, false)
       return shouldKeep
