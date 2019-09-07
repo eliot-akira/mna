@@ -15,7 +15,11 @@ export default function createRouteHandler({
 
   const findMappedRouteData = props => {
 
-    const { siteName = '' } = props // From react-client, react-server/render
+    const {
+      siteName = '',
+      routeName: originalRouteName
+    } = props // From react-client, react-server/render
+
     const routeName = stripEndSlash(
       filterRouteName
         ? filterRouteName({
@@ -109,7 +113,16 @@ export default function createRouteHandler({
       notFound = true
     }
 
-    cache[siteAndRouteName] = { Route, siteName, routeName, Item, meta, notFound, filterRouteName }
+    cache[siteAndRouteName] = {
+      Route,
+      siteName,
+      routeName,
+      Item,
+      meta,
+      notFound,
+      filterRouteName,
+      originalRouteName
+    }
 
     return cache[siteAndRouteName]
   }
@@ -126,7 +139,8 @@ export default function createRouteHandler({
       { path: '/*', render,
         // Used by react-server/render/serverActions
         findRoute: props => {
-          const { Item } = findMappedRouteData(props)
+          const { Item, routeName } = findMappedRouteData(props)
+          Item.routeName = routeName
           return Item
         }
       },

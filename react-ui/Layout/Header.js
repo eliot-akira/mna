@@ -27,6 +27,9 @@ const HeaderTitle = ({
 
 const withMenuRoot = (to, menuRoot) => {
 
+  // Skip external links
+  if (to.indexOf(':')>=0) return to
+
   const route = to[0]==='/' ? to : (
     menuRoot[ menuRoot.length - 1 ]==='/'
       ? menuRoot

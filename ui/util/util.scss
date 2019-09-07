@@ -16,10 +16,14 @@
 
 .text-small   { font-size: $body-font-size * 0.9; }
 .text-smaller   { font-size: $body-font-size * 0.75; }
+.text-size-normal { font-size: 1rem; }
 .text-big   { font-size: $body-font-size * 1.1; }
 .text-serif { font-family: $serif-font-family }
 .text-code {
   font-family: $monospace-font-family;
+}
+.text-body-font {
+  font-family: $font-family;
 }
 
 .nowrap { white-space: nowrap }

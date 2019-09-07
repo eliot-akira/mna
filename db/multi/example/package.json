@@ -1,0 +1,16 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "rm example.db; echo 'Run npm stop to end the processes'; NEDB_MULTI_PORT=3333 pm2 start ecosystem.config.js",
+    "stop": "pm2 kill"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pm2": "^2.4.6"
+  }
+}

@@ -4,20 +4,37 @@ import { Component } from '@mna/react'
 
 const log = (...args) => console.log('withRouteData', ...args)
 
+function createKeyWithDefault(props) {
+
+  const {
+    createKey,
+    siteName = 'unknown',
+    routeName, // See createRouteHandler
+  } = props
+
+  return !createKey ? `${siteName}/${
+    routeName
+  }` : createKey(props)
+}
+
 async function ensureRouteData(props) {
 
   const {
-    actions, state, setState,
+    state: localState, setState: localSetState,
+    app = {}, // App-wide state/setState
     api, user,
     siteName = 'unknown',
-    routeName,
+    routeName, originalRouteName,
     createKey,
     getRouteData,
     isServer
   } = props
 
+  const state = app.state || localState
+  const setState = app.setState || localSetState
+
   // Must be the same as in RouteDataProvider
-  const key = !createKey ? `${siteName}/${routeName}` : createKey(props)
+  const key = createKeyWithDefault(props)
 
   let currentRouteData = state.routeData[key]
   if (currentRouteData) return currentRouteData
@@ -27,12 +44,15 @@ async function ensureRouteData(props) {
     return
   }
 
+  if (state.routeData && state.routeData[key]) return state.routeData[key]
+
   if (!api) {
     log('No api')
     return
   }
 
   setState({ fetchingRouteData: { ...state.fetchingRouteData, [key]: true } })
+
 
   //log('Fetch route data', key)
 
@@ -60,7 +80,6 @@ const withRouteData = (ensurerPropsOrFn) => C => {
   class RouteDataProvider extends Component {
 
     static serverAction = async (props) => {
-
       //log('RouteDataProvider.serverAction')
       await ensureRouteData({ ...ensurerProps, ...props, isServer: true })
     }
@@ -83,14 +102,15 @@ const withRouteData = (ensurerPropsOrFn) => C => {
     render() {
 
       const {
-        state,
+        state, setState,
         siteName = 'unknown',
-        routeName,
+        routeName, originalRouteName,
         createKey,
       } = this.props
 
-      const key = !createKey ? `${siteName}/${routeName}` : createKey(this.props)
+      const key = createKeyWithDefault(this.props)
       const routeData = state.routeData[key]
+      //const clearRouteData = () => setState({ routeData: { ...routeData, [key]: null } })
 
       return <C {...{ routeData, ...this.props }} />
     }

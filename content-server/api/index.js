@@ -41,7 +41,7 @@ export async function api(props) {
   try {
     return await types[type][action](actionProps)
   } catch (e) {
-    log('Error', { type, action, data }, e)
+    console.error('@mna/content-server/api', { type, action, data }, e)
     throw e
   }
 }

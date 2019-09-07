@@ -150,6 +150,11 @@ module.exports = function build({ args, options }) {
     execSync(`if [ ! -f ${npmIgnorePath} ]; then echo "*.test.*\\n" >> ${npmIgnorePath}; fi`)
   })
 
+  // Symlink compiled folders to node_modules, so tests can require them
+  const symlinkSrc = path.resolve(dest)
+  const symlinkDest = `${dest}/node_modules/@mna`
+  execSync(`rm ${symlinkDest} 2>/dev/null ; ln -s ${symlinkSrc} ${symlinkDest}`)
+
   // Emit TypeScript declaration files
 
   const tsFiles = glob.sync(`{${

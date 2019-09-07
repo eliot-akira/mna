@@ -14,7 +14,7 @@
     @extend .w-100;
   }
   .site-header-inner {
-    @extend .flex, .flex-grow, .w-100; //, .lg-width, .mx-auto;
+    @extend .flex, .flex-grow, .w-100, .flex-justify; //, .lg-width, .mx-auto;
   }
 
   .site-main-body-wrap {
@@ -37,13 +37,11 @@
     flex-direction: row;
 
     .header-title, .header-menu {
-      width: 50%;
+      width: auto;
     }
     .header-menu {
-
       display: flex;
       align-items: center;
-
       a {
         margin-left: $space-2;
       }

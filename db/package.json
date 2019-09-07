@@ -1,8 +1,9 @@
 {
   "name": "@mna/db",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "main": "index.js",
   "dependencies": {
+    "axon": "^2.0.3",
     "mkdirp": "^0.5.1",
     "neo-async": "^2.6.0",
     "underscore": "^1.9.1"

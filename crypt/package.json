@@ -1,0 +1,12 @@
+{
+  "name": "@mna/crypt",
+  "version": "2.1.0",
+  "main": "index.js",
+  "dependencies": {},
+  "license": "MIT",
+  "author": "Eliot Akira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliot-akira/mna.git"
+  }
+}

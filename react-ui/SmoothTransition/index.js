@@ -30,7 +30,7 @@ class SmoothTransition extends Component {
         location: newProps.location,
         fadeClassName: 'fade-enter'
       }, this.smoothEnter)
-    }, newProps.duration || 150) // Same as CSS transition duration
+    }, newProps.duration || 250) // Same as CSS transition duration
   }
 
   componentWillUnmount() {

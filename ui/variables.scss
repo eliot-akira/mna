@@ -10,7 +10,7 @@ $green: #19a974 !default; // #1abc9c #26BF3A #2ecc40
 $light-green: #89d6a8 !default;
 $yellow: #ffe75d !default; // ffdc00
 $orange: #ff851b !default;
-$red: #e74c3c !default; // #ff4136
+$red: #e74c3c !default; // ff1b1b, #ff4136
 $purple: #9b59b6 !default; // #b10dc9
 
 $navy: #37528A !default; // 415F69 253c52 001f3f 56727C
@@ -145,7 +145,7 @@ $monospace-font-family:
 // Border
 $border-width: 1px !default;
 $border-radius: 4px !default;
-$border-color: $darken-2 !default; //light-gray, darken-2
+$border-color: $silver !default; //light-gray, darken-2
 
 $rule-border-style: solid !default;
 $rule-border-width: $border-width !default;

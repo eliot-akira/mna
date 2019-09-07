@@ -5,6 +5,7 @@ const libs = {
     'api',
     'calendar',
     'content-client',
+    'crypt',
     'dom',
     'event',
     'html',
@@ -20,15 +21,16 @@ const libs = {
   ],
   // Server only
   server: [
+    'db',
     'content-server',
     'fsp',
+    'mailer',
     'react-server',
   ],
   // Libs that don't need to be compiled
   copy: [
     'auth',
     'builder',
-    'db',
     'fonts',
     'gitlib',
     'icons',

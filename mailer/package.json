@@ -1,0 +1,8 @@
+{
+  "name": "@mna/mailer",
+  "version": "2.1.0",
+  "description": "Email transport",
+  "dependencies": {
+    "nodemailer": "*"
+  }
+}

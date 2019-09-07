@@ -14,15 +14,16 @@ tags: [abc, def]
 
 [Link](http://example.com)
 
-<include file="./test-include.md">
-
 `
+
+  // <include file="./test-include.md">
+  // <p>Test include success</p>
+
 
   const snapshot = {
     html:
 `<h1><a name="h1" class="markdown-heading-anchor" href="#"></a>H1</h1>
 <p><a href="http://example.com">Link</a></p>
-<p>Test include success</p>
 `,
     attributes: {
       title: 'Title',

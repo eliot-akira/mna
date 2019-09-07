@@ -1,6 +1,7 @@
 import { Component, Switch, Route } from '@mna/react'
 import SmoothTransition from '@mna/react-ui/SmoothTransition'
 import ScrollTop from '@mna/react-ui/ScrollTop'
+import { scroller } from '@mna/react-ui/Scroll'
 
 class Body extends Component {
 
@@ -13,12 +14,13 @@ class Body extends Component {
     // Enable keyboard scroll upon route render
 
     // https://stackoverflow.com/questions/22109621/keyboard-down-button-does-not-work-when-overflow-is-defined-for-html-body#answer-22126539
-    if (!this.scrollContainer
-      // If another element is focused already
-      || window.document.activeElement
-    ) return
-    this.scrollContainer.tabIndex = '0'
-    this.scrollContainer.focus()
+
+    if (!this.scrollContainer) return
+    // Make sure no other element is focused already
+    if (!window.document.activeElement) {
+      this.scrollContainer.tabIndex = '0'
+      this.scrollContainer.focus()
+    }
   }
 
   render() {

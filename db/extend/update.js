@@ -11,10 +11,13 @@ module.exports = function extendUpdate({ db, instance }) {
         query = id ? { id } : { name }
         props = name ? { name, ...restOfQuery } : restOfQuery
       } else {
-        const { query: updateQuery, ...restOfProps } = query
+        const { query: updateQuery, $upsert, ...restOfProps } = query
         query = updateQuery
         props = restOfProps
         if (!query) {
+          if ($upsert) {
+            return db.create(restOfProps)
+          }
           reject(new Error('Database update needs "id" or "query"'))
           return
         }

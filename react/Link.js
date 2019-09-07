@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 const externalUrl = new RegExp(/^(http:|https:|mailto:|ftp:|tel:)/)
 
-export default function Link({ href, to, children = [], ...props }) {
+export default function Link({ href, to, children = [], exact, ...props }) {
 
   let target = to || href
 
@@ -26,6 +26,7 @@ export default function Link({ href, to, children = [], ...props }) {
     ...props,
     children,
     to: target,
+    exact,
     isActive: (match, location) => {
 
       const routeName = location.pathname.replace(/\/$/, '')
@@ -33,7 +34,7 @@ export default function Link({ href, to, children = [], ...props }) {
 
       const targetRouteName = target.replace(/\/$/, '') || '/'
 
-      if (props.exact) return routeName===targetRouteName
+      if (props.exact!==false) return routeName===targetRouteName
 
       const len = target.length
 

@@ -1,0 +1,6 @@
+{
+  "name": "micro/compress",
+  "dependencies": {
+    "compression": "^1.7.1"
+  }
+}

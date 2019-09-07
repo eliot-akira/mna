@@ -1,8 +1,10 @@
-import React from 'react'
+import { Component } from 'react'
 import ScrollLink from './mixins/scroll-link'
 
-class LinkElement extends React.Component {
-  render = () => (<a {...this.props}>{this.props.children}</a>)
+class LinkElement extends Component {
+  render() {
+    return <a {...this.props}>{this.props.children}</a>
+  }
 }
 
 const Link = ScrollLink(LinkElement)

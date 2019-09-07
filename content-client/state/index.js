@@ -17,10 +17,6 @@ export const createState = () => ({
 
 export const actions = {
 
-  setCookieRootDomain: ({ args, setState }) => setState({
-    cookieRootDomain: args[0]
-  }),
-
   api: ({ type, action, data }) => api.post('/api', {
     type,
     action,
@@ -57,6 +53,15 @@ export const actions = {
       deleteCookie('jwt', state.cookieRootDomain)
     })
   ,
+
+  setCookieRootDomain: ({ args, setState }) => setState({
+    cookieRootDomain: args[0]
+  }),
+
+  // See: react/withRouteData
+  clearRouteData: ({ setState, props }) => {
+    setState({ routeData: {} })
+  },
 
   updateUser: ({ data, state, setState }) => api.post('/api', {
     type: 'user',

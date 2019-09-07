@@ -32,23 +32,48 @@ export default async function handleServerActions({
       const matchKeys = routeKeys.filter(key => route[key]===childRoute[key])
       if (matchKeys.length!==routeKeyLength) continue
 
-      const serverAction =
-        // In the route config
-        childRoute.serverAction
-        // Static property on the component
-        || (childRoute.component && childRoute.component.serverAction)
-        // Static property on dynamically loaded route
-        || (childRoute.findRoute &&
-          (childRoute.findRoute({
-            ...serverActionProps,
-            location: { pathname: location }
-          }) || {}).serverAction
-        )
+      let serverActionComponent, serverAction, routeName = serverActionProps.routeName
+
+      // Check if we have route name set from findRoute
+      if (childRoute.serverAction) {
+        serverAction = childRoute.serverAction
+        serverActionComponent = childRoute
+      } else if (childRoute.component && childRoute.component.serverAction) {
+        serverAction = childRoute.component.serverAction
+        serverActionComponent = childRoute.component
+      } else if (childRoute.findRoute) {
+        serverActionComponent = childRoute.findRoute({
+          ...serverActionProps,
+          location: { pathname: location }
+        }) || {}
+        serverAction = serverActionComponent.serverAction
+
+      }
+
+      if (typeof serverActionComponent.routeName!=='undefined') {
+        routeName = serverActionComponent.routeName
+      }
+
+      // const serverAction =
+      //   // In the route config
+      //   childRoute.serverAction
+      //   // Static property on the component
+      //   || (childRoute.component && childRoute.component.serverAction)
+      //   // Static property on dynamically loaded route
+      //   || (childRoute.findRoute &&
+      //     (childRoute.findRoute({
+      //       ...serverActionProps,
+      //       location: { pathname: location }
+      //     }) || {}).serverAction
+      //   )
 
       if (!serverAction) continue
 
       try {
-        await serverAction(serverActionProps)
+        await serverAction({
+          ...serverActionProps,
+          routeName: serverActionComponent.routeName
+        })
       } catch (e) {
         console.log(`Child route server action error - route ${location}`, e)
       }
