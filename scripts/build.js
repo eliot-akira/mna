@@ -153,7 +153,7 @@ module.exports = function build({ args, options }) {
   // Symlink compiled folders to node_modules, so tests can require them
   const symlinkSrc = path.resolve(dest)
   const symlinkDest = `${dest}/node_modules/@mna`
-  execSync(`rm ${symlinkDest} 2>/dev/null ; ln -s ${symlinkSrc} ${symlinkDest}`)
+  execSync(`rm -rf ${symlinkDest} 2>/dev/null ; ln -s ${symlinkSrc} ${symlinkDest}`)
 
   // Emit TypeScript declaration files
 

@@ -6,7 +6,7 @@ export const addTags = tags => Object.assign(globalTags, tags)
 
 export default function htmr(post, options = {}) {
 
-  const { tags, ...convertOptions } = options
+  const { tags = {}, ...convertOptions } = options
 
   const context = {
     nodeIndex: 0

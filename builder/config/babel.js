@@ -10,10 +10,49 @@ const presets = [
 ]
 
 const plugins = [
-  require.resolve('@babel/plugin-proposal-object-rest-spread'),
-  require.resolve('@babel/plugin-proposal-class-properties'),
+
+  // @see https://github.com/babel/babel/blob/master/packages/babel-preset-stage-0/README.md
+
+  // Stage 1
+
+  // * https://babeljs.io/docs/en/next/babel-plugin-proposal-export-default-from
   require.resolve('@babel/plugin-proposal-export-default-from'),
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-logical-assignment-operators
+  //require.resolve('@babel/plugin-proposal-logical-assignment-operators'),
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-optional-chaining
+  [require.resolve('@babel/plugin-proposal-optional-chaining'), { 'loose': false }],
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-pipeline-operator
+  [require.resolve('@babel/plugin-proposal-pipeline-operator'), { 'proposal': 'minimal' }],
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-nullish-coalescing-operator
+  [require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'), { 'loose': false }],
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-do-expressions
+  require.resolve('@babel/plugin-proposal-do-expressions'),
+
+  // Stage 2
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-export-namespace-from
+  require.resolve('@babel/plugin-proposal-export-namespace-from'),
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-throw-expressions
+  require.resolve('@babel/plugin-proposal-throw-expressions'),
+
+  // Stage 3
+
+  // * Used for route/chunk-splitting
   require.resolve('@babel/plugin-syntax-dynamic-import'),
+
+  // * https://babeljs.io/docs/en/next/babel-plugin-proposal-class-properties
+  [require.resolve('@babel/plugin-proposal-class-properties'), { 'loose': false }],
+
+  // ES2018
+  // * https://babeljs.io/docs/en/next/babel-plugin-proposal-object-rest-spread
+  require.resolve('@babel/plugin-proposal-object-rest-spread'),
+
   [require.resolve('@babel/plugin-transform-runtime'), {
     corejs: 3, // Match useBuiltIns option below
   }],
@@ -34,14 +73,20 @@ const options = {
   plugins,
 }
 
+const presetEnvOptions = {
+  modules: 'commonjs',
+  useBuiltIns: 'usage',
+  corejs: 3,
+}
+
 const clientOptions = {
   ...options,
   presets: [
     [ require.resolve('@babel/preset-env'),
-      { 'modules': 'commonjs',
-        useBuiltIns: 'usage',
-        corejs: 3,
-        'targets': { 'browsers': ['last 2 versions', 'ie >= 9'] }
+      { ...presetEnvOptions,
+        targets: {
+          browsers: ['last 2 versions', 'ie >= 9']
+        }
       }
     ],
     ...presets
@@ -52,10 +97,10 @@ const serverOptions = {
   ...options,
   presets: [
     [ require.resolve('@babel/preset-env'),
-      { 'modules': 'commonjs',
-        useBuiltIns: 'usage',
-        corejs: 3,
-        'targets': { 'node': 'current' }
+      { ...presetEnvOptions,
+        targets: {
+          node: 'current'
+        }
       }
     ],
     ...presets

@@ -18,7 +18,6 @@ function renderNodes(nodes, options = {}) {
 }
 
 function renderTag(tagName, attributes, children, options = {}) {
-
   // Registered tags
   const {
     tags = {},
@@ -51,11 +50,8 @@ function renderTag(tagName, attributes, children, options = {}) {
 }
 
 function renderAttributes(tagName, attributes, options = {}) {
-
   const { keys = [], ...atts } = attributes
-
   keys.forEach(key => atts[key] = true)
-
   return atts
 }
 
