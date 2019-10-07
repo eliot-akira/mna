@@ -37,10 +37,18 @@ const getFiles = () => {
 
 const onError = e => console.error(e)
 
+const getTime = () => {
+  const date = new Date()
+  const str = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
+    .toISOString()
+  return str.slice(0, 10)+' '+str.slice(11, 22)
+}
+
 const done = () => {
 
   if (options['-q']) return
 
+  console.log(getTime())
   console.log(`${colors.gray}Press enter to run again, "r" to reload test paths, "q" to quit${colors.reset}`)
 
   process.stdin.once('data', function (b) {
@@ -50,6 +58,7 @@ const done = () => {
       return
     }
     if (data==='r') getFiles()
+    console.log('-----')
     runTests().catch(onError)
   })
 }
