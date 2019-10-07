@@ -7,8 +7,11 @@ const md = require('markdown-it')({
   //highlight: renderHighLight
 })
   //.use(require('./include'))
-  .use(require('./anchor'))
+
+  // Set attr before anchor to allow specifying anchor name with <!--{name=""}-->
   .use(require('./attr'))
+
+  .use(require('./anchor'))
   .use(require('./taskList'), {
     // Without `disabled` attribute
     enabled: true

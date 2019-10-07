@@ -11,20 +11,31 @@ const slugify = (s) => encodeURIComponent(String(s).trim().toLowerCase().replace
 function makeRule(md, options) {
   return function addHeadingAnchors(state) {
     // Go to length-2 because we're going to be peeking ahead.
-    for (var i = 0; i < state.tokens.length-1; i++) {
+    for (let i = 0; i < state.tokens.length-1; i++) {
       if (state.tokens[i].type !== 'heading_open' ||
           state.tokens[i+1].type !== 'inline') {
         continue
       }
 
-      var headingOpenToken = state.tokens[i+1]
-      var headingInlineToken = state.tokens[i+1]
+      const headingOpenToken = state.tokens[i]
+      const headingInlineToken = state.tokens[i+1]
 
       if (!headingInlineToken.content) {
         continue
       }
 
-      var anchorName = options.slugify(headingInlineToken.content, md)
+      let anchorName
+
+      if (headingOpenToken.attrs) {
+        for (const [key, value] of headingOpenToken.attrs) {
+          if (key==='name') {
+            anchorName = value
+            break
+          }
+        }
+      }
+
+      if (!anchorName) anchorName = options.slugify(headingInlineToken.content, md)
 
       if (options.addHeadingID) {
         state.tokens[i].attrPush(['id', anchorName])
