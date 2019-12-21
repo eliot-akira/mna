@@ -5,8 +5,10 @@ import { scroller } from '@mna/react-ui/Scroll'
 
 class Body extends Component {
 
+  static overrideScrollContainer = false
+
   componentDidMount() {
-    this.focusScrollContainer()
+    if (!Body.overrideScrollContainer) this.focusScrollContainer()
   }
 
   focusScrollContainer = () => {
@@ -25,11 +27,14 @@ class Body extends Component {
 
   render() {
     const { children, location, onRouteEnter, header, footer } = this.props
+    const mainProps = {
+      className: "site-main",
+      ref: el => this.scrollContainer = el
+    }
+    if (!Body.overrideScrollContainer) mainProps.id = 'content'
+
     return (
-      <main id="content"
-        className="site-main"
-        ref={el => this.scrollContainer = el }
-      >
+      <main {...mainProps}>
         <SmoothTransition
           className="site-main-body"
           location={location}
@@ -40,7 +45,7 @@ class Body extends Component {
         >
           {transitLocation =>
             <>
-              <ScrollTop pathname={transitLocation.pathname} />
+              {!Body.overrideScrollContainer && <ScrollTop pathname={transitLocation.pathname} />}
               <Switch location={transitLocation}>
                 { children }
               </Switch>

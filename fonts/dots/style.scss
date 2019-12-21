@@ -1,0 +1,14 @@
+
+@font-face {
+  font-family: 'dots';
+  src: url('dots.eot');
+  src: url('dots.eot?#iefix') format('embedded-opentype'),
+       url('dots.woff') format('woff'),
+       url('dots.ttf') format('truetype'),
+       url('dots.svg#dotsfontregular') format('svg');
+}
+
+.font-dots {
+  font-family: 'dots';
+  color: #666;
+}

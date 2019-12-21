@@ -26,6 +26,7 @@ const libs = {
     'fsp',
     'mailer',
     'react-server',
+    //'tron'
   ],
   // Libs that don't need to be compiled
   copy: [

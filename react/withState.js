@@ -75,13 +75,14 @@ const withState = ({
     }
 
     getStateProps = () => ({
+      ...this.props,
       store: this,
       state: this.state,
       actions: this.actions,
       setState: this.setState,
       createState: this.createState,
       ...this.actionContext,
-      ...this.props
+      // Was: ...this.props,
     })
 
     render() {

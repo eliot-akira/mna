@@ -22,6 +22,11 @@ export default function Link({ href, to, children = [], exact, ...props }) {
     )
   }
 
+  // Add trailing slash
+  if (target.indexOf('.') < 0 && target.substr(-1)!=='/') {
+    target += '/'
+  }
+
   return <NavLink {...{
     ...props,
     children,

@@ -1,8 +1,9 @@
+//const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const baseConfig = require('./server.base')
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true
 
-module.exports = {
+const config = {
   ...baseConfig,
   mode: 'production',
   devtool: generateSourceMap ? 'source-map' : false,
@@ -14,3 +15,7 @@ module.exports = {
     })
   ],
 }
+
+//config.optimization.minimizer = [new UglifyJsPlugin()]
+
+module.exports = config

@@ -16,7 +16,7 @@ const presets = {
       height: '14px',
       width: '14px',
       borderRadius: '50%',
-      backgroundColor: '#737c96'
+      backgroundColor: '#8a95b5'
     }
   }
 }
@@ -27,7 +27,7 @@ export default function createRangeSlider({ className = '', styles = {}, preset 
     ...(preset && presets[preset] ? presets[preset] : {}),
     ...styles
   }
-  
+
   const RangeSlider = ({ value, min, max, onChange, highlighToValue = true }) => {
     if (value < min) value = min
     if (value > max) value = max
@@ -49,7 +49,7 @@ export default function createRangeSlider({ className = '', styles = {}, preset 
                     min,
                     max,
                     ...rangeStyles.trackHighlight,
-                  })                  
+                  })
                 })
               }}
             >

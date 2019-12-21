@@ -27,7 +27,7 @@
     "@mna/react-ui": "2.x",
     "@types/node": "12.x",
     "@types/react": "16.x",
-    "react": "16.x",
-    "react-dom": "16.x"
+    "react": "16.8.x",
+    "react-dom": "16.8.x"
   }
 }

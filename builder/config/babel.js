@@ -21,14 +21,8 @@ const plugins = [
   // https://babeljs.io/docs/en/next/babel-plugin-proposal-logical-assignment-operators
   //require.resolve('@babel/plugin-proposal-logical-assignment-operators'),
 
-  // https://babeljs.io/docs/en/next/babel-plugin-proposal-optional-chaining
-  [require.resolve('@babel/plugin-proposal-optional-chaining'), { 'loose': false }],
-
   // https://babeljs.io/docs/en/next/babel-plugin-proposal-pipeline-operator
   [require.resolve('@babel/plugin-proposal-pipeline-operator'), { 'proposal': 'minimal' }],
-
-  // https://babeljs.io/docs/en/next/babel-plugin-proposal-nullish-coalescing-operator
-  [require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'), { 'loose': false }],
 
   // https://babeljs.io/docs/en/next/babel-plugin-proposal-do-expressions
   require.resolve('@babel/plugin-proposal-do-expressions'),
@@ -42,6 +36,12 @@ const plugins = [
   require.resolve('@babel/plugin-proposal-throw-expressions'),
 
   // Stage 3
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-optional-chaining
+  [require.resolve('@babel/plugin-proposal-optional-chaining'), { 'loose': false }],
+
+  // https://babeljs.io/docs/en/next/babel-plugin-proposal-nullish-coalescing-operator
+  [require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'), { 'loose': false }],
 
   // * Used for route/chunk-splitting
   require.resolve('@babel/plugin-syntax-dynamic-import'),
@@ -85,7 +85,7 @@ const clientOptions = {
     [ require.resolve('@babel/preset-env'),
       { ...presetEnvOptions,
         targets: {
-          browsers: ['last 2 versions', 'ie >= 9']
+          browsers: ["> 0.25%, not dead", "not ie 11", "not op_mini all"] // Was: ['last 2 versions', 'ie >= 9']
         }
       }
     ],

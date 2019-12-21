@@ -1,7 +1,7 @@
 
 $paragraph-font-size: 1rem !default;
-$paragraph-margin-top: 12px !default; // $space-2
-$paragraph-margin-bottom: 12px !default;
+$paragraph-margin-top: $space-2 !default;
+$paragraph-margin-bottom: $space-2 !default;
 
 $list-margin-top: 0 !default;
 $list-margin-bottom: 12px !default; // $space-1
@@ -30,7 +30,7 @@ b {
   font-weight: $bold-font-weight;
 }
 strong {
-  font-weight: strong;
+  font-weight: bold;
 }
 
 $wider-letter-space: .03em;
@@ -119,7 +119,19 @@ img { border-radius: $border-radius; }
     // GitHub style
     padding-bottom: $space-1 / 1.5;
     border-bottom: 1px solid $border-color;
-    text-align: center;
+    text-align: left;
+  }
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  h4, h5, h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  & > h1:first-child,
+  & > h2:first-child {
+    margin-top: 0 !important;
   }
 }
 

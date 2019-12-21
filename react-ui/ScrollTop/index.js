@@ -13,6 +13,7 @@ class ScrollTop extends Component {
   componentDidMount() {
     // Show if scrolled down
     this.container = document.querySelector(`#${this.containerId}`)
+    if (!this.container) return
     this.container.addEventListener('scroll', this.scrollHandler.bind(this))
     this.scrollHandler()
   }

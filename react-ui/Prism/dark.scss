@@ -3,15 +3,15 @@ $prism-bg-color: #171717; // 1c1c1c
 $prism-dark-gray: #5C6370; //777;
 $prism-gray: #999;
 $prism-light-gray: #e1ecff; //abb2bf; //ccc;
-$prism-red: #e06c75; //D27575; // #e2777a
+$prism-red: #e06c75; //e06c75 D27575 e2777a
 $prism-dark-blue: #887bb5;
-$prism-blue: #56a6ed; // 2876ff 61afef 6196cc
+$prism-blue: #61aeef; //  2876ff 61afef 6196cc
 $prism-light-blue: #96beff; //96beff;
-$prism-orange: #cb8f5b; // d19a66 CC8B5E f08d49
-$prism-yellow: #E5C07B; // d7b95b, f8d269, eecc6f, e6c772 f8c555
-$prism-purple: #c678dd; // c678dd B88EC7 cc99cd
-$prism-green: #8dbb6e; // 98c379 8BB56E 7ec699
-$prism-cyan: #56b6c2; //7FD2C7; // #67cdcc
+$prism-orange: #d19a66; // cb8f5b d19a66 CC8B5E f08d49
+$prism-yellow: #ebd17d; // e5cc7b d7b95b, f8d269, eecc6f, e6c772 f8c555
+$prism-purple: #c678dd; // 9b71c6 c678dd B88EC7 cc99cd
+$prism-green: #98c379; // 8dbb6e 8BB56E 7ec699
+$prism-cyan: #55b6c2; //7FD2C7; // #67cdcc
 
 code[class*="language-"],
 pre /*[class*="language-"]*/ {
@@ -24,7 +24,7 @@ pre /*[class*="language-"]*/ {
   word-break: normal;
   word-wrap: normal;
 
-  line-height: 1.5;
+  line-height: 1.55;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -38,14 +38,15 @@ pre /*[class*="language-"]*/ {
 
 /* Code blocks */
 pre /*[class*="language-"]*/ {
-  padding: 0; // .75em 1em;
+  padding: 0; // .75em 1em
   margin: .5em 0;
   overflow: auto;
   display: flex;
 }
 
 pre > code {
-  //padding: .6em .75em;
+  padding: .75em 1em;
+  width: auto;
 }
 
 :not(pre) > code[class*="language-"],
@@ -54,7 +55,7 @@ pre /*[class*="language-"]*/, pre /*[class*="language-"]*/ code {
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code /*[class*="language-"]*/ {
   padding: .1em;
   border-radius: .3em;
   white-space: normal;

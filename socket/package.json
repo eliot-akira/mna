@@ -1,6 +1,6 @@
 {
   "name": "@mna/socket",
-  "version": "2.1.0",
+  "version": "2.1.4",
   "description": "WebSocket client and server",
   "dependencies": {
     "@mna/event": "2.x"

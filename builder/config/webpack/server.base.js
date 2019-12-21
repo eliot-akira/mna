@@ -27,6 +27,7 @@ module.exports = {
       ]
     }),
   ],
+  optimization: {},
   output: {
     path: paths.buildServer,
     filename: 'server.js',

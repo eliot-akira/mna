@@ -4,6 +4,9 @@ import React from 'react'
 import ScrollElement from './mixins/scroll-target'
 import scroller from './mixins/scroller'
 import PropTypes from 'prop-types'
+import { setImmediate } from 'core-js'
+
+let Target
 
 class ElementWrapper extends React.Component{
   componentDidMount() {
@@ -16,7 +19,7 @@ class ElementWrapper extends React.Component{
 
     scroller.scrollTo(target, {
       containerId: 'content',
-      offset: -45
+      offset: Target.offset
     })
   }
 
@@ -43,4 +46,7 @@ ElementWrapper.propTypes = {
   id:   PropTypes.string
 }
 
-export default ScrollElement(ElementWrapper)
+Target = ScrollElement(ElementWrapper)
+Target.offset = -45
+
+export default Target

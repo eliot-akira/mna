@@ -24,13 +24,13 @@ export const a = (props, children, { render }) => {
   }
 
   if (props.href) {
-
     const href = props.href.replace(/^\//, '')
 
     if (href[0]==='#') {
       return <ScrollLink {...{
         ...props,
-        offset: props.offset!=undefined ? props.offset : 12,
+        offset: ScrollTarget.offset!=undefined ? ScrollTarget.offset
+          : props.offset!=undefined ? props.offset : 12,
         href,
         to: href.replace(/^\#/, ''),
       }}>{render(children)}</ScrollLink>

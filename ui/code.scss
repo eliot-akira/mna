@@ -3,7 +3,7 @@ $pre-font-size: .9rem !default;
 $pre-margin-top: 0 !default;
 $pre-margin-bottom: $space-2 !default;
 $pre-border-radius: $border-radius !default;
-$pre-background-color: #fafafa !default;
+$pre-background-color: #f7f7f7 !default;
 
 pre, code {
   background-color: $pre-background-color;
@@ -33,10 +33,18 @@ pre {
 }
 
 code {
-  padding: .2em .3em;
+  margin: 0 .25em;
+  padding: .25em .5em;
+  vertical-align: middle;
 }
 
 pre > code {
-  //padding: 0;
+  margin: 0;
   padding: .75rem $space-2;
+  display: block;
+  width: 100%;
+}
+
+pre, code {
+  font-weight: normal;
 }

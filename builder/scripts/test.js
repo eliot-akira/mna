@@ -12,5 +12,4 @@ module.exports = function runTester(props = {}) {
   require('@babel/register')(babelConfig)
 
   require('@mna/tester/cli')
-
 }

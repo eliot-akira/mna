@@ -55,8 +55,14 @@ async function ensureRouteData(props) {
 
 
   //log('Fetch route data', key)
+  try {
+    currentRouteData = await getRouteData({ key, ...props }) || {}
+  } catch(e) {
+    log('Failed to get route data', key)
+    console.error(e)
+    currentRouteData = {}
+  }
 
-  currentRouteData = await getRouteData({ key, ...props }) || {}
   const { context: siteContext = {} } = currentRouteData
 
   setState({
