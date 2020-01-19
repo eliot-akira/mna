@@ -1,5 +1,7 @@
+import parse from './parse'
+import render from './render'
 
-module.exports = {
-  parse: require('./parse'),
-  render: require('./render')
+export {
+  parse,
+  render
 }

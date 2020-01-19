@@ -21,6 +21,6 @@ function inlineStyle (style) {
   }, '').slice(2)
 }
 
-module.exports = {
+export {
   serializeAttr, dasherize, inlineStyle
 }

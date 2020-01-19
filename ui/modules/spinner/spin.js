@@ -30,18 +30,7 @@
     var target = document.getElementById('foo')
     var spinner = new Spinner(opts).spin(target)
  */
-(function (root, factory) {
-
-  /* CommonJS */
-  if (typeof module == 'object' && module.exports) module.exports = factory()
-
-  /* AMD module */
-  else if (typeof define == 'function' && define.amd) define(factory)
-
-  /* Browser global */
-  else root.Spinner = factory()
-}(this, function () {
-  "use strict"
+export default (function () {
 
   var prefixes = ['webkit', 'Moz', 'ms', 'O'] /* Vendor prefixes */
     , animations = {} /* Animation rules keyed by their name */
@@ -379,4 +368,4 @@
 
   return Spinner
 
-}))
+})()

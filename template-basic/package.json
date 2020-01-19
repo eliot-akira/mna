@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "builder start",
-    "build": "builder build",
+    "dev": "../builder/run start",
+    "build": "../builder/run build",
     "test": "builder test src -x=src/@mna",
     "deploy": "cd build && ./deploy",
     "export": "yarn build && APP_EXPORT=true NODE_ENV=production node build/server/server.js",

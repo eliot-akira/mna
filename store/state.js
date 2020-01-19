@@ -1,4 +1,4 @@
-module.exports = function withState(store, props) {
+export default function withState(store, props) {
 
   const state = {}
   const getState = key => key ? state[key] : state

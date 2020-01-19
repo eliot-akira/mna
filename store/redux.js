@@ -8,7 +8,7 @@ const reduxDevTools =
   && window[key]
     ? window[key] : null
 
-module.exports = function connectReduxDevTools(name, store) {
+export default function connectReduxDevTools(name, store) {
 
   if (!reduxDevTools) return
 

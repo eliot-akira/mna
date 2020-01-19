@@ -1,4 +1,4 @@
-module.exports = function withChildStores(store, props, createStore) {
+export default function withChildStores(store, props, createStore) {
 
   store.childStores = {}
 

@@ -84,8 +84,9 @@ const clientOptions = {
   presets: [
     [ require.resolve('@babel/preset-env'),
       { ...presetEnvOptions,
+        modules: false, // Important for supporting dynamic import() and chunk splitting - used to work with 'commonjs'
         targets: {
-          browsers: ["> 0.25%, not dead", "not ie 11", "not op_mini all"] // Was: ['last 2 versions', 'ie >= 9']
+          browsers: ['last 2 versions', "> 0.25%, not dead", "not ie 11", "not op_mini all"] // Was: ['last 2 versions', 'ie >= 9']
         }
       }
     ],

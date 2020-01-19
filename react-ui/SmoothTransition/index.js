@@ -5,19 +5,20 @@ class SmoothTransition extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      location: this.props.location,
+      location: props.location,
       fadeClassName:
         'fade-enter'
     }
-    this.pathname = this.props.location.pathname
+    this.pathname = props.location.pathname
   }
 
   componentDidMount() {
     this.smoothEnter()
   }
 
-  componentWillUpdate(newProps) {
-
+  componentDidUpdate() {
+  //componentWillUpdate(newProps) {
+    const newProps = this.props
     if (this.pathname===newProps.location.pathname) return
 
     this.pathname = newProps.location.pathname
@@ -30,7 +31,7 @@ class SmoothTransition extends Component {
         location: newProps.location,
         fadeClassName: 'fade-enter'
       }, this.smoothEnter)
-    }, newProps.duration || 250) // Same as CSS transition duration
+    }, newProps.duration || 360) // Same as CSS transition duration
   }
 
   componentWillUnmount() {

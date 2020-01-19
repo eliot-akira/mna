@@ -41,7 +41,7 @@ const closingTagAncestorBreakers = {
   dd: ['dl']
 }
 
-module.exports = {
+export {
   tags,
   voidTags,
   closingTags,

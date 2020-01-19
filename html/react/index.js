@@ -1,6 +1,6 @@
-const { createElement } = require('react')
-const parse = require('../parse')
-const decodeEntities = require('../entities/decode')
+import { createElement } from 'react'
+import parse from '../parse'
+import decodeEntities from '../entities/decode'
 
 function render(str, options = {}) {
   const nodes = typeof str==='string' ? parse(str) : str
@@ -55,4 +55,4 @@ function renderAttributes(tagName, attributes, options = {}) {
   return atts
 }
 
-module.exports = render
+export default render

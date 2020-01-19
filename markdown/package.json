@@ -1,10 +1,10 @@
 {
   "name": "@mna/markdown",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "main": "index.js",
   "dependencies": {
-    "front-matter": "^3.0.2",
-    "markdown-it": "^9.1.0"
+    "front-matter": "^3.1.0",
+    "markdown-it": "^10.0.0"
   },
   "files": [
     "**/*.js"

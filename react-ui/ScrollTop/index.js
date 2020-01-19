@@ -10,6 +10,12 @@ class ScrollTop extends Component {
 
   state = { isActive: false }
 
+  constructor(props) {
+    super(props)
+    this.pathname = props.location.pathname
+    this.location = props.location
+  }
+
   componentDidMount() {
     // Show if scrolled down
     this.container = document.querySelector(`#${this.containerId}`)
@@ -23,14 +29,18 @@ class ScrollTop extends Component {
     this.container.removeEventListener('scroll', this.scrollHandler.bind(this))
   }
 
-  componentWillUpdate(newProps) {
+  componentDidUpdate() {
+    //componentWillUpdate(newProps) {
+    const props = this.props
     if (
       // Allow overriding current location
-      this.props.pathname ? (this.props.pathname !== newProps.pathname)
+      props.pathname ? (props.pathname !== this.pathname)
         // From router directly
-        : (this.props.location !== newProps.location)
+        : (props.location !== this.location)
     ) {
       this.container.scrollTop = 0
+      this.pathname = props.location.pathname
+      this.location = props.location
     }
   }
 

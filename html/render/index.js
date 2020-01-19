@@ -1,9 +1,9 @@
-const paul = require('../paul')
-const { stringIncludes, arrayIncludes } = require('../utils')
-const defaultContext = require('../context')
+import paul from '../paul'
+import { stringIncludes, arrayIncludes } from '../utils'
+import * as defaultContext from '../context'
 
-const parse = require('../parse')
-const { serializeAttr, dasherize, inlineStyle } = require('./utils')
+import parse from '../parse'
+import { serializeAttr, dasherize, inlineStyle } from './utils'
 
 async function render(source, options = {}) {
 
@@ -142,4 +142,4 @@ Object.assign(defaultContext, {
   renderAttributes
 })
 
-module.exports = render
+export default render

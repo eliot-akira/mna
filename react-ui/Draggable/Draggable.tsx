@@ -191,11 +191,12 @@ export default class Draggable extends React.Component<DraggableProps, Draggable
       // Can only determine if SVG after mounting
       isElementSVG: false
     }
-  }
+  // }
 
-  componentWillMount() {
-    if (this.props.position && !(this.props.onDrag || this.props.onStop)) {
-      // eslint-disable-next-line
+  // componentWillMount() {
+    // if (this.props.position && !(this.props.onDrag || this.props.onStop)) {
+    if (props.position && !(props.onDrag || props.onStop)) {
+        // eslint-disable-next-line
       console.warn('A `position` was applied to this <Draggable>, without drag handlers. This will make this ' +
         'component effectively undraggable. Please attach `onDrag` or `onStop` handlers so you can adjust the ' +
         '`position` of this element.')

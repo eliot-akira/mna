@@ -33,6 +33,6 @@ function arrayIncludes (array, searchElement, position) {
   return false
 }
 
-module.exports = {
+export {
   startsWith, endsWith, stringIncludes, isRealNaN, arrayIncludes
 }

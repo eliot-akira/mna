@@ -1,3 +1,4 @@
+import { Component } from 'react'
 import { withRouter } from 'react-router'
 
 // Usage:
@@ -7,17 +8,30 @@ import { withRouter } from 'react-router'
 export default function load(name, Loaded) {
 
   const C = Loaded.default || Loaded
-  const SyncComponent = withRouter(function(props) {
-    // Pass rendered component name to server: see ./render
-    if (props.staticContext && props.staticContext.splitPoints) {
-      props.staticContext.splitPoints.push(name)
-    }
-    return <C {...props} />
-  })
 
-  if (C.serverAction) {
-    SyncComponent.serverAction = C.serverAction
+  class SyncComponent extends Component {
+
+    componentDidMount() {
+      // Pass rendered Markdown frontmatter as meta
+      const { onLoadMeta } = this.props
+      if (C.meta && onLoadMeta) onLoadMeta( C.meta )
+    }
+
+    render() {
+      const { staticContext } = this.props
+      // Pass rendered component name to server: see ./render
+      if (staticContext && staticContext.splitPoints) {
+        staticContext.splitPoints.push(name)
+      }
+      return <C {...this.props} />
+    }
   }
 
-  return SyncComponent
+  const SyncComponentWithRouter = withRouter(SyncComponent)
+
+  if (C.serverAction) {
+    SyncComponentWithRouter.serverAction = C.serverAction
+  }
+
+  return SyncComponentWithRouter
 }

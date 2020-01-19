@@ -1,10 +1,11 @@
-const lexer = require('./lexer')
-const parser = require('./parser')
-const { format } = require('./formats')
+import lexer from './lexer'
+import parser from './parser'
+import { format } from './formats'
+import * as parseContext from '../context'
 
 const parseDefaults = {
   format, // transform for v0 spec
-  ...require('../context')
+  ...parseContext
 }
 
 function parse(str = '', userOptions = {}) {
@@ -20,4 +21,4 @@ function parse(str = '', userOptions = {}) {
   return format(nodes, options)
 }
 
-module.exports = parse
+export default parse

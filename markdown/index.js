@@ -1,41 +1,38 @@
+const markdownIt = require('markdown-it')
 const frontmatter = require('front-matter')
 
-const preprocessMermaid = function(source) {
-  return source
-    .replace(/\</g, '&lt;')
-    .replace(/\>/g, '&gt;')
-}
+const attributesPlugin = require('./plugins/attributes')
+const anchorPlugin = require('./plugins/anchor')
+const taskListPlugin = require('./plugins/taskList')
+//const includePlugin = require('./plugins/include')
 
-const md = require('markdown-it')({
+const md = markdownIt({
   preset: 'default',
   html: true,
   linkify: true,
   //highlight: renderHighLight
-
-  // Mermaid is too heavy..
-  // highlight: function(code, lang) {
-  //   if (!lang || !lang.match(/\bmermaid\b/i)) return '' // Use default escape
-  //   return `<div class="mermaid">${preprocessMermaid(code)}</div>`
-  // }
 })
-//.use(require('./include'))
 
-  // Set attr before anchor to allow specifying anchor name with <!--{name=""}-->
-  .use(require('./attr'))
+  // <!--{ name="value" }-->
+  .use(attributesPlugin)
+  .use(anchorPlugin)
 
-  .use(require('./anchor'))
-  .use(require('./taskList'), {
-    // Without `disabled` attribute
+  .use(taskListPlugin, {
+    // Checkbox without `disabled` attribute
     enabled: true
   })
+  //.use(includePlugin)
 
 module.exports = function renderMarkdown(content = '', options = {}) {
 
-  const { body, attributes } = frontmatter(content)
+  const {
+    body,
+    attributes: meta = {}
+  } = frontmatter(content)
 
   const html = options.markdown
     ? options.markdown(body, options)
     : md.render(body, options)
 
-  return { html, attributes }
+  return { html, meta }
 }

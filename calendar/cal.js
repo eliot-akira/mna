@@ -141,7 +141,7 @@ const getMonthData = day => {
   return { weeks }
 }
 
-module.exports = {
+export {
   isSameDay,
   isFuture,
   isPast,

@@ -1,4 +1,4 @@
-const { startsWith } = require('../utils')
+import { startsWith } from '../utils'
 
 function format (nodes, options = {}) {
 
@@ -120,7 +120,7 @@ function splitHead (str, sep) {
   return [str.slice(0, idx), str.slice(idx + sep.length)]
 }
 
-module.exports = {
+export {
   format, formatAttributes, formatStyles,
   unquote, capitalize, camelCase, castValue, splitHead
 }

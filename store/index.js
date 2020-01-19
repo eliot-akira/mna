@@ -1,7 +1,7 @@
-const withEvent = require('@mna/event')
-const withState = require('./state')
-const withActions = require('./actions')
-const withChildStores = require('./childStores')
+import withEvent from '@mna/event'
+import withState from './state'
+import withActions from './actions'
+import withChildStores from './childStores'
 
 export default function createStore(props = {}) {
 

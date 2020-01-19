@@ -1,5 +1,5 @@
 
-module.exports = function decode(str) {
+export default function decode(str) {
 
   // TODO: More robust HTML entity decode?
   // https://github.com/substack/node-ent

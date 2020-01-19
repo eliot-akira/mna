@@ -38,6 +38,7 @@ module.exports = {
     namedModules: true,
     noEmitOnErrors: true,
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,

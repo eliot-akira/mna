@@ -1,6 +1,6 @@
-const { arrayIncludes } = require('../utils')
+import { arrayIncludes } from '../utils'
 
-module.exports = function parser (tokens, options) {
+export default function parser (tokens, options) {
   const root = { tagName: null, children: [] }
   const state = { tokens, options, cursor: 0, stack: [root] }
   parse(state)

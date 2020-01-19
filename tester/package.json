@@ -1,6 +1,6 @@
 {
   "name": "@mna/tester",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "Test runner",
   "main": "index.js",
   "bin": {

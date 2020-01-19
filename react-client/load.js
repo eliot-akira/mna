@@ -26,7 +26,9 @@ export default function loadAsync(getComponent) {
       Loaded: AsyncComponent.Loaded
     }
 
-    componentWillMount() {
+    // componentWillMount() {
+    constructor(props) {
+      super(props)
       if (this.state.Loaded) {
         if (this.resolvePromise) this.resolvePromise()
         return
@@ -40,6 +42,11 @@ export default function loadAsync(getComponent) {
 
     componentDidMount() {
       this.mounted = true
+
+      // Pass rendered Markdown frontmatter as meta
+      const { Loaded } = this.state
+      const { onLoadMeta } = this.props
+      if (Loaded && Loaded.meta && onLoadMeta) onLoadMeta( Loaded.meta )
     }
 
     componentWillUnmount() {

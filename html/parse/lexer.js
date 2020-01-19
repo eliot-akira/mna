@@ -1,11 +1,11 @@
-const {
+import {
   startsWith,
   endsWith,
   stringIncludes,
   arrayIncludes
-} = require('../utils')
+} from '../utils'
 
-module.exports = function lexer (str, options) {
+export default function lexer (str, options) {
   const state = { str, options, cursor: 0, tokens: [] }
   lex(state)
   return state.tokens

@@ -58,5 +58,5 @@ function createEmitter(obj = {}) {
   return obj
 }
 
-module.exports = createEmitter
-module.exports.Emitter = Emitter
+export default createEmitter
+export { Emitter }

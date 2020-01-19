@@ -1,4 +1,4 @@
-module.exports = function withActions(store, props) {
+export default function withActions(store, props) {
 
   const { state, getState, setState } = store
 
