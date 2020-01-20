@@ -64,7 +64,7 @@ class App extends Component {
               // Redirect after login
               search: `?from=${encodeURIComponent('/'+routeParts.join('/'))}`
               // decodeURIComponent(location.search.split('?from=')[1] || '')
-            }} />            
+            }} />
             : redirectToHome
               ?
               <Redirect to="/" />

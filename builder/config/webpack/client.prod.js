@@ -1,4 +1,5 @@
 //const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const baseConfig = require('./client.base')
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true
@@ -9,6 +10,7 @@ const config = {
   devtool: generateSourceMap ? 'source-map' : false,
   plugins: [
     ...baseConfig.plugins,
+    new webpack.optimize.AggressiveMergingPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true

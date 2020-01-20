@@ -1,10 +1,7 @@
-"use strict"
-
 import React from 'react'
 import ScrollElement from './mixins/scroll-target'
 import scroller from './mixins/scroller'
 import PropTypes from 'prop-types'
-import { setImmediate } from 'core-js'
 
 let Target
 
