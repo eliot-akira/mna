@@ -1,6 +1,7 @@
 import http, { Server, IncomingMessage, ServerResponse } from 'http'
 import url from 'url'
-import api, { API } from './index'
+import api from './index'
+import API from './API'
 
 declare var test: {
   (title: string, fn: (it: (title: string, pass: any) => void) => void): void,

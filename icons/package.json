@@ -1,7 +1,7 @@
 {
   "name": "@mna/icons",
   "description": "Icons",
-  "version": "2.2.0",
+  "version": "2.2.3",
   "main": "index.js",
   "files": [
     "**/*.js",

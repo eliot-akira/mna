@@ -1,6 +1,6 @@
 {
   "name": "@mna/logger",
-  "version": "2.2.0",
+  "version": "2.2.3",
   "main": "index.js",
   "license": "MIT",
   "author": "Eliot Akira",

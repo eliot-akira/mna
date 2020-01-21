@@ -5,10 +5,11 @@
 
 module.exports = ({ template }) => {
   let pluginOptions
+  let didAdd
 
   function addModuleExportsDefaults(path) {
     const finder = new ExportsFinder(path)
-    if (!finder.isOnlyExportsDefault()) {
+    if (didAdd || !finder.isOnlyExportsDefault()) {
       return
     }
     if (finder.isAmd()) {
@@ -21,6 +22,8 @@ module.exports = ({ template }) => {
     if (pluginOptions.addDefaultProperty) {
       rootPath.node.body.push(template('module.exports.default = exports.default')())
     }
+
+    didAdd = true
   }
 
   const ExportsDefaultVisitor = {
@@ -55,6 +58,7 @@ module.exports = ({ template }) => {
       }
     },
     post(fileMap) {
+      didAdd = false
       fileMap.path.traverse(ExportsDefaultVisitor)
     }
   }

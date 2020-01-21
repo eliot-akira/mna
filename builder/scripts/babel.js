@@ -38,9 +38,10 @@ module.exports = function babel(props = {}) {
     [require.resolve('babel-plugin-transform-rename-import'), { replacements }]
   )
 
-  // additionalPlugins.push(
-  //   require.resolve('../config/babel-plugin-add-module-exports')
-  // )
+  // Support require() without .default
+  additionalPlugins.push(
+    require.resolve('../config/babel-plugin-add-module-exports')
+  )
 
   Object.assign(opts.cliOptions, {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],

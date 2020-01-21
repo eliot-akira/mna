@@ -1,7 +1,7 @@
 {
   "name": "@mna/gitlib",
   "description": "Tool for managing projects with multiple internal Git repos",
-  "version": "2.2.0",
+  "version": "2.2.3",
   "main": "index.js",
   "bin": {
     "gitl": "run"
