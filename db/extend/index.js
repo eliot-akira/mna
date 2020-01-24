@@ -26,6 +26,13 @@ function extendDatabaseMethods({ db, instance }) {
   db.upsert = (query, props, ...args) =>
     db.update(query, { $upsert: true, ...props }, ...args)
 
+  db.close = function () {
+    return new Promise((resolve, reject) => {
+      instance.persistence.stopAutocompaction()
+      instance.persistence.compactDatafile(resolve)
+    })
+  }
+
   return db
 }
 

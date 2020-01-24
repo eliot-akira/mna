@@ -81,7 +81,6 @@ function Datastore (options) {
 
 util.inherits(Datastore, require('events').EventEmitter)
 
-
 /**
  * Load the database from the datafile, and trigger the execution of buffered commands if any
  */
