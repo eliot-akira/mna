@@ -18,9 +18,13 @@ const dotenvFiles = [
   paths.dotenv,
 ].filter(Boolean)
 
+let loadedEnv = {}
+
 for (const dotenvFile of dotenvFiles) {
   if (!fs.existsSync(dotenvFile)) continue
-  dotenv.config({ path: dotenvFile })
+  const envResult = dotenv.config({ path: dotenvFile })
+  loadedEnv = envResult.parsed
+  console.log('Using environment file', dotenvFile)
   break
 }
 
@@ -37,6 +41,7 @@ module.exports = () => {
   const raw = {
     PORT: process.env.PORT || 3000,
     NODE_ENV: process.env.NODE_ENV || 'development',
+    ...loadedEnv
   }
 
   // Stringify all values so we can feed into Webpack DefinePlugin
