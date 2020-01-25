@@ -44,7 +44,7 @@ module.exports = () => {
     ...loadedEnv
   }
 
-  // Stringify all values so we can feed into Webpack DefinePlugin
+  // Stringify all values so we can feed into Webpack DefinePlugin (client only)
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key])
