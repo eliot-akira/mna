@@ -1,4 +1,4 @@
-import { Emitter } from '@mna/event'
+import Emitter from '@mna/event/Emitter'
 
 // Converted to class for efficient memory use in method creation
 

@@ -1,7 +1,8 @@
 import http from 'http'
-import { Emitter } from '@mna/event'
+import Emitter from '@mna/event/Emitter'
 import WebSocketServer from './lib/websocket-server'
 import createSocketInstance from './socketInstance'
+import uniqueId from './uniqueId'
 
 /*
 
@@ -40,12 +41,11 @@ export default function createWebSocketServer({
 
   io.wss = wss
   io.sockets = {}
-  //io.maxSocketId = 0
   io.serverRequestListeners = {}
 
   wss.on('connection', (ws, req) => {
 
-    const socketId = Date.now() //++io.maxSocketId
+    const socketId = uniqueId() // ++io.maxSocketId //Date.now()
 
     let socket = createSocketInstance({
       io, ws, socketId
@@ -56,7 +56,7 @@ export default function createWebSocketServer({
     ws.on('close', () => {
       delete io.sockets[socketId]
       socket.emit('disconnect')
-      socket = null // Free!
+      socket = null // Free
     })
 
     io.emit('connect', socket, req)

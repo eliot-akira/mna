@@ -25,7 +25,7 @@ export default function createWebSocketClient(props = {}) {
 
   const { host, port } = props
 
-  const socketUrl = `ws://${host || location.host}${
+  const socketUrl = `ws://${host || (location.hostname)}${
     port ? `:${port}` : ''
   }`
 
@@ -47,7 +47,7 @@ export default function createWebSocketClient(props = {}) {
     const requestId = Date.now()
 
     io.clientRequestListeners[requestId] = resolve
-    io.send({ ...data, clientRequestId: requestId })      
+    io.send({ ...data, clientRequestId: requestId })
   })
 
   io.handleServerRequest = fn => io.on('serverRequest', async data => {
@@ -64,6 +64,8 @@ export default function createWebSocketClient(props = {}) {
       ...(result || {})
     })
   })
+
+  io.url = socketUrl
 
   return io
 }
