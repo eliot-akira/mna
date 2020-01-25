@@ -42,13 +42,16 @@ export default async function createServer(props = {}) {
 
   // WebSocket server
   if (props.socket) {
+    const socketPort = config.socketPort || config.port
     webSocketServer = createWebSocketServer({
       appServer,
       port: config.port,
-      socketPort: config.socketPort || config.port,
+      socketPort: socketPort,
       options: {}
     })
     props.socket(webSocketServer)
+
+    console.log(`WebSocket server at port ${socketPort}`)
   }
 
   // Clean exit

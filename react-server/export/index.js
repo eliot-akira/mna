@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from '@mna/fsp'
-import { API } from '@mna/api'
+import API from '@mna/api/API'
 
 async function exportStaticRoutes({ url, routes, targetFolder }) {
 
