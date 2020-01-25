@@ -12,7 +12,7 @@ function createKeyWithDefault(props) {
     routeName, // See createRouteHandler
   } = props
 
-  return !createKey ? `${siteName}/${
+  return !createKey ? `${ // ${siteName}/
     routeName
   }` : createKey(props)
 }
@@ -40,7 +40,6 @@ async function ensureRouteData(props) {
   if (currentRouteData) return currentRouteData
 
   if (state.fetchingRouteData && state.fetchingRouteData[key]) {
-    //log('Route data fetching', key)
     return
   }
 
@@ -86,7 +85,6 @@ const withRouteData = (ensurerPropsOrFn) => C => {
   class RouteDataProvider extends Component {
 
     static serverAction = async (props) => {
-      //log('RouteDataProvider.serverAction')
       await ensureRouteData({ ...ensurerProps, ...props, isServer: true })
     }
 
@@ -94,9 +92,8 @@ const withRouteData = (ensurerPropsOrFn) => C => {
       super(props)
     }
 
-    ensureRouteData = () =>
-      ensureRouteData({ ...ensurerProps, ...this.props })
-        .catch(e => console.error('RouteDataProvider.ensureRouteData error', e))
+    ensureRouteData = () => ensureRouteData({ ...ensurerProps, ...this.props })
+      .catch(e => console.error('RouteDataProvider.ensureRouteData error', e))
 
     componentDidMount() {
       this.ensureRouteData()
