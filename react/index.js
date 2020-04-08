@@ -6,7 +6,10 @@ export default React
 export { Component, createElement } from 'react'
 export { render, hydrate } from 'react-dom'
 export { Switch, Route, Prompt, withRouter } from 'react-router'
+
+// TODO: Update to [React Helmet Async](https://github.com/staylor/react-helmet-async)
 export { Helmet } from 'react-helmet'
+
 export classnames from 'classnames'
 
 export Link from './Link'

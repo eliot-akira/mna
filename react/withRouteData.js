@@ -8,11 +8,11 @@ function createKeyWithDefault(props) {
 
   const {
     createKey,
-    siteName = 'unknown',
+    siteName = '',
     routeName, // See createRouteHandler
   } = props
 
-  return !createKey ? `${ // ${siteName}/
+  return !createKey ? `${siteName==='localhost' ? '' : siteName}/${
     routeName
   }` : createKey(props)
 }
@@ -23,7 +23,7 @@ async function ensureRouteData(props) {
     state: localState, setState: localSetState,
     app = {}, // App-wide state/setState
     api, user,
-    siteName = 'unknown',
+    siteName = '',
     routeName, originalRouteName,
     createKey,
     getRouteData,
@@ -106,7 +106,7 @@ const withRouteData = (ensurerPropsOrFn) => C => {
 
       const {
         state, setState,
-        siteName = 'unknown',
+        siteName = '',
         routeName, originalRouteName,
         createKey,
       } = this.props

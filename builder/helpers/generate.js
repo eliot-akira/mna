@@ -43,7 +43,7 @@ async function watchAndRegenerate(config) {
   console.log('Watching for dynamic code generation:', watchPattern, '\n')
 
   const watcher = chokidar.watch(watchPattern, {
-    ignored: ['_*/**', '**/_*', '**/_*/**', 'node_modules/**', '**/node_modules/**', '**/.git/**',
+    ignored: ['_*/**', '**/_*', '**/_*/**', '**/*.*.*', 'node_modules/**', '**/node_modules/**', '**/.git/**',
       ...(!watchIgnore ? [] : !Array.isArray(watchIgnore) ? [watchIgnore] : watchIgnore)]
   })
 
@@ -77,7 +77,7 @@ async function generateAll(config, item, event) {
     // TODO: Cache for watch task, and add/remove changed file(s)
 
     items = glob.sync(globPattern, {
-      ignore: ['**/_*', '**/_*/**', ...(!globIgnore ? [] : !Array.isArray(globIgnore) ? [globIgnore] : globIgnore )],
+      ignore: ['**/_*', '**/_*/**', '**/*.*.*', ...(!globIgnore ? [] : !Array.isArray(globIgnore) ? [globIgnore] : globIgnore )],
       follow: true // Follow symlinks
     })
 
