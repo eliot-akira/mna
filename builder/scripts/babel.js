@@ -18,9 +18,9 @@ module.exports = function babel(props = {}) {
   const additionalPlugins = []
 
   if (target==='client') {
-    additionalPlugins.push(
-      require.resolve('@babel/plugin-transform-modules-commonjs')
-    )
+    // additionalPlugins.push(
+    //   require.resolve('@babel/plugin-transform-modules-commonjs')
+    // )
   }
 
   if (root.length || Object.keys(alias).length) {

@@ -11,9 +11,9 @@ test('promiseQueue', async it => {
 
   const getBatchNumber = (i: number) => Math.ceil(i / concurrentLimit)
 
-  for (let i=0, len=numberOfPromises; i < len; i++) {
+  const pushPromiseCreator = (index: number) => {
 
-    const batchNumber = getBatchNumber(i+1)
+    const batchNumber = getBatchNumber(index+1)
 
     // Chaos monkey: test that promises don't run before their batch, regardless of execution time
     const waitDuration = 100 / (Math.random() * 10)
@@ -21,19 +21,23 @@ test('promiseQueue', async it => {
     createPromises.push(() => new Promise((resolve, reject) => {
 
       const done = () => {
-
         numberFinished++
-        resolve(i)
+        resolve(index)
 
         const currentBatch = getBatchNumber(numberFinished)
 
-        it(`runs promise #${i+1} in queue`, true)
-        it(`runs promise #${i+1} in batch ${batchNumber}`, currentBatch===batchNumber, { currentBatch, batchNumber })
+        it(`runs promise #${index+1} in queue`, true)
+        it(`runs promise #${index+1} in batch ${batchNumber}`, currentBatch===batchNumber, { index, currentBatch, batchNumber })
 
       }
 
       setTimeout(done, waitDuration)
     }))
+
+  }
+
+  for (let i=0, len=numberOfPromises; i < len; i++) {
+    pushPromiseCreator(i)
   }
 
   const results = await promiseQueue(createPromises, concurrentLimit)

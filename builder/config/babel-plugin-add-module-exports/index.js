@@ -5,11 +5,10 @@
 
 module.exports = ({ template }) => {
   let pluginOptions
-  let didAdd
 
   function addModuleExportsDefaults(path) {
     const finder = new ExportsFinder(path)
-    if (didAdd || !finder.isOnlyExportsDefault()) {
+    if (!finder.isOnlyExportsDefault()) {
       return
     }
     if (finder.isAmd()) {
@@ -22,8 +21,6 @@ module.exports = ({ template }) => {
     if (pluginOptions.addDefaultProperty) {
       rootPath.node.body.push(template('module.exports.default = exports.default')())
     }
-
-    didAdd = true
   }
 
   const ExportsDefaultVisitor = {
@@ -58,7 +55,6 @@ module.exports = ({ template }) => {
       }
     },
     post(fileMap) {
-      didAdd = false
       fileMap.path.traverse(ExportsDefaultVisitor)
     }
   }
@@ -107,6 +103,7 @@ class ExportsFinder {
     }
 
     const objectName = path.get(`${property}.left.object.name`).node
+    // Check name of  MemberExpressions and values of StringLiterals
     const propertyName =
       path.get(`${property}.left.property.name`).node ||
       path.get(`${property}.left.property.value`).node

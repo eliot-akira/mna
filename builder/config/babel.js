@@ -65,6 +65,7 @@ const plugins = [
     },
   ],*/
   require.resolve('./babel-plugin-react-require'),
+  require.resolve('@babel/plugin-transform-modules-commonjs')
 ]
 
 const options = {
@@ -99,6 +100,7 @@ const serverOptions = {
   presets: [
     [ require.resolve('@babel/preset-env'),
       { ...presetEnvOptions,
+        modules: false,
         targets: {
           node: 'current'
         }
@@ -108,7 +110,7 @@ const serverOptions = {
   ],
   plugins: [
     ...plugins,
-    require.resolve('@babel/plugin-transform-modules-commonjs'),
+    // require.resolve('@babel/plugin-transform-modules-commonjs'),
   ]
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@mna/react",
-  "version": "2.2.5",
+  "version": "2.3.0",
   "main": "index.js",
   "dependencies": {
     "@mna/api": "2.x",

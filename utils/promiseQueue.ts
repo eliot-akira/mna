@@ -9,7 +9,6 @@ export default async function promiseQueue(promiseCreators: PromiseCreator[], li
   for (let i=0, len=promiseCreators.length; i < len; i++) {
 
     queue.push(promiseCreators[i])
-
     const isLastItemInBatch = (i+1) % limit === 0
     const isLastItem = i===len-1
 
@@ -18,7 +17,9 @@ export default async function promiseQueue(promiseCreators: PromiseCreator[], li
     const promises = queue.map(fn => fn())
 
     // Run batch in parallel
-    results.push(...await Promise.all(promises))
+    const promiseResults = await Promise.all(promises)
+
+    results.push(...promiseResults)
 
     // Empty queue
     queue.splice(0)

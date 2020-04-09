@@ -49,7 +49,7 @@ module.exports = function build({ args, options }) {
 
   const selectedLibs =
     args[0]
-      ? (args[0]==='all' ? allLibs : args[0].split(','))
+      ? (args[0]==='all' ? allLibs : [...args[0].split(','), ...args.slice(1)])
       : allLibs
 
   if (options.version) updateVersion({
