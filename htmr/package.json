@@ -1,6 +1,6 @@
 {
   "name": "@mna/htmr",
-  "version": "2.3.0",
+  "version": "2.3.3",
   "dependencies": {
     "@mna/react-ui": "2.x"
   },
