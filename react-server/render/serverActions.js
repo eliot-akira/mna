@@ -2,7 +2,7 @@ import { matchRoutes } from '@mna/react'
 
 export default async function handleServerActions({
   App, routes, location,
-  serverActionProps
+  serverActionProps = {}
 }) {
 
   if (App.serverAction) {
@@ -49,6 +49,8 @@ export default async function handleServerActions({
         serverAction = serverActionComponent.serverAction
 
       }
+
+      serverActionComponent = serverActionComponent || {}
 
       if (typeof serverActionComponent.routeName!=='undefined') {
         routeName = serverActionComponent.routeName
