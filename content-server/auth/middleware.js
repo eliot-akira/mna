@@ -2,7 +2,7 @@ import { serialize as makeCookie } from 'cookie'
 
 // Authentication for all routes
 
-const TOKEN_KEY = 'jwt'
+const TOKEN_KEY = 'mna_jwt'
 const emptyCookie = makeCookie(TOKEN_KEY, '', { path: '/', maxAge: 0 })
 
 const log = (...args) => console.log('@mna/content/auth/middleware', ...args)
@@ -36,10 +36,12 @@ export default async function createAuthMiddleware({ auth, stores }) {
     const domain = (req.headers.host || '').split(':')[0]
 
     const token = await tokenFromUser(user)
+
     const cookieOptions = {
       path: '/', // Important: for the whole domain
       maxAge: 14 * 24 * 60 * 60, // 14 days in seconds
-      domain
+      domain,
+      sameSite: 'strict', // No third-party
       //req.headers.origin || '', // Enable for subdomains
       //httpOnly: true, // Also prevents client-side delete
       //secure: true, // Requires HTTPS
@@ -80,7 +82,6 @@ export default async function createAuthMiddleware({ auth, stores }) {
     // Get user and pass to all routes
 
     try {
-
       const user = await userFromToken(token)
 
       if (user) {
