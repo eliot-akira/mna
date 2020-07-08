@@ -94,9 +94,9 @@ export async function login({ auth, store, data, req, res }) {
   }
 }
 
-export async function logout({ auth, store, data, res }) {
+export async function logout({ auth, store, data, req, res }) {
 
-  await auth.logout(res)
+  await auth.logout(req, res)
 
   //log('LOGOUT', data)
 

@@ -31,13 +31,11 @@ export default async function createAuthMiddleware({ auth, stores }) {
 
   // Cookie
 
-  auth.login = async (req, res, user) => {
+  const createCookieOptions = req => {
 
     const domain = (req.headers.host || '').split(':')[0]
 
-    const token = await tokenFromUser(user)
-
-    const cookieOptions = {
+    return {
       path: '/', // Important: for the whole domain
       maxAge: 14 * 24 * 60 * 60, // 14 days in seconds
       domain,
@@ -46,6 +44,12 @@ export default async function createAuthMiddleware({ auth, stores }) {
       //httpOnly: true, // Also prevents client-side delete
       //secure: true, // Requires HTTPS
     }
+  }
+
+  auth.login = async (req, res, user) => {
+
+    const token = await tokenFromUser(user)
+    const cookieOptions = createCookieOptions(req)
 
     //log('login/makeCookie', domain)
 
@@ -53,8 +57,12 @@ export default async function createAuthMiddleware({ auth, stores }) {
     res.setHeader('Set-Cookie', makeCookie(TOKEN_KEY, token, cookieOptions))
   }
 
-  auth.logout = (res) => res.setHeader('Set-Cookie', emptyCookie)
-
+  auth.logout = (req, res) => {
+    res.setHeader('Set-Cookie', makeCookie(TOKEN_KEY, '', {
+      ...createCookieOptions(req),
+      maxAge: 0
+    }))
+  }
 
   return async (req, res) => {
 
